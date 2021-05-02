@@ -11,6 +11,114 @@ class DatabaseController
         $this->conn = (new Database())->getConnection();
     }
 
+    // GET
+    public function getTeacherByUsername($username): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE username LIKE :username");
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAllTeacherTests($teacher_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM test WHERE teacher_id LIKE :teacher_id");
+        $stmt->bindParam(":teacher_id", $teacher_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getTestByKey($test_key): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM test WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getQuestionsByTestKey($test_key): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM questions WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getQuestionById($id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM questions WHERE id LIKE :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAnswersByQuestionId($question_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM answers WHERE question_id LIKE :question_id");
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAllCompletedTests(): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getCompletedTestsByTestKey($test_key): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getCompletedTestsByStudentId($student_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE student_id LIKE :student_id");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getStudentAnswersByTestKeyAndStudentId($test_key, $student_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getStudentAnswersByTestKeyAndQuestionId($test_key, $question_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE question_id LIKE :question_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+    // UPDATE
+
+    public function updateCompletedTestPoints($test_key, $student_id, $points){
+        $stmt = $this->conn->prepare("UPDATE completed_tests SET points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt->bindParam(":points", $points);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->execute();
+    }
+
+    public function updateStudentAnswerToCorrect($id, $is_correct){
+        $stmt = $this->conn->prepare("UPDATE student_answers SET is_correct=:is_correct WHERE id LIKE :id");
+        $stmt->bindParam(":is_correct", $is_correct);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+    }
+
     // INSERT
     public function insertTeacher($username, $password){
         $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (username, password) VALUES (:username, :password)");
