@@ -36,7 +36,7 @@
             <span>© 2021 HNS</span>
         </footer>
 
-        <script id="main" src="js/draw.js"></script>  
+        <script src="js/draw.js"></script>  
 
     </body>
 </html>
