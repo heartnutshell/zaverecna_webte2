@@ -24,8 +24,8 @@
         </header>
 
         <div>
-            <input value="#000000" id="colorPicker" data-jscolor="">
-            <input type="range" min="1" max="69" value="1" id="sizeSlider">
+            <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:'Close'}">
+            <input type="range" min="1" max="100" value="1" id="sizeSlider">
             <button onclick="clearCanvas()" id="clear">Clear</button>
             <button onclick="saveDrawing()" id="save">Save</button>
             <button onclick="loadDrawing()" id="save">Load last Save</button>
