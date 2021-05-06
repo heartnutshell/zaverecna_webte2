@@ -18,7 +18,7 @@ if ($uploadOk == 0) {
     echo "Your file was not uploaded.";
 } else {
     // file name from studenID and questionID?
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir. $_POST["studentID"]."_".$_POST["questionID"].$fileType)) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir. $_GET["studentID"]."_".$_GET["questionID"].$fileType)) {
         echo "File has been uploaded.";
     } else {
         echo "There was an error uploading your file.";
