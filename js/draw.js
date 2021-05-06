@@ -24,7 +24,7 @@ const loadDrawing = () => {
     clearCanvas();
     //need to get save from DB
     if(drawingSave) {
-        fabric.loadSVGFromString(saved, objects => {
+        fabric.loadSVGFromString(drawingSave, objects => {
             canvas.add(...objects);
             canvas.requestRenderAll();
         });
