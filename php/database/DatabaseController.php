@@ -128,7 +128,7 @@ class DatabaseController
     }
 
     public function insertTeacherWithName($email, $password, $name, $surname){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO connections (email, password, name, surname) VALUES (:email, :password, :name, :surname)");
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (email, password, name, surname) VALUES (:email, :password, :name, :surname)");
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password);
         $stmt->bindParam(":name", $name);
