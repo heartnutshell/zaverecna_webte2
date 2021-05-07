@@ -4,7 +4,7 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 
     <head>
         <meta charset="UTF-8" />
