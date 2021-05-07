@@ -14,7 +14,7 @@ class DatabaseController
     // GET
     public function getTeacherByUsername($username): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE username LIKE :username");
+        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE email LIKE :username");
         $stmt->bindParam(":username", $username);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -126,15 +126,16 @@ class DatabaseController
         $stmt->bindParam(":password", $password);
         $stmt->execute();
     }
-/*
-    public function insertTeacherWithName($username, $password, $name, $surname){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO connections (password, name, surname) VALUES (:password, :name, :surname)");
+
+    public function insertTeacherWithName($email, $password, $name, $surname){
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO connections (email, password, name, surname) VALUES (:email, :password, :name, :surname)");
+        $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
     }
-*/
+
     public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points){
         $stmt = $this->conn->prepare("INSERT IGNORE INTO test (test_key, teacher_id, time_limit, active, max_points) VALUES (:test_key, :teacher_id, :time_limit, :active, :max_points)");
         $stmt->bindParam(":test_key", $test_key);

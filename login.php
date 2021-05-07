@@ -2,7 +2,7 @@
 
 require_once 'php/database/DatabaseController.php';
 
-$db = new Database;
+$db = new DatabaseController;
 
 if(isset($_POST['email']) && isset($_POST['password'])){
 
