@@ -22,6 +22,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(password_verify($password, $result[0]['password'])){       
                 
                 session_start();
+                echo "prihlasený";
                 //pridať vytvorenie session -> interface pre učitela
 
             } else{
