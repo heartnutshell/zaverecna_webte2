@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'php/database/Database.php';
+    require_once 'php/database/DatabaseController.php';
 
     $db = new Database;
 
@@ -13,15 +13,15 @@
             $name = $_POST['name'];
             $surname = $_POST['surname'];
 
-            $stmt = $db->getConnection()->prepare("INSERT IGNORE INTO teacher (email, password, name, surname)
-                                                    VALUES (:email, :password, :name, :surname)");
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':surname', $surname);
-            $stmt->exececute();
-            $message =  "Registrácia úspešná!";
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            $result = $db->insertTeacherWithName($email, $password, $name, $surname);
+
+            if($result){
+                $message =  "Registrácia úspešná!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+            } else {
+                $message =  "Registrácia neúspešná!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+            }
         }
 
     } catch(PDOException $e) {
