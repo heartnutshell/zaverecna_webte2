@@ -20,6 +20,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentByID($id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $result = $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getAllTeacherTests($teacher_id): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM test WHERE teacher_id LIKE :teacher_id");
@@ -120,10 +128,11 @@ class DatabaseController
     }
 
     // INSERT
-    public function insertTeacher($username, $password){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (username, password) VALUES (:username, :password)");
-        $stmt->bindParam(":username", $username);
-        $stmt->bindParam(":password", $password);
+    public function insertStudent($id, $name, $surname){
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student (id, name, surname) VALUES (:id, :name, :surname)");
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":surname", $surname);
         $stmt->execute();
     }
 
