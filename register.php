@@ -93,6 +93,7 @@
                             id="email"
                             name="email"
                             aria-describedby="emailHelp"
+                            pattern="/^\S+@\S+\.\S+$/"
                             autocomplete="off"
                             required
                         />
