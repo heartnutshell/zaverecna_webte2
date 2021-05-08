@@ -1,0 +1,14 @@
+.form-range
+{
+    width: 200px !important;
+}
+.card-body {
+    background-color: whitesmoke;
+}
+#range-num {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.card {
+    width: 532px;
+}

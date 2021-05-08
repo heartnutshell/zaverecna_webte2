@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ ."/Database.php";
@@ -75,6 +76,7 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+
     public function getCompletedTestsByTestKey($test_key): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE test_key LIKE :test_key");
@@ -82,7 +84,7 @@ class DatabaseController
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
+  
     public function getCompletedTestsByStudentId($student_id): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE student_id LIKE :student_id");
@@ -259,4 +261,3 @@ class DatabaseController
 
 
 }
-
