@@ -14,9 +14,17 @@ class DatabaseController
     // GET
     public function getTeacherByUsername($username): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE username LIKE :username");
+        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE email LIKE :username");
         $stmt->bindParam(":username", $username);
         $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getStudentByID($id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $result = $stmt->execute();
         return $stmt->fetchAll();
     }
 
@@ -60,45 +68,25 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    public function getAllStudentTests(): array
+    public function getAllCompletedTests(): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests");
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getStudentTestsByTestKey($test_key): array
+    public function getCompletedTestsByTestKey($test_key): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE test_key LIKE :test_key");
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE test_key LIKE :test_key");
         $stmt->bindParam(":test_key", $test_key);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getCompletedStudentTestsByTestKey($test_key): array
-    {
-        $completed = 1;
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE test_key LIKE :test_key AND completed = :completed");
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":completed", $completed);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getStudentTestsByStudentId($student_id): array
-    {
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id");
-        $stmt->bindParam(":student_id", $student_id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     public function getCompletedTestsByStudentId($student_id): array
     {
-        $completed = 1;
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id AND completed = :completed");
+        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE student_id LIKE :student_id");
         $stmt->bindParam(":student_id", $student_id);
-        $stmt->bindParam(":completed", $completed);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -121,87 +109,37 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    public function getStudentById($id): array
-    {
-        $stmt = $this->conn->prepare("SELECT * FROM student WHERE id = :id");
-        $stmt->bindParam(":id", $id);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
 
     // UPDATE
 
+    public function updateCompletedTestPoints($test_key, $student_id, $points){
+        $stmt = $this->conn->prepare("UPDATE completed_tests SET points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt->bindParam(":points", $points);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->execute();
+    }
 
-    public function updateStudentAnswerIsCorrect($id, $is_correct){
+    public function updateStudentAnswerToCorrect($id, $is_correct){
         $stmt = $this->conn->prepare("UPDATE student_answers SET is_correct=:is_correct WHERE id LIKE :id");
         $stmt->bindParam(":is_correct", $is_correct);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
 
-    public function updateStudent($id, $name, $surname){
-        $stmt = $this->conn->prepare("UPDATE student SET name=:name, surname=:surname WHERE id = :id");
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":surname", $surname);
-        $stmt->execute();
-    }
-
-    public function updateStudentTestPoints($test_key, $student_id, $points){
-        $stmt = $this->conn->prepare("UPDATE student_tests SET points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
-        $stmt->bindParam(":points", $points);
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":student_id", $student_id);
-        $stmt->execute();
-    }
-
-    public function setCorrectConnectAnswer($question_id, $correct_connect){
-        $stmt = $this->conn->prepare("UPDATE questions SET correct_connect=:correct_connect WHERE id LIKE :question_id");
-        $stmt->bindParam(":correct_connect", $correct_connect);
-        $stmt->bindParam(":question_id", $question_id);
-        $stmt->execute();
-    }
-
-    public function setStudentLeftTab($student_id, $test_key){
-        $left_tab=1;
-        $stmt = $this->conn->prepare("UPDATE student_tests SET left_tab=:left_tab WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
-        $stmt->bindParam(":student_id", $student_id);
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":left_tab", $left_tab);
-        $stmt->execute();
-    }
-
-    public function setStudentCompletedTest($student_id, $test_key, $points){
-        $completed = 1;
-        $stmt = $this->conn->prepare("UPDATE student_tests SET completed=:completed, points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
-        $stmt->bindParam(":student_id", $student_id);
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":completed", $completed);
-        $stmt->bindParam(":points", $points);
-        $stmt->execute();
-    }
-
     // INSERT
-    public function insertTeacher($username, $password){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (username, password) VALUES (:username, :password)");
-        $stmt->bindParam(":username", $username);
-        $stmt->bindParam(":password", $password);
-        $stmt->execute();
-    }
-
-/*
-    public function insertTeacherWithName($username, $password, $name, $surname){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO connections (password, name, surname) VALUES (:password, :name, :surname)");
-        $stmt->bindParam(":password", $password);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":surname", $surname);
-        $stmt->execute();
-    }
-*/
     public function insertStudent($id, $name, $surname){
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student (id, name, surname) VALUES (:id, :name, :surname)");
         $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":surname", $surname);
+        $stmt->execute();
+    }
+
+    public function insertTeacherWithName($email, $password, $name, $surname){
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (email, password, name, surname) VALUES (:email, :password, :name, :surname)");
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password", $password);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
@@ -239,7 +177,7 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertAnswerWithKey($question_id, $answer, $answer_key, $is_correct=0){
+    public function insertAnswerWithKey($question_id, $answer, $answer_key, $is_correct){
         $stmt = $this->conn->prepare("INSERT IGNORE INTO answers (question_id, answer, answer_key, is_correct) VALUES (:question_id, :answer, :answer_key, :is_correct)");
         $stmt->bindParam(":question_id", $question_id);
         $stmt->bindParam(":answer", $answer);
@@ -248,11 +186,14 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentTest($student_id, $test_key, $start_time){
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (student_id, test_key, start_time) VALUES (:student_id, :test_key, :start_time)");
+    public function insertCompletedTest($student_id, $test_key, $name, $surname, $left_tab, $points){
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO completed_tests (student_id, test_key, name, surname, left_tab, points) VALUES (:student_id, :test_key, :name, :surname, :left_tab, :points)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":start_time", $start_time);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":surname", $surname);
+        $stmt->bindParam(":left_tab", $left_tab);
+        $stmt->bindParam(":points", $points);
         $stmt->execute();
     }
 
@@ -292,6 +233,20 @@ class DatabaseController
         $stmt->execute();
     }
 
+    public function insertStudentVisibility($student_id, $test_key, $visibility){
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_visibility (test_key, student_id, visibility) VALUES (:test_key, :student_id, :visibility )");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":visibility ", $visibility );
+        $stmt->execute();
+    }
+    
+    public function getStudentsVisibility($test_key){
+        $stmt = $this->conn->prepare("SELECT * FROM student_visibility WHERE test_key = :test_key");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
 
     /**
