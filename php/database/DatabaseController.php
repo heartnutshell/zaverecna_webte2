@@ -93,6 +93,15 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentsByTestKey($test_key, $last_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests, student WHERE test_key LIKE :test_key AND student.id = student_tests.student_id AND student_tests.id > :last_id");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":last_id", $last_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getStudentAnswersByTestKeyAndStudentId($test_key, $student_id): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
@@ -250,7 +259,7 @@ class DatabaseController
 
     public function insertStudentVisibility($test_key, $student_id, $visibility)
     {
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_visibility (test_key, student_id, visibility, timestamp) VALUES (:test_key, :student_id, :visibility, :timestamp)");
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_visibilities (test_key, student_id, visibility, timestamp) VALUES (:test_key, :student_id, :visibility, :timestamp)");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":visibility", $visibility);
@@ -258,10 +267,11 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function getStudentsVisibility($test_key)
+    public function getStudentsVisibility($test_key, $last_id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_visibility WHERE test_key = :test_key");
+        $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id asc");
         $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":last_id", $last_id);
         $stmt->execute();
         return $stmt->fetchAll();
     }

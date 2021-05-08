@@ -15,4 +15,4 @@ $partial->createHeader("Student | Test");
 
 </main>
 
-<script src="../js/pageVisibility.js"></script>
+<script src="../js/api/pageVisibility.js"></script>
