@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ ."/Database.php";
+require_once __DIR__ . "/Database.php";
 
 class DatabaseController
 {
@@ -133,14 +133,16 @@ class DatabaseController
     // UPDATE
 
 
-    public function updateStudentAnswerIsCorrect($id, $is_correct){
+    public function updateStudentAnswerIsCorrect($id, $is_correct)
+    {
         $stmt = $this->conn->prepare("UPDATE student_answers SET is_correct=:is_correct WHERE id LIKE :id");
         $stmt->bindParam(":is_correct", $is_correct);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
 
-    public function updateStudent($id, $name, $surname){
+    public function updateStudent($id, $name, $surname)
+    {
         $stmt = $this->conn->prepare("UPDATE student SET name=:name, surname=:surname WHERE id = :id");
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":name", $name);
@@ -148,7 +150,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function updateStudentTestPoints($test_key, $student_id, $points){
+    public function updateStudentTestPoints($test_key, $student_id, $points)
+    {
         $stmt = $this->conn->prepare("UPDATE student_tests SET points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
         $stmt->bindParam(":points", $points);
         $stmt->bindParam(":test_key", $test_key);
@@ -156,15 +159,17 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function setCorrectConnectAnswer($question_id, $correct_connect){
+    public function setCorrectConnectAnswer($question_id, $correct_connect)
+    {
         $stmt = $this->conn->prepare("UPDATE questions SET correct_connect=:correct_connect WHERE id LIKE :question_id");
         $stmt->bindParam(":correct_connect", $correct_connect);
         $stmt->bindParam(":question_id", $question_id);
         $stmt->execute();
     }
 
-    public function setStudentLeftTab($student_id, $test_key){
-        $left_tab=1;
+    public function setStudentLeftTab($student_id, $test_key)
+    {
+        $left_tab = 1;
         $stmt = $this->conn->prepare("UPDATE student_tests SET left_tab=:left_tab WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -172,7 +177,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function setStudentCompletedTest($student_id, $test_key, $points){
+    public function setStudentCompletedTest($student_id, $test_key, $points)
+    {
         $completed = 1;
         $stmt = $this->conn->prepare("UPDATE student_tests SET completed=:completed, points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
         $stmt->bindParam(":student_id", $student_id);
@@ -183,14 +189,15 @@ class DatabaseController
     }
 
     // INSERT
-    public function insertTeacher($username, $password){
+    public function insertTeacher($username, $password)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO teacher (username, password) VALUES (:username, :password)");
         $stmt->bindParam(":username", $username);
         $stmt->bindParam(":password", $password);
         $stmt->execute();
     }
 
-/*
+    /*
     public function insertTeacherWithName($username, $password, $name, $surname){
         $stmt = $this->conn->prepare("INSERT IGNORE INTO connections (password, name, surname) VALUES (:password, :name, :surname)");
         $stmt->bindParam(":password", $password);
@@ -199,7 +206,8 @@ class DatabaseController
         $stmt->execute();
     }
 */
-    public function insertStudent($id, $name, $surname){
+    public function insertStudent($id, $name, $surname)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student (id, name, surname) VALUES (:id, :name, :surname)");
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":name", $name);
@@ -207,7 +215,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points){
+    public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO test (test_key, teacher_id, time_limit, active, max_points) VALUES (:test_key, :teacher_id, :time_limit, :active, :max_points)");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":teacher_id", $teacher_id);
@@ -217,10 +226,11 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertQuestion($test_key, $type, $question, $points, $correct_connect = null){
-        if ($correct_connect == null){
+    public function insertQuestion($test_key, $type, $question, $points, $correct_connect = null)
+    {
+        if ($correct_connect == null) {
             $stmt = $this->conn->prepare("INSERT IGNORE INTO questions (test_key, type, question, points) VALUES (:test_key, :type, :question, :points)");
-        }else{
+        } else {
             $stmt = $this->conn->prepare("INSERT IGNORE INTO questions (test_key, type, question, correct_connect, points) VALUES (:test_key, :type, :question, :correct_connect, :points)");
             $stmt->bindParam(":correct_connect", $correct_connect);
         }
@@ -231,7 +241,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertAnswer($question_id, $answer, $is_correct){
+    public function insertAnswer($question_id, $answer, $is_correct)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO answers (question_id, answer, is_correct) VALUES (:question_id, :answer, :is_correct)");
         $stmt->bindParam(":question_id", $question_id);
         $stmt->bindParam(":answer", $answer);
@@ -239,7 +250,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertAnswerWithKey($question_id, $answer, $answer_key, $is_correct=0){
+    public function insertAnswerWithKey($question_id, $answer, $answer_key, $is_correct = 0)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO answers (question_id, answer, answer_key, is_correct) VALUES (:question_id, :answer, :answer_key, :is_correct)");
         $stmt->bindParam(":question_id", $question_id);
         $stmt->bindParam(":answer", $answer);
@@ -248,7 +260,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentTest($student_id, $test_key, $start_time){
+    public function insertStudentTest($student_id, $test_key, $start_time)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (student_id, test_key, start_time) VALUES (:student_id, :test_key, :start_time)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -256,7 +269,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentAnswer($student_id, $test_key, $question_id, $answer_id){
+    public function insertStudentAnswer($student_id, $test_key, $question_id, $answer_id)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, answer_id) VALUES (:student_id, :test_key, :question_id, :answer_id)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -265,7 +279,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentOpenAnswer($student_id, $test_key, $question_id, $answer){
+    public function insertStudentOpenAnswer($student_id, $test_key, $question_id, $answer)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, answer) VALUES (:student_id, :test_key, :question_id, :answer)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -274,7 +289,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentFileAnswer($student_id, $test_key, $question_id, $file){
+    public function insertStudentFileAnswer($student_id, $test_key, $question_id, $file)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, file) VALUES (:student_id, :test_key, :question_id, :file)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -283,7 +299,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function insertStudentConnectAnswer($student_id, $test_key, $question_id, $connect_answer){
+    public function insertStudentConnectAnswer($student_id, $test_key, $question_id, $connect_answer)
+    {
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, connect_answer) VALUES (:student_id, :test_key, :question_id, :connect_answer)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -301,7 +318,4 @@ class DatabaseController
     {
         return $this->conn;
     }
-
-
 }
-
