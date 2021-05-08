@@ -12,13 +12,13 @@
         <title>test</title>
         <link rel="icon" type="image/png" href="img/favicon.png" />
         <!-- CSS --> 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">    
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">    
         <!-- JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="lib/fabric.min.js"></script>
-        <script src="lib/jscolor.min.js"></script>
+        <script src="../../lib/fabric.min.js"></script>
+        <script src="../../lib/jscolor.min.js"></script>
     </head>
 
     <body>
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <script src="js/draw.js"></script>  
+        <script src="../../js/draw.js"></script>  
 
     </body>
 </html>
