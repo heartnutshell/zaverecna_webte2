@@ -93,7 +93,7 @@
                             id="email"
                             name="email"
                             aria-describedby="emailHelp"
-                            pattern="/^\S+@\S+\.\S+$/"
+                            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                             autocomplete="off"
                             required
                         />
