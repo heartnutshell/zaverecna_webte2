@@ -1,10 +1,8 @@
 $(document).ready(() => {
-
-    document.addEventListener( "visibilitychange" ,() => {
-    
+    document.addEventListener("visibilitychange", () => {
         const state = document.visibilityState;
         console.log(state);
-        if(state === "hidden"){
+        if (state === "hidden") {
             // Student sa prepol na ine okno
             // TODO : Pridať zaznam do DB
 
@@ -13,31 +11,26 @@ $(document).ready(() => {
                 method: "POST",
                 data: {
                     action: "left-tab",
-                    test_key: "VSA2021",
-                    student_id: 92078,
+                    test_key: "OS2021",
+                    student_id: 11111,
                 },
                 success: (data) => {
                     console.log(data);
-                }
-            })
-    
-        } else if (state === "visible"){
-
+                },
+            });
+        } else if (state === "visible") {
             $.ajax({
                 url: "../php/routes/activity.php",
                 method: "POST",
                 data: {
-                    action: "left-tab",
-                    test_key: "VSA2021",
-                    student_id: 92078,
+                    action: "enter-tab",
+                    test_key: "OS2021",
+                    student_id: 11111,
                 },
                 success: (data) => {
                     console.log(data);
-                }
-            })
+                },
+            });
         }
-    
-    })
-
-})
-
+    });
+});

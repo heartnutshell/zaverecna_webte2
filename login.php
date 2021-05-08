@@ -28,8 +28,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
                 $_SESSION["isLogged"] = true;
                 echo "prihlasený";
-                //pridať vytvorenie session -> interface pre učitela
-
             } else {
                 if ($user_found = 1) {
                     $message = "Nesprávne heslo!";

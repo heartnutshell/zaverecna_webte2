@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/../";
+
 require_once __DIR__ . "/../php/database/DatabaseController.php";
 require_once __DIR__ . "/../php/questions/CreateQuestion.php";
 require_once __DIR__ . "/partials/Partial.php";
@@ -10,6 +12,8 @@ $partial = new Partial();
 
 // Creating Header
 $partial->createHeader("Teacher | Home");
+
+// TODO : Get Teacher ID from sessions when logged in
 
 ?>
 
