@@ -143,7 +143,7 @@ class DatabaseController
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
-        $result = this->getTeacherByUsername($email);{
+        $result = $this->getTeacherByUsername($email);{
             if ($result){
                 return TRUE;
             } else {
