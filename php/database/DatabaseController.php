@@ -143,7 +143,7 @@ class DatabaseController
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
-        $retult = this->getTeacherByUsername($email);{
+        $result = this->getTeacherByUsername($email);{
             if ($result){
                 return TRUE;
             } else {
