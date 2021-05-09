@@ -1,0 +1,11 @@
+/*
+ Teacher - Tests
+*/
+
+.test.active {
+    background-color: rgb(44, 199, 78);
+}
+
+.test.not-active {
+    background-color: rgb(153, 31, 31);
+}
