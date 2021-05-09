@@ -17,7 +17,7 @@ document.getElementById('load').addEventListener('click', (e) => {
     mathfield.setValue(save);
 });
 
-//upravenie latex output
+//upravenie latex outputu
 function escapeHtml(string) {
     return String(string).replace(/[&<>"'`=/\u200b]/g, function (
         s
