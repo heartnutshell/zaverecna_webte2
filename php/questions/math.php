@@ -27,10 +27,10 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <math-field id="mf" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
-                        <textarea class="output" id="latex" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
                     </div>
                     <div class="card-footer">
                         <button type="button" class="btn btn-outline-primary" id="save">Save</button>
+                        <button type="button" class="btn btn-outline-primary" id="load">load</button>
                     </div>
                 </div>
             </div>

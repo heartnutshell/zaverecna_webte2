@@ -1,17 +1,39 @@
+let save = "";
+
 const mf = MathLive.makeMathField('mf', {
-    onContentDidChange: (mf) => {
-        const latex = mf.getValue();
-        document.getElementById('latex').value = latex;
+    onContentDidChange: (mf) => {        
     },
 });
 
-document.getElementById('latex').addEventListener('input', (ev) => {
-    mf.setValue(ev.target.value);
+const mathfield = document.getElementById('mf');
+
+//uloženie vzorca
+document.getElementById('save').addEventListener('click', (e) => {
+            save = escapeHtml(mathfield.value);
+        });
+
+//načítanie vzorca
+document.getElementById('load').addEventListener('click', (e) => {
+    mathfield.setValue(save);
 });
 
-document
-        .getElementById('save')
-        .addEventListener('click', (ev) => {
-            console.log(document.getElementById('latex'));
-        });
-/*¯\_(ツ)_/¯*/
+//upravenie latex output
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'`=/\u200b]/g, function (
+        s
+    ) {
+        return (
+            {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;',
+                '/': '&#x2F;',
+                '`': '&#x60;',
+                '=': '&#x3D;',
+                '\u200b': '&amp;#zws;',
+            }[s] || s
+        );
+    });
+}
