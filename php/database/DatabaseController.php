@@ -143,6 +143,13 @@ class DatabaseController
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
+        $retult = this->getTeacherByUsername($email);{
+            if ($result){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
     }
 
     public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points){
