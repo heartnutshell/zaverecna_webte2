@@ -17,10 +17,10 @@ const clearCanvas = () => {
 
 const saveDrawing = () => {
     drawingSave = canvas.toSVG()
-    //need to save into DB
+    insertDrawAnswer(drawingSave);
 }
 
-const loadDrawing = () => {
+const loadDrawing = () => { //len na testovanie
     clearCanvas();
     //need to get save from DB
     if(drawingSave) {

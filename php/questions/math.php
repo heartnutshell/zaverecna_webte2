@@ -36,7 +36,8 @@
             </div>
         </div>
 
-        <script src="../../js/math.js"></script> 
+        <script src="../../js/api/studentAnswer.js"></script>
+        <script src="../../js/math.js"></script>         
 
     </body>
 </html>

@@ -9,7 +9,8 @@ const mathfield = document.getElementById('mf');
 
 //uloženie vzorca
 document.getElementById('save').addEventListener('click', (e) => {
-            save = escapeHtml(mathfield.value);
+            save = escapeHtml(mathfield.value); //len na testovanie
+            insertMathAnswer(save);
         });
 
 //načítanie vzorca

@@ -43,7 +43,8 @@
             </div>
         </div>
 
-        <script src="../../js/draw.js"></script>  
+        <script src="../../js/api/studentAnswer.js"></script>
+        <script src="../../js/draw.js"></script>       
 
     </body>
 </html>
