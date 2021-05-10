@@ -13,10 +13,10 @@ class DatabaseController
     }
 
     // GET
-    public function getTeacherByUsername($username): array
+    public function getTeacherByEmail($email): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE email LIKE :username");
-        $stmt->bindParam(":username", $username);
+        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE email LIKE :email");
+        $stmt->bindParam(":email", $email);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -25,7 +25,7 @@ class DatabaseController
     {
         $stmt = $this->conn->prepare("SELECT * FROM student WHERE id = :id");
         $stmt->bindParam(":id", $id);
-        $result = $stmt->execute();
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 
@@ -41,6 +41,13 @@ class DatabaseController
     {
         $stmt = $this->conn->prepare("SELECT * FROM test WHERE test_key LIKE :test_key");
         $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getTestKeys(): array
+    {
+        $stmt = $this->conn->prepare("SELECT test_key FROM test");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -158,6 +165,12 @@ class DatabaseController
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
+        $result = $this->getTeacherByEmail($email);
+        if ($result) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points)
@@ -259,17 +272,18 @@ class DatabaseController
 
     public function insertStudentVisibility($test_key, $student_id, $visibility)
     {
+        $time = Date("Y-m-d H:i_s");
         $stmt = $this->conn->prepare("INSERT IGNORE INTO student_visibilities (test_key, student_id, visibility, timestamp) VALUES (:test_key, :student_id, :visibility, :timestamp)");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":visibility", $visibility);
-        $stmt->bindParam(":timestamp", Date("Y-m-d H:i_s"));
+        $stmt->bindParam(":timestamp", $time);
         $stmt->execute();
     }
 
-    public function getStudentsVisibility($test_key, $last_id)
+    public function getStudentsVisibility($test_key, $last_id): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id asc");
+        $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id ASC");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":last_id", $last_id);
         $stmt->execute();

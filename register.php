@@ -49,7 +49,7 @@ try {
 </head>
 
 <body>
-
+    <a href="login.php">Prihlásiť sa</a>
     <div class="container">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="needs-validation" method="post"
             enctype="multipart/form-data" novalidate>

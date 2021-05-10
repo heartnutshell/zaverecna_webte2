@@ -34,3 +34,15 @@ if ($_REQUEST["type"] == "teacher-test") {
             break;
     }
 }
+
+// Creating Tests
+if ($_REQUEST["type"] == "tests") {
+
+    switch ($_REQUEST["action"]) {
+        case "get-test-keys":
+            echo json_encode($db->getTestKeys());
+            break;
+        default:
+            break;
+    }
+}

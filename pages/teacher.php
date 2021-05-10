@@ -11,11 +11,11 @@ $partial->authenticate();
 
 ["teacher_id" => $teacher_id, "teacher_name" => $name, "teacher_surname" => $surname] = $_SESSION;
 
-$createQ = new CreateQuestion();
+// $createQ = new CreateQuestion();
 $db = new DatabaseController();
 
 // Creating Header
-$partial->createHeader("Teacher | Home");
+$partial->createHeader("Učiteľ | Home");
 
 // Fetch Teacher's tests
 $tests = $db->getAllTeacherTests($teacher_id);
@@ -35,42 +35,42 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
         <?php if (count($tests) == 0) : ?>
 
-            <h4>Žiadne testy</h4>
+        <h6>Žiadne testy</h6>
 
         <?php else : ?>
-            <table>
+        <table>
 
-                <thead>
-                    <tr>
-                        <th>Kód testu</th>
-                        <th>Časový limit</th>
-                        <th>Max bodov</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+            <thead>
+                <tr>
+                    <th>Kód testu</th>
+                    <th>Časový limit</th>
+                    <th>Max bodov</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
 
-                <tbody>
+            <tbody>
 
-                    <?php foreach ($tests as $key => $test) : ?>
-                        <tr>
+                <?php foreach ($tests as $key => $test) : ?>
+                <tr>
 
-                            <td><?= $test["test_key"]; ?></td>
-                            <td><?= $test["time_limit"]; ?></td>
-                            <td><?= $test["max_points"]; ?></td>
+                    <td><?= $test["test_key"]; ?></td>
+                    <td><?= $test["time_limit"]; ?></td>
+                    <td><?= $test["max_points"]; ?></td>
 
-                            <?php if ($test["active"]) : ?>
-                                <td class="test active">
-                                    <a href="testOverview.php?test_key=<?= $test["test_key"] ?>"><?= $test["active"] ?></a>
-                                </td>
-                            <?php else : ?>
-                                <td class="test not-active"><?= $test["active"] ?></td>
-                            <?php endif; ?>
+                    <?php if ($test["active"]) : ?>
+                    <td class="test active">
+                        <a href="testOverview.php?test_key=<?= $test["test_key"] ?>"><?= $test["active"] ?></a>
+                    </td>
+                    <?php else : ?>
+                    <td class="test not-active"><?= $test["active"] ?></td>
+                    <?php endif; ?>
 
-                        </tr>
-                    <?php endforeach; ?>
+                </tr>
+                <?php endforeach; ?>
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
         <?php endif; ?>
     </section>

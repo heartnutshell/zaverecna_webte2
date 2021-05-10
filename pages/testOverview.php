@@ -34,7 +34,7 @@ if ($_SESSION["teacher_id"] != $test[0]["teacher_id"]) {
 $students = $db->getStudentsByTestKey($_GET["test_key"], 0);
 
 // Creating Header
-$partial->createHeader("Teacher | Test: {$_GET["test_key"]}");
+$partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
 ?>
 
@@ -85,19 +85,19 @@ $partial->createHeader("Teacher | Test: {$_GET["test_key"]}");
 
 </main>
 
-<script src="../js/api/teacherTest.js"></script>
+<script src="../js/api/teacher.js"></script>
 <script>
-    $(document).ready(() => {
+$(document).ready(() => {
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const test_key = urlParams.get("test_key");
+    const urlParams = new URLSearchParams(window.location.search);
+    const test_key = urlParams.get("test_key");
 
+    updateNotifications(test_key);
+    updateStudentsData(test_key);
+
+    setInterval(() => {
         updateNotifications(test_key);
         updateStudentsData(test_key);
-
-        setInterval(() => {
-            updateNotifications(test_key);
-            updateStudentsData(test_key);
-        }, 3000);
-    })
+    }, 3000);
+})
 </script>
