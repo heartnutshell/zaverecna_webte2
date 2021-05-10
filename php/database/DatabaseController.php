@@ -13,10 +13,10 @@ class DatabaseController
     }
 
     // GET
-    public function getTeacherByUsername($username): array
+    public function getTeacherByEmail($email): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE username LIKE :username");
-        $stmt->bindParam(":username", $username);
+        $stmt = $this->conn->prepare("SELECT * FROM teacher WHERE email LIKE :email");
+        $stmt->bindParam(":email", $email);
         $stmt->execute();
         return $stmt->fetchAll();
     }
