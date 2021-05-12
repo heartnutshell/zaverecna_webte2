@@ -292,3 +292,5 @@ class DatabaseController
         return $this->conn;
     }
 }
+
+?>
