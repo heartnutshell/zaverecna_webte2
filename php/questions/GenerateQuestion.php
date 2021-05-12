@@ -14,8 +14,6 @@ class GenerateQuestion
 
     public function generateSelect($question_id) {
         echo '
-        <div class="container">
-            <div class="row-6">
                 <div class="card mb-3">
                     <div class="card-body">';
                         $answers = $this->databaseController->getAnswersByQuestionId($question_id);
@@ -25,28 +23,20 @@ class GenerateQuestion
                         echo '
                     </div>
                 </div>
-            </div>
-        </div>
         ';
     }
 
     public function generateText($question_id) {
         echo '
-        <div class="container">
-            <div class="row-6">
                 <div class="card mb-3">
                     <div class="card-body">
                         <textarea class="output" id="'.$question_id.'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                     </div>
-                </div>
-            </div>
         </div>';
     }
 
     public function generateConnect($question_id) {
         echo '
-        <div class="container">
-            <div class="row-6">
                 <div class="card mb-3">
                     <div class="row">';
                         $answers = $this->databaseController->getAnswersByQuestionId(5);
@@ -95,8 +85,6 @@ class GenerateQuestion
                         echo'
                     </div>
                 </div>
-            </div>
-        </div>
         ';
     }
 
