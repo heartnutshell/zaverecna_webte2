@@ -1,6 +1,6 @@
 <?php
 
-
+    $question = "tu ide otazka?";
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,11 @@
 
         <div class="container">
             <div class="row-6">
+                <?php echo'
                 <div class="card mb-3">
+                    <div class="card-header">
+                        <span><?php echo $question ?></span>
+                    </div>
                     <div class="card-body">
                         <math-field id="mf" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>
@@ -33,6 +37,7 @@
                         <button type="button" class="btn btn-outline-primary" id="load">load</button>
                     </div>
                 </div>
+                ';?>
             </div>
         </div>
 

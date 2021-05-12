@@ -1,6 +1,6 @@
 <?php
 
-
+    $question = "tu ide otazka?";
 
 ?>
 <!DOCTYPE html>
@@ -25,9 +25,11 @@
 
         <div class="container">
             <div class="row-6">
+                <?php echo'
                 <div class="card mb-3">
                     <div class="card-header">
-                        <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:'Close'}">
+                        <span>'.$question.'</span>
+                        <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
                         <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                         <output id="range-num">1</output>      
                     </div>
@@ -40,6 +42,7 @@
                         <button type="button" class="btn btn-outline-primary" onclick="loadDrawing()" id="save">Load last Save</button>
                     </div>
                 </div>
+                ';?>
             </div>
         </div>
 
