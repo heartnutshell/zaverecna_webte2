@@ -1,5 +1,9 @@
 <?php
+require_once __DIR__ . "/../database/DatabaseController.php";
 
+$databaseController = new DatabaseController();
+
+$question_id = 7;
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +24,9 @@
         <div class="card mb-3">
             <div class="card-body">
                 <?php
-                $question_id = 1;
-                for ($i = 0; $i<4; $i++){
-                    echo 'option <input type="checkbox" class="output" id="'.$question_id.'"><br>';
+                $answers = $databaseController->getAnswersByQuestionId($question_id);
+                foreach ($answers as $answer){
+                    echo $answer["answer"].'<input type="checkbox" class="output" id="'.$question_id.'"><br>';
                 }
                 ?>
             </div>

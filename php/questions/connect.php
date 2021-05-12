@@ -1,5 +1,9 @@
 <?php
+require_once __DIR__ . "/../database/DatabaseController.php";
 
+$databaseController = new DatabaseController();
+
+$question_id = 5;
 ?>
 
 <!DOCTYPE html>
@@ -18,17 +22,46 @@
 <div class="container">
     <div class="row-6">
         <div class="card mb-3">
-            <div class="card-body">
+            <div class="row">
                 <?php
-                $question_id = 1;
-                for ($i = 0; $i<4; $i++){
-                    echo chr($i+ord('a')).') option  '.($i+1).') <select class="output" id="'.$question_id.'"> ';
-                    for ($j = 0; $j<4; $j++)
-                        echo '
-                            <option class="output" id="'.$j.'">'.$j.'</option>
-                        ';
-                    echo '</select><br>';
+                $answers = $databaseController->getAnswersByQuestionId(5);
+
+                $left_answers = array();
+                $right_answers = array();
+
+                foreach ($answers as $answer){
+                    if (is_numeric($answer["answer_key"])){
+                        array_push($right_answers, $answer);
+                    }else{
+                        array_push($left_answers, $answer);
+                    }
                 }
+
+                usort($left_answers, function ($item1, $item2){
+                   return ord($item1["answer_key"]) >  ord($item2["answer_key"]);
+                });
+
+                usort($right_answers, function ($item1, $item2){
+                    return ord($item1["answer_key"]) >  ord($item2["answer_key"]);
+                });
+
+                echo '<div class="card-body col-6">';
+                foreach ($left_answers as $answer){
+                    echo $answer["answer_key"].") ".$answer["answer"]."<br>";
+                }
+                echo '</div>';
+                echo '<div class="card-body col-6">';
+                foreach ($left_answers as $answer){
+                    echo '<select class="output" id="'.$question_id.'">';
+                    foreach ($right_answers as $option) {
+                        echo '
+                        <option class="output" id="' . $option["answer_key"] . '">' . $option["answer"] . '</option>
+                    ';
+                    }
+                    echo '</select><br>';
+
+                }
+                echo '</div>';
                 ?>
             </div>
         </div>
