@@ -11,7 +11,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             
         $email = $_POST['email'];
 
-        $result = $db->getTeacherByUsername($email);
+        $result = $db->getTeacherByEmail($email);
 
         if ($result == NULL){
             $message = "Neznámy email!";
