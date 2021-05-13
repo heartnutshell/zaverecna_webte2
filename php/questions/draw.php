@@ -29,17 +29,31 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <span>'.$question.'</span>
-                        <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
-                        <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
+                        <input value="#000000" id="jednacolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <input type="range" min="1" max="100" value="1" step="1" id="jednasize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                         <output id="range-num">1</output>      
                     </div>
                     <div class="card-body">
-                        <canvas id="drawHere"></canvas>
+                        <canvas id="jedna"></canvas>
                     </div>
                     <div class="card-footer">
-                        <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="saveDrawing()" id="save">Save</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="loadDrawing()" id="save">Load last Save</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="jednaclear">Clear</button>
+                    </div>
+                </div>
+                ';?>
+                <?php echo'
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <span>'.$question.'</span>
+                        <input value="#000000" id="dvacolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <input type="range" min="1" max="100" value="1" step="1" id="dvasize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
+                        <output id="range-num">1</output>      
+                    </div>
+                    <div class="card-body">
+                        <canvas id="dva"></canvas>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="dvaclear">Clear</button>
                     </div>
                 </div>
                 ';?>
