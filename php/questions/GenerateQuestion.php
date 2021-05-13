@@ -24,6 +24,7 @@ class GenerateQuestion
         }
         echo '
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -34,6 +35,7 @@ class GenerateQuestion
                 <div class="card-body">
                     <textarea class="output" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
     }
 
@@ -77,6 +79,7 @@ class GenerateQuestion
         echo '</div></div>';
 
         echo'
+            <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -98,7 +101,8 @@ class GenerateQuestion
                     <div class="card-footer">
                         <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
                     </div>
-                    <input type="hidden" id="'.$question_id.'" value="">
+                    <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
+                    <input type="hidden" value="1" name="'.$question_id.'_hidden">
                 </div>
         ';
         //treba includnut v teste
@@ -118,7 +122,8 @@ class GenerateQuestion
                         <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>
                     <div class="card-footer">
-                        <input type="hidden" id='.$question_id.'>
+                        <input type="hidden" id='.$question_id.' name="'.$question_id.'">
+                        <input type="hidden" value="1" name="'.$question_id.'_hidden">
                     </div>
             </div>
         ';
