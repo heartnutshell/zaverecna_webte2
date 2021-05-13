@@ -90,7 +90,7 @@ foreach ($post_keys as $key){
             break;
         case QuestionType::MATH:
         case QuestionType::DRAW:
-            $student_answer["answer"] = $_POST[$key];
+            $student_answer["answer"] = $_POST[$current_question[0]["id"]];
             break;
         default:
             echo "wrong question type";
