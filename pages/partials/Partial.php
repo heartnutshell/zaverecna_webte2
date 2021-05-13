@@ -44,10 +44,10 @@ class Partial
         $session = new Session();
         $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
         if (!isset($_SESSION["isLogged"])) {
-            header("Location: ../login.php");
+            header("Location: https://wt100.fei.stuba.sk/zygarde/login.php");
         }
         if ($_SESSION["isLogged"] != true) {
-            header("Location: ../login.php");
+            header("Location: https://wt100.fei.stuba.sk/zygarde/login.php");
         }
     }
 

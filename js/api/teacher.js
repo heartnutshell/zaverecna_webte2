@@ -1,11 +1,11 @@
 let last_log_id = 0;
 let last_student_id = 0;
 
-const teacherApiUrl = "../php/routes/teacher.php";
+const teacherApiUrl = "../php/routes/";
 
 const updateNotifications = (test_key) => {
     $.ajax({
-        url: teacherApiUrl,
+        url: teacherApiUrl + "teacher.php",
         method: "POST",
         data: {
             type: "teacher-test",
@@ -38,7 +38,7 @@ const updateNotifications = (test_key) => {
 
 const updateStudentsData = (test_key) => {
     $.ajax({
-        url: teacherApiUrl,
+        url: teacherApiUrl + "teacher.php",
         method: "POST",
         data: {
             type: "teacher-test",
@@ -70,7 +70,7 @@ const updateStudentsData = (test_key) => {
 
 const getTestKeys = (e) => {
     $.ajax({
-        url: teacherApiUrl,
+        url: teacherApiUrl + "teacher.php",
         method: "GET",
         data: {
             type: "tests",
@@ -94,6 +94,23 @@ const getTestKeys = (e) => {
                 e.target.classList.add("is-valid");
                 e.target.classList.remove("is-invalid");
             }
+        },
+    });
+};
+
+const submitCreateTest = (formData) => {
+    $.ajax({
+        url: teacherApiUrl + "teacherCreateTest.php",
+        method: "POST",
+        data: {
+            formData,
+        },
+        success: (data) => {
+            console.log(data);
+        },
+        error: (xhr, status, err) => {
+            console.log(err);
+            console.log(xhr);
         },
     });
 };

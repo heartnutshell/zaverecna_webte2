@@ -1,7 +1,7 @@
 $(document).ready(() => {
     document.addEventListener("visibilitychange", () => {
         const state = document.visibilityState;
-
+        // TODO Get Student DATA from Sesstion or Storage
         if (state === "hidden") {
             // Student sa prepol na ine okno
             $.ajax({

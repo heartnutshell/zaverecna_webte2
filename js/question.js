@@ -13,14 +13,14 @@ const removeElementById = (id) => {
 const createQuestion = (type, key, number) => {
     // Znenie otazky
     let questionInput = `
-    <div class="card" id="${key}-${number}">
+    <div class="card" id="Question${number}">
         <div class="card-header">
             <span>${typeArr[type]}</span>
-            <span class="btn btn-danger" onclick="removeElementById('${key}-${number}')">&times;</span>
+            <span class="btn btn-danger" onclick="removeElementById('Question${number}')">&times;</span>
         </div>
         <div class="card-body">
             <div>
-                <label for="${key}Q${number}">Otázka</label>
+                <label for="Q${number}">Otázka</label>
                 <input class="form-control" type="text" id="Q${number}" name="Q${number}" data-type="${type}">
             </div>
     `;
@@ -28,8 +28,8 @@ const createQuestion = (type, key, number) => {
     // Pocet bodov za otazku
     let pointInput = `
             <div>
-                <label for="${key}P${number}">Počet bodov</label>
-                <input class="form-control" type="text" id="${key}P${number}" name="${key}P${number}" data-parent="Q${number}" data-group="point">
+                <label for="P${number}">Počet bodov</label>
+                <input class="form-control" type="text" id="P${number}" name="P${number}" data-parent="Q${number}" data-group="points">
             </div>
         </div>
     </div>
@@ -65,8 +65,8 @@ const createQuestion = (type, key, number) => {
 const createOpenQuestionBody = (key, number) => {
     return `
     <div>
-        <label for="${key}A${number}">Odpoveď</label>
-        <input class="form-control" type="text" id="${key}A${number}" name="${key}A${number}" data-parent="Q${number}">
+        <label for="OpenA${number}">Odpoveď</label>
+        <input class="form-control" type="text" id="OpenA${number}" name="OpenA${number}" data-parent="Q${number}">
     </div>
     `;
 };
@@ -75,26 +75,70 @@ const createOpenQuestionBody = (key, number) => {
  * Choose Question
  */
 
+// const createChooseQuestionBody = (key, number) => {
+//     return `
+//     <div id="chooseQ${number}">
+//         <div>
+//             <label for="CorrectA${number}">Správna odpoveď</label>
+//             <input class="form-control" type="text" id="CorrectA${number}" name="CorrectA${number}" data-parent="Q${number}">
+//         </div>
+//         <div>
+//             <label for="IncorrectA1${number}">Nesprávna odpoveď</label>
+//             <input class="form-control" type="text" id="IncorrectA1${number}" name="IncorrectA1${number}" data-parent="Q${number}">
+//         </div>
+//         <div>
+//             <label for="IncorrectA2${number}">Nesprávna odpoveď</label>
+//             <input class="form-control" type="text" id="IncorrectA2${number}" name="IncorrectA2${number}" data-parent="Q${number}">
+//         </div>
+//         <div>
+//             <label for="IncorrectA3${number}">Nesprávna odpoveď</label>
+//             <input class="form-control" type="text" id="IncorrectA3${number}" name="IncorrectA3${number}" data-parent="Q${number}">
+//         </div>
+//     </div>
+//     `;
+// };
+
+let selectIndex = 1;
+
+const selectCheckboxHandle = (event, id) => {
+    const checked = event.target.checked;
+
+    $(`#${id}`).attr("data-correct", checked);
+};
+
+const addSelectToChooseQuestion = (bodyId, number) => {
+    ++selectIndex;
+    const row = `
+        <div id="select-${selectIndex}" class="row">
+            <div class="col-md-10">
+                <input id="checkbox-${selectIndex}" type="checkbox" onclick="selectCheckboxHandle(event,'selectA${selectIndex}')" >
+                <label for="checkbox-${selectIndex}">Správna odpoveď</label>
+                <input class="form-control" type="text" id="selectA${selectIndex}" name="selectA${selectIndex}" data-parent="Q${number}" data-correct="false">
+            </div>
+            <div class="col-md-1">
+                <span onclick="removeElementById('select-${selectIndex}')" class="btn btn-danger">&times;</span>
+            </div>
+        </div>
+    `;
+
+    $(`#${bodyId}`).append(row);
+};
+
 const createChooseQuestionBody = (key, number) => {
     return `
-    <div id="chooseQ${number}">
-        <div>
-            <label for="${key}CA${number}">Správna odpoveď</label>
-            <input class="form-control" type="text" id="${key}CA${number}" name="${key}CA${number}" data-parent="Q${number}">
-        </div>
-        <div>
-            <label for="${key}WA1${number}">Nesprávna odpoveď</label>
-            <input class="form-control" type="text" id="${key}WA1${number}" name="${key}WA1${number}" data-parent="Q${number}">
-        </div>
-        <div>
-            <label for="${key}WA2${number}">Nesprávna odpoveď</label>
-            <input class="form-control" type="text" id="${key}WA2${number}" name="${key}WA2${number}" data-parent="Q${number}">
-        </div>
-        <div>
-            <label for="${key}WA3${number}">Nesprávna odpoveď</label>
-            <input class="form-control" type="text" id="${key}WA3${number}" name="${key}WA3${number}" data-parent="Q${number}">
+    <div id="chooseQ${number}" >
+        <div id="select-${selectIndex}" class="row">
+            <div class="col-md-10">
+                <input id="checkbox-${selectIndex}" type="checkbox" onclick="selectCheckboxHandle(event,'selectA${selectIndex}')" >
+                <label for="checkbox-${selectIndex}">Správna odpoveď</label>
+                <input class="form-control" type="text" id="selectA${selectIndex}" name="selectA${selectIndex}" data-parent="Q${number}" data-correct="false">
+            </div>
+            <div class="col-md-1">
+                <span onclick="removeElementById('select-${selectIndex}')" class="btn btn-danger">&times;</span>
+            </div>
         </div>
     </div>
+    <span class="btn btn-success" onclick="addSelectToChooseQuestion('chooseQ${number}', '${number}')">Pridať odpoveď</span>
     `;
 };
 
@@ -110,10 +154,10 @@ const addPairToConnectQuestion = (id, key, number) => {
     const row = `
     <div id="pair-${pairIndex}" class="row">
         <div class="col-md-5">
-            <input class="form-control" type="text" id="${key}CQ${number}" name="${key}CQ${number}" data-parent="Q${number}">
+            <input class="form-control" type="text" id="CQ${number}-${pairIndex}" name="CQ${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}">
         </div>
         <div class="col-md-5">
-            <input class="form-control" type="text" id="${key}CA${number}" name="${key}CA${number}" data-parent="Q${number}">
+            <input class="form-control" type="text" id="CA${number}-${pairIndex}" name="CA${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}">
         </div>
         <div class="col-md-1">
             <span onclick="removeElementById('pair-${pairIndex}')" class="btn btn-danger">&times;</span>
@@ -128,13 +172,12 @@ const addPairToConnectQuestion = (id, key, number) => {
 const createConnectQuestionBody = (key, number) => {
     return `
     <div id="connectQ${number}">
-        <!-- TODO Try remove redundant code -->
         <div id="pair-${pairIndex}" class="row">
             <div class="col-md-5">
-                <input class="form-control" type="text" id="${key}CQ${number}" name="${key}CQ${number}" data-parent="Q">
+                <input class="form-control" type="text" id="CQ${number}-${pairIndex}" name="CQ${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}" >
             </div>
             <div class="col-md-5">
-                <input class="form-control" type="text" id="${key}CA${number}" name="${key}CA${number}">
+                <input class="form-control" type="text" id="CA${number}-${pairIndex}" name="CA${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}" >
             </div>
             <div class="col-md-1">
                 <span onclick="removeElementById('pair-${pairIndex}')" class="btn btn-danger">&times;</span>
@@ -142,29 +185,6 @@ const createConnectQuestionBody = (key, number) => {
         </div>
 
     </div>
-    <span class="btn btn-success" onclick="addPairToConnectQuestion('connectQ${number}', '${key}', '${number}')">Add row</span>
-    `;
-};
-
-/**
- * Math Question & Draw Question
- */
-const createCustomQuestion = (key, number, type) => {
-    return `
-    <div id="connectQ${number}">
-
-        <div id="pair-${pairIndex}" class="row">
-            <div class="col-md-5">
-                <input class="form-control" type="text" id="${key}CQ${number}" name="${key}CQ${number}" data-parent="Q${number}">
-            </div>
-            <div class="col-md-5">
-                <input class="form-control" type="text" id="${key}CA${number}" name="${key}CA${number}" data-parent="Q${number}">
-            </div>
-            <div class="col-md-1">
-                <span onclick="removeElementById('pair-${pairIndex}')" class="btn btn-danger">&times;</span>
-            </div>
-        </div>
-
-    </div>
+    <span class="btn btn-success" onclick="addPairToConnectQuestion('connectQ${number}', '', '${number}')">Pridať riadok</span>
     `;
 };
