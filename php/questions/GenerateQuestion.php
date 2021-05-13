@@ -107,7 +107,7 @@ class GenerateQuestion
         echo '
             <div class="card mb-3">
                 <div class="card-header">
-                    <span>'.$question.'</span>
+                    <span>'.$question.'</span><br>
                     <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
                     <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                     <output id="range-num">1</output>      
