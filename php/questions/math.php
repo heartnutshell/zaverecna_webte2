@@ -30,11 +30,25 @@
                         <span><?php echo $question ?></span>
                     </div>
                     <div class="card-body">
-                        <math-field id="mf" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                        <math-field id="mf-68" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>
                     <div class="card-footer">
-                        <button type="button" class="btn btn-outline-primary" id="save">Save</button>
-                        <button type="button" class="btn btn-outline-primary" id="load">load</button>
+                        <input type="hidden" id="68">
+                        <button type="button" class="btn btn-outline-primary" id="save" onclick="saveMath()">Save</button>
+                        <button type="button" class="btn btn-outline-primary" id="load" onclick="loadMath()">Load</button>
+                    </div>
+                </div>
+                ';?>
+                <?php echo'
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <span><?php echo $question ?></span>
+                    </div>
+                    <div class="card-body">
+                        <math-field id="mf-69" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" id="69">
                     </div>
                 </div>
                 ';?>

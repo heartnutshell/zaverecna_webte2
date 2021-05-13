@@ -1,26 +1,36 @@
-let save = "";
+var mathfields = [];
 
-//document.querySelectorAll("math-field").forEach(item => {
+document.querySelectorAll("math-field").forEach(item => {
     const mf = MathLive.makeMathField(item, {
-        onContentDidChange: (mf) => {        
+        onContentDidChange: (mf) => {
         },
     });
-    const mathfield = document.getElementById(item);
-//});
+    mathfields.push(item.id);
+});
+
+mathfields.forEach(item => {
+    document.getElementById(item).addEventListener('input', (e) => {
+        let id = item.split('-')[1];
+            console.log(e.target.value);
+            document.getElementById(id).value = escapeHtml(e.target.value);
+    })
+});
 
 
-//uloženie vzorca
+
+/*//uloženie vzorca
 const saveMath = () => {
     document.getElementById('save').addEventListener('click', (e) => {
-                save = escapeHtml(mathfield.value); //len na testovanie
-                insertMathAnswer(save);
+                save = escapeHtml(document.getElementById('mf').value);
+                console.log(save);
+                insertMathAnswer(save);              
             });
-}
+}*/
 
 //načítanie vzorca
 const loadMath = () => {
     document.getElementById('load').addEventListener('click', (e) => {
-        mathfield.setValue(save);
+        document.getElementById('mf').setValue(save);
     });
 }
 
