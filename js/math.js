@@ -8,15 +8,19 @@ const mf = MathLive.makeMathField('mf', {
 const mathfield = document.getElementById('mf');
 
 //uloženie vzorca
-document.getElementById('save').addEventListener('click', (e) => {
-            save = escapeHtml(mathfield.value); //len na testovanie
-            insertMathAnswer(save);
-        });
+const saveMath = () => {
+    document.getElementById('save').addEventListener('click', (e) => {
+                save = escapeHtml(mathfield.value); //len na testovanie
+                insertMathAnswer(save);
+            });
+}
 
 //načítanie vzorca
-document.getElementById('load').addEventListener('click', (e) => {
-    mathfield.setValue(save);
-});
+const loadMath = () => {
+    document.getElementById('load').addEventListener('click', (e) => {
+        mathfield.setValue(save);
+    });
+}
 
 //upravenie latex outputu
 function escapeHtml(string) {

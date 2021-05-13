@@ -139,8 +139,8 @@ class GenerateQuestion
                     <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" id="save">Save</button>
-                    <button type="button" class="btn btn-outline-primary" id="load">load</button>
+                    <button type="button" class="btn btn-outline-primary" id="save" onclick="saveMath()">Save</button>
+                    <button type="button" class="btn btn-outline-primary" id="load" onclick="loadMath()">Load</button>
                 </div>
             </div>
         ';
