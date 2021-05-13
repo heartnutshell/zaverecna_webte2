@@ -53,6 +53,8 @@ class GenerateQuestion
                     array_push($right_answers, $decoded[$key]);
                 }
 
+                shuffle($right_answers);
+
                     // Lava cast
                 echo '<div class="row"><div class="card-body col-6">';
                 foreach ($left_answers as $answer){
