@@ -16,15 +16,15 @@ class GenerateQuestion
         echo '
             <div class="card mb-3">
                 <div class="card-body">';
-                    $answers = $question["correct_answer"];
-                    $decoded = json_decode($answers, true);
-                    $keys = array_keys($decoded);
-                    echo '<input type="hidden" class="output" name="'.$question["id"].'_hidden">';
-                    foreach ($keys as $key){
-                        echo '<input type="checkbox" class="output" name="'.$question["id"].'_'.$key.'">'.$key.'<br>';
-                    }
-                    echo '
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
+        foreach ($keys as $key){
+            echo '<input type="checkbox" class="output" name="'.$question["id"].'_'.$key.'">'.$key.'<br>';
+        }
+        echo '
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -33,53 +33,53 @@ class GenerateQuestion
         echo '
             <div class="card mb-3">
                 <div class="card-body">
-                    <input type="hidden" class="output" name="'.$question["id"].'_hidden">
                     <textarea class="output" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
     }
 
     public function generateConnect($question) {
         echo '
             <div class="card">';
-                $answers = $question["correct_answer"];
-                $decoded = json_decode($answers, true);
-                $keys = array_keys($decoded);
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
 
-                $left_answers = array();
-                $right_answers = array();
+        $left_answers = array();
+        $right_answers = array();
 
-                // rozdelenie na polia
-                foreach ($keys as $key){
-                    array_push($left_answers, $key);
-                    array_push($right_answers, $decoded[$key]);
-                }
+        // rozdelenie na polia
+        foreach ($keys as $key){
+            array_push($left_answers, $key);
+            array_push($right_answers, $decoded[$key]);
+        }
 
-                shuffle($right_answers);
+        shuffle($right_answers);
 
-                    // Lava cast
-                echo '<div class="row"><div class="card-body col-6">';
-                foreach ($left_answers as $answer){
-                    echo $answer."<br>";
-                }
-                echo '</div>';
+        // Lava cast
+        echo '<div class="row"><div class="card-body col-6">';
+        foreach ($left_answers as $answer){
+            echo $answer."<br>";
+        }
+        echo '</div>';
 
-                // Prava cast
-                echo '<div class="card-body col-6">';
-                echo '<input type="hidden" class="output" name="'.$question["id"].'_hidden">';
-                foreach ($left_answers as $answer){
-                    echo '<select class="output" name="'.$question["id"].'_'.$answer.'">';
-                    foreach ($right_answers as $option) {
-                        echo '
+        // Prava cast
+        echo '<div class="card-body col-6">';
+        foreach ($left_answers as $answer){
+            echo '<select class="output" name="'.$question["id"].'_'.$answer.'">';
+            foreach ($right_answers as $option) {
+                echo '
                         <option class="output" value="'.$option.'">' . $option . '</option>
                         ';
-                    }
-                    echo '</select><br>';
+            }
+            echo '</select><br>';
 
-                }
-                echo '</div></div>';
+        }
+        echo '</div></div>';
 
-                echo'
+        echo'
+            <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -101,7 +101,8 @@ class GenerateQuestion
                     <div class="card-footer">
                         <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
                     </div>
-                    <input type="hidden" id="'.$question_id.'" value="">
+                    <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
+                    <input type="hidden" value="1" name="'.$question_id.'_hidden">
                 </div>
         ';
         //treba includnut v teste
@@ -121,7 +122,8 @@ class GenerateQuestion
                         <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>
                     <div class="card-footer">
-                        <input type="hidden" id='.$question_id.'>
+                        <input type="hidden" id='.$question_id.' name="'.$question_id.'">
+                        <input type="hidden" value="1" name="'.$question_id.'_hidden">
                     </div>
             </div>
         ';
