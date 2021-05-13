@@ -14,28 +14,60 @@ class CreateQuestion
         $this->conn = new DatabaseController();
     }
 
-    public function createOpen($type, $question, $answer, $point)
+    /**
+     * Open Question
+     */
+    public function createOpen($question, $answer, $points)
     {
-        $this->conn->insertQuestion($this->test_key, $type, $question, $point, $answer);
+        $correctAnswer = [];
+
+        $words = explode(" ", $answer[0]["value"]);
+        foreach ($words as $word) {
+            array_push($correctAnswer, $word);
+        }
+        // print_r($correctAnswer);
+        $correctAnswerJSON = json_encode($correctAnswer);
+        $this->conn->insertQuestion($this->test_key, "open", $question, $correctAnswerJSON, $points);
     }
 
-    public function createSelect($question, $options)
+    /**
+     * Choose / Select Question
+     */
+    public function createChoose($question, $options, $points)
     {
-        //TODO
+        $correctAnswers = [];
+        // Make JSON from $options
+        foreach ($options as $answer) {
+            $correctAnswers[$answer["value"]] = $answer["selectCorrect"];
+        }
+
+        $correctAnswersJSON = json_encode($correctAnswers);
+
+        $this->conn->insertQuestion($this->test_key, "choose", $question, $correctAnswersJSON, $points);
     }
 
-    public function createConnect($question, $optionsA, $optionsB)
+    /**
+     * Connect / Pair Question
+     */
+    public function createConnect($question, $pairs, $points)
     {
-        //TODO
+        $correctPairs = [];
+        for ($i = 0; $i < count($pairs); $i += 2) {
+            if ($pairs[$i]["pairIndex"] == $pairs[$i + 1]["pairIndex"])
+                $correctPairs[$pairs[$i]["value"]] = $pairs[$i + 1]["value"];
+        }
+
+        $correctPairsJSON = json_encode($correctPairs);
+        $this->conn->insertQuestion($this->test_key, "connect", $question, $correctPairsJSON, $points);
     }
 
-    public function createDraw($question)
+    public function createDraw($question, $points)
     {
-        //TODO
+        $this->conn->insertQuestion($this->test_key, "draw", $question, null, $points);
     }
 
-    public function createMath($question)
+    public function createMath($question, $points)
     {
-        //TODO
+        $this->conn->insertQuestion($this->test_key, "math", $question, null, $points);
     }
 }

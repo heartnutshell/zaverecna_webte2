@@ -18,40 +18,51 @@ $partial->authenticate();
 
 // Get Teacher ID from SESSION
 $teacher_id = $_SESSION["teacher_id"];
+$test_key = $_POST["formData"][0]["value"];
+$time_limit = $_POST["formData"][1]["value"];
+$max_points = $_POST["formData"][2]["value"];
 
-// Create CreateQuestion Service
-$qService = new CreateQuestion($_POST["test_key_hidden"]);
+// Create Services
+$db = new DatabaseController();
 
-function createQuestion($questionData)
-{
-    ["value" => $question, "type" => $type, "points" => $points] = $questionData;
-
-    switch ($type) {
-        case "open":
-
-            break;
-        case "choose":
-            break;
-        case "connect":
-            break;
-        case "draw":
-            break;
-        case "math":
-            break;
-        default:
-            echo "Question type not found $type";
-    }
-}
-
+// Create Test record in DB
+$db->insertTest($test_key, $teacher_id, $time_limit, 1, $max_points);
 
 $formData = $_POST["formData"];
 
-print_r($formData);
+// Init Creating Questions
+$questionService = new CreateQuestion($test_key);
 
 foreach ($formData as $data) {
 
     if (strpos($data["name"], "Q") !== false) {
         print_r($data);
-        createQuestion($data);
+        createQuestion($data, $questionService);
+    }
+}
+
+function createQuestion($questionData, $questionService)
+{
+
+    ["value" => $question, "type" => $type, "points" => $points] = $questionData;
+
+    switch ($type) {
+        case "open":
+            $questionService->createOpen($question, $questionData["child"], $points);
+            break;
+        case "choose":
+            $questionService->createChoose($question, $questionData["child"], $points);
+            break;
+        case "connect":
+            $questionService->createConnect($question, $questionData["child"], $points);
+            break;
+        case "draw":
+            $questionService->createDraw($question, $points);
+            break;
+        case "math":
+            $questionService->createMath($question, $points);
+            break;
+        default:
+            echo "Question type not found $type";
     }
 }
