@@ -89,21 +89,20 @@ class GenerateQuestion
         $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span><br>
-                    <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
-                    <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
-                    <output id="range-num">1</output>      
+                    <div class="card-header">
+                        <span>'.$question.'</span>
+                        <input value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <input type="range" min="1" max="100" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
+                        <output id="range-num">1</output>      
+                    </div>
+                    <div class="card-body">
+                        <canvas id="'.$question_id.'-draw"></canvas>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
+                    </div>
+                    <input type="hidden" id="'.$question_id.'" value="">
                 </div>
-                <div class="card-body">
-                    <canvas id="'.$question_id.'"></canvas>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="saveDrawing()" id="save">Save</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="loadDrawing()" id="save">Load last Save</button>
-                </div>
-            </div>
         ';
         //treba includnut v teste
         //<script src="../../js/api/studentAnswer.js"></script>
@@ -115,16 +114,15 @@ class GenerateQuestion
         $question = $result[0]['question'];
         echo'
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>
-                <div class="card-body">
-                    <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" id="save" onclick="saveMath()">Save</button>
-                    <button type="button" class="btn btn-outline-primary" id="load" onclick="loadMath()">Load</button>
-                </div>
+                    <div class="card-header">
+                        <span><?php echo $question ?></span>
+                    </div>
+                    <div class="card-body">
+                        <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" id='.$question_id.'>
+                    </div>
             </div>
         ';
         //treba includnut v teste
