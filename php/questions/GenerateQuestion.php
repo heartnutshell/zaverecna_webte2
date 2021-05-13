@@ -1,7 +1,16 @@
 <?php
 
+
+require_once __DIR__ ."/../database/DatabaseController.php";
 class GenerateQuestion
 {
+
+    private DatabaseController $databaseController;
+
+    public function __construct()
+    {
+        $this->databaseController = new DatabaseController();
+    }
 
     public function generateSelect($question) {
         echo '
