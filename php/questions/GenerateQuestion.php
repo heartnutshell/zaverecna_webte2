@@ -13,8 +13,13 @@ class GenerateQuestion
     }
 
     public function generateSelect($question_id) {
+        $result = $this->databaseController->getQuestionById($question_id);
+        $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
+                <div class="card-header">
+                    <span>'.$question.'</span>
+                </div>
                 <div class="card-body">';
                     $answers = $this->databaseController->getAnswersByQuestionId($question_id);
                     foreach ($answers as $answer){
@@ -27,8 +32,13 @@ class GenerateQuestion
     }
 
     public function generateText($question_id) {
+        $result = $this->databaseController->getQuestionById($question_id);
+        $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
+                <div class="card-header">
+                    <span>'.$question.'</span>
+                </div>
                 <div class="card-body">
                     <textarea class="output" id="'.$question_id.'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
@@ -36,8 +46,13 @@ class GenerateQuestion
     }
 
     public function generateConnect($question_id) {
+        $result = $this->databaseController->getQuestionById($question_id);
+        $question = $result[0]['question'];
         echo '
-            <div class="card mb-3">';
+            <div class="card mb-3">
+                <div class="card-header">
+                    <span>'.$question.'</span>
+                </div>';
                     $answers = $this->databaseController->getAnswersByQuestionId(5);
 
                     $left_answers = array();
@@ -86,7 +101,9 @@ class GenerateQuestion
         ';
     }
 
-    public function generateDraw($question) {
+    public function generateDraw($question_id) {
+        $result = $this->databaseController->getQuestionById($question_id);
+        $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
                 <div class="card-header">
@@ -96,7 +113,7 @@ class GenerateQuestion
                     <output id="range-num">1</output>      
                 </div>
                 <div class="card-body">
-                    <canvas id="drawHere"></canvas>
+                    <canvas id="'.$question_id.'"></canvas>
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
@@ -110,14 +127,16 @@ class GenerateQuestion
         //<script src="../../js/draw.js"></script> 
     }
 
-    public function generateEquation($question) {
+    public function generateEquation($question_id) {
+        $result = $this->databaseController->getQuestionById($question_id);
+        $question = $result[0]['question'];
         echo'
             <div class="card mb-3">
                 <div class="card-header">
                     <span>'.$question.'</span>
                 </div>
                 <div class="card-body">
-                    <math-field id="mf" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                    <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-outline-primary" id="save">Save</button>
