@@ -117,8 +117,6 @@ class GenerateQuestion
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="saveDrawing()" id="save">Save</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="loadDrawing()" id="save">Load last Save</button>
                 </div>
             </div>
         ';
@@ -137,10 +135,6 @@ class GenerateQuestion
                 </div>
                 <div class="card-body">
                     <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" id="save" onclick="saveMath()">Save</button>
-                    <button type="button" class="btn btn-outline-primary" id="load" onclick="loadMath()">Load</button>
                 </div>
             </div>
         ';

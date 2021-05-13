@@ -13,8 +13,7 @@ const insertMathAnswer = (mathAnswer) => {
         error: (xhr, status, err) => {
             console.log(xhr);
         },
-    })
-    
+    })   
 }
 
 const insertDrawAnswer = (drawAnswer) => {
@@ -32,9 +31,9 @@ const insertDrawAnswer = (drawAnswer) => {
         error: (xhr, status, err) => {
             console.log(xhr);
         },
-    })
-    
+    }) 
 }
+
 const getDrawing = (drawAnswer) => {
 
     $.ajax({
@@ -58,8 +57,7 @@ const getDrawing = (drawAnswer) => {
         error: (xhr, status, err) => {
             console.log(xhr);
         },
-    })
-    
+    })   
 }
 
 const getMath = (mathAnswer) => {
@@ -79,6 +77,5 @@ const getMath = (mathAnswer) => {
         error: (xhr, status, err) => {
             console.log(xhr);
         },
-    })
-    
+    })  
 }

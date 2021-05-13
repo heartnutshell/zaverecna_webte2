@@ -31,7 +31,10 @@ const loadDrawing = () => { //len na testovanie
     }
 }
 
-const canvas = initCanvas('drawHere');
+//document.querySelectorAll("canvas").forEach(item => {
+    const canvas = initCanvas('drawHere');
+//});
+
 const picker = document.getElementById('colorPicker');
 const slider = document.getElementById('sizeSlider');
 let drawingSave;

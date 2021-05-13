@@ -1,11 +1,13 @@
 let save = "";
 
-const mf = MathLive.makeMathField('mf', {
-    onContentDidChange: (mf) => {        
-    },
-});
+//document.querySelectorAll("math-field").forEach(item => {
+    const mf = MathLive.makeMathField(item, {
+        onContentDidChange: (mf) => {        
+        },
+    });
+    const mathfield = document.getElementById(item);
+//});
 
-const mathfield = document.getElementById('mf');
 
 //uloženie vzorca
 const saveMath = () => {
