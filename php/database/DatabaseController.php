@@ -36,7 +36,7 @@ class DatabaseController
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
+    
     public function getTestByKey($test_key): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM test WHERE test_key LIKE :test_key");
@@ -44,6 +44,14 @@ class DatabaseController
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    
+    public function getTestKeys(): array
+    {
+        $stmt = $this->conn->prepare("SELECT test_key FROM test");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 
     public function getQuestionsByTestKey($test_key): array
     {
@@ -113,6 +121,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentsVisibility($test_key, $last_id): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id ASC");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":last_id", $last_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     // UPDATE
     public function updateCompletedTestPoints($test_key, $student_id, $points)
@@ -131,7 +147,7 @@ class DatabaseController
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
-
+    
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
@@ -212,17 +228,6 @@ class DatabaseController
         $stmt->bindParam(":timestamp", $time);
         $stmt->execute();
     }
-
-    public function getStudentsVisibility($test_key, $last_id)
-    {
-        $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id ASC");
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":last_id", $last_id);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-
 
 
     /**
