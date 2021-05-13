@@ -21,7 +21,7 @@ const updateNotifications = (test_key) => {
                     <td>${log["id"]}</td>
                     <td>${log["name"]}</td>
                     <td>${log["surname"]}</td>
-                    <td>${log["visibility"]}</td>   
+                    <td>${log["visibility"]}</td>
                     <td>${log["timestamp"]}</td>
                 </tr>
                 `);
@@ -79,21 +79,21 @@ const getTestKeys = (e) => {
         success: (data) => {
             const keys = JSON.parse(data);
 
-            for (key in keys) {
-                if (keys[key][0] === e.target.value) {
-                    toggleCreateQuestionButtons("disable");
+            for (const key in keys) {
+                // Test Key exists
+                if (keys[key][0].toLowerCase() === e.target.value.toLowerCase()) {
                     localStorage.setItem("test_key", "");
                     e.target.classList.add("is-invalid");
                     e.target.classList.remove("is-valid");
-                } else {
-                    toggleCreateQuestionButtons("enable");
-                    localStorage.setItem("test_key", e.target.value);
-                    e.target.classList.add("is-valid");
-                    e.target.classList.remove("is-invalid");
+                    $("#test_key--invalid").html("Kód testu už existuje");
+                    break;
                 }
+                // Test key is Available
+                toggleCreateQuestionButtons("enable");
+                localStorage.setItem("test_key", e.target.value);
+                e.target.classList.add("is-valid");
+                e.target.classList.remove("is-invalid");
             }
-
-            // console.log(keys.hasOwnProperty(e.target.value));
         },
     });
 };

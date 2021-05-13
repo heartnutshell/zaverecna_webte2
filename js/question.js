@@ -128,10 +128,10 @@ const addPairToConnectQuestion = (id, key, number) => {
 const createConnectQuestionBody = (key, number) => {
     return `
     <div id="connectQ${number}">
-
+        <!-- TODO Try remove redundant code -->
         <div id="pair-${pairIndex}" class="row">
             <div class="col-md-5">
-                <input class="form-control" type="text" id="${key}CQ${number}" name="${key}CQ${number}">
+                <input class="form-control" type="text" id="${key}CQ${number}" name="${key}CQ${number}" data-parent="Q">
             </div>
             <div class="col-md-5">
                 <input class="form-control" type="text" id="${key}CA${number}" name="${key}CA${number}">
