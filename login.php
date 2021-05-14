@@ -5,50 +5,54 @@ require_once __DIR__ . '/php/session/Session.php';
 $session = new Session();
 $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
 
-require_once 'php/database/DatabaseController.php';
+require_once __DIR__ . '/php/database/DatabaseController.php';
 
 $db = new DatabaseController;
 
-if(isset($_POST['email']) && isset($_POST['password'])){
+if (isset($_POST['email']) && isset($_POST['password'])) {
 
     //hladanie účta v DB
     try {
-            
+
         $email = $_POST['email'];
 
         $result = $db->getTeacherByEmail($email);
 
-        if ($result == NULL){
+        if ($result == NULL) {
             $message = "Neznámy email!";
             echo "<script type='text/javascript'>alert('$message');</script>";
         } else {
             //overenie správnosti hesla
             $password = $_POST['password'];
+
             if(password_verify($password, $result[0]['password'])){       
                 
+
                 $_SESSION["isLogged"] = true;
                 $_SESSION["teacher_id"] = $result[0]["id"];
                 $_SESSION["teacher_name"] = $result[0]["name"];
                 $_SESSION["teacher_surname"] = $result[0]["surname"];
                 header("Location: pages/teacher.php");
 
+
             } else{
                 if($user_found = 1){
+
                     $message = "Nesprávne heslo!";
                     echo "<script type='text/javascript'>alert('$message');</script>";
                 }
             }
         }
-    
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
-    } 
+    }
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="sk">
+
 
     <head>
         <meta charset="UTF-8" />
@@ -119,4 +123,5 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         <?php include 'footer.php';?>
 
     </body>
+
 </html>
