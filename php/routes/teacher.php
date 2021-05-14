@@ -3,8 +3,9 @@
 require_once __DIR__ . "/../database/DatabaseController.php";
 
 $db = new DatabaseController();
-
-// Students Page Visibility
+/**
+ * Students Page Visibility
+ *  */
 if ($_REQUEST["type"] == "page-visibility") {
 
 
@@ -20,7 +21,9 @@ if ($_REQUEST["type"] == "page-visibility") {
     }
 }
 
-// Teacher Notifications
+/**
+ * Teacher Notifications
+ */
 if ($_REQUEST["type"] == "teacher-test") {
 
     switch ($_REQUEST["action"]) {
@@ -34,13 +37,21 @@ if ($_REQUEST["type"] == "teacher-test") {
             break;
     }
 }
-
-// Creating Tests
+/**
+ * Test Related 
+ */
 if ($_REQUEST["type"] == "tests") {
 
     switch ($_REQUEST["action"]) {
         case "get-test-keys":
             echo json_encode($db->getTestKeys());
+            break;
+
+        case "toggle-test-status":
+            ["test_key" => $test_key, "status" => $status] = $_POST;
+            echo $test_key;
+            echo $status;
+            $db->updateTestActiveStatus($test_key, $status);
             break;
         default:
             break;

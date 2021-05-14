@@ -46,6 +46,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
                     <th>Časový limit</th>
                     <th>Max bodov</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -59,13 +60,16 @@ $tests = $db->getAllTeacherTests($teacher_id);
                     <td><?= $test["max_points"]; ?></td>
 
                     <?php if ($test["active"]) : ?>
-                    <td class="test active">
-                        <a href="testOverview.php?test_key=<?= $test["test_key"] ?>"><?= $test["active"] ?></a>
-                    </td>
+                    <td class="test active"><?= $test["active"] ?> </td>
                     <?php else : ?>
                     <td class="test not-active"><?= $test["active"] ?></td>
                     <?php endif; ?>
 
+                    <td>
+                        <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
+                            <i class="bi bi-three-dots"></i>
+                        </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
 

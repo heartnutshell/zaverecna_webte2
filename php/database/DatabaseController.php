@@ -139,6 +139,14 @@ class DatabaseController
         $stmt->execute();
     }
 
+    public function updateTestActiveStatus($test_key, $newStatus)
+    {
+        $stmt = $this->conn->prepare("UPDATE test SET active=:active WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":active", $newStatus);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+    }
+
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
