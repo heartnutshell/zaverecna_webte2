@@ -114,3 +114,27 @@ const submitCreateTest = (formData) => {
         },
     });
 };
+
+const toggleTestStatus = (event, status, test_key) => {
+    let newStatus = status ? 0 : 1;
+    console.log(event.target.setAttribute("disabled", "disabled"));
+    $.ajax({
+        url: teacherApiUrl + "teacher.php",
+        method: "POST",
+        data: {
+            type: "tests",
+            action: "toggle-test-status",
+            status: newStatus,
+            test_key,
+        },
+        success: (data) => {
+            event.target.removeAttribute("disabled");
+        },
+        error: (xhr, status, err) => {
+            console.log(xhr);
+            console.log(status);
+            console.log(err);
+        },
+        timeout: 3000,
+    });
+};

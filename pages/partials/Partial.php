@@ -15,7 +15,8 @@ class Partial
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <!-- Bootstrap -->
         <link href='../css/bootstrap.min.css' rel='stylesheet'>
-        <!-- Bootstrap -->
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'>
+        <!-- CSS -->
         <link href='../css/teacher.css' rel='stylesheet'>
         <!-- JS -->
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8' crossorigin='anonymous'></script>

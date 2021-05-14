@@ -38,7 +38,40 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
 ?>
 
-<main>
+<main class="container">
+
+    <section>
+        <h4>Info</h4>
+        <table class="table">
+            <tr>
+                <td>Kód testu : </td>
+                <td><?= $test[0]["test_key"]; ?></td>
+            </tr>
+            <tr>
+                <td>Časový limit : </td>
+                <td><?= $test[0]["time_limit"]; ?></td>
+            </tr>
+            <tr>
+                <td>Počet bodov : </td>
+                <td><?= $test[0]["max_points"]; ?></td>
+            </tr>
+            <tr>
+                <td>Stav : </td>
+                <td><?= $test[0]["active"] ? "<span class='test active'>Zapnutý</span>" : "<span class='test not-active'>Vypnutý</span>"; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Zapnúť/vypnúť test : </td>
+                <td id="test_status"
+                    onclick="toggleTestStatus(event, <?= $test[0]['active'] ?> , '<?= $_GET['test_key'] ?>' )">
+                    <button class="btn btn-primary">
+                        <?= $test[0]["active"] ? "Vypnúť" : "Zapnúť"; ?>
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+    </section>
 
     <section>
 
@@ -87,17 +120,17 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
 <script src="../js/api/teacher.js"></script>
 <script>
-$(document).ready(() => {
+// $(document).ready(() => {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const test_key = urlParams.get("test_key");
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const test_key = urlParams.get("test_key");
 
-    updateNotifications(test_key);
-    updateStudentsData(test_key);
+//     updateNotifications(test_key);
+//     updateStudentsData(test_key);
 
-    setInterval(() => {
-        updateNotifications(test_key);
-        updateStudentsData(test_key);
-    }, 3000);
-})
+//     setInterval(() => {
+//         updateNotifications(test_key);
+//         updateStudentsData(test_key);
+//     }, 3000);
+// })
 </script>
