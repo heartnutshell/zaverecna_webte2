@@ -12,91 +12,74 @@ class GenerateQuestion
         $this->databaseController = new DatabaseController();
     }
 
-    public function generateSelect($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
+    public function generateSelect($question) {
         echo '
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>
                 <div class="card-body">';
-                    $answers = $this->databaseController->getAnswersByQuestionId($question_id);
-                    foreach ($answers as $answer){
-                        echo $answer["answer"].'<input type="checkbox" class="output" id="'.$question_id.'"><br>';
-                    }
-                    echo '
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
+        foreach ($keys as $key){
+            echo '<input type="checkbox" class="output" name="'.$question["id"].'_'.$key.'">'.$key.'<br>';
+        }
+        echo '
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
 
-    public function generateText($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
+    public function generateText($question) {
         echo '
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>
                 <div class="card-body">
-                    <textarea class="output" id="'.$question_id.'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
+                    <textarea class="output" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
     }
 
-    public function generateConnect($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
+    public function generateConnect($question) {
         echo '
-            <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>';
-                    $answers = $this->databaseController->getAnswersByQuestionId(5);
+            <div class="card">';
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
 
-                    $left_answers = array();
-                    $right_answers = array();
+        $left_answers = array();
+        $right_answers = array();
 
-                    // rozdelenie na polia
-                    foreach ($answers as $answer){
-                        if (is_numeric($answer["answer_key"])){
-                            array_push($right_answers, $answer);
-                        }else{
-                            array_push($left_answers, $answer);
-                        }
-                    }
+        // rozdelenie na polia
+        foreach ($keys as $key){
+            array_push($left_answers, $key);
+            array_push($right_answers, $decoded[$key]);
+        }
 
-                    // sortovanie podla abecedy
-                    usort($left_answers, function ($item1, $item2){
-                        return ord($item1["answer_key"]) >  ord($item2["answer_key"]);
-                    });
-                    usort($right_answers, function ($item1, $item2){
-                        return ord($item1["answer_key"]) >  ord($item2["answer_key"]);
-                    });
+        shuffle($right_answers);
 
-                        // Lava cast
-                    echo '<div class="card-body col-6">';
-                    foreach ($left_answers as $answer){
-                        echo $answer["answer_key"].") ".$answer["answer"]."<br>";
-                    }
-                    echo '</div>';
+        // Lava cast
+        echo '<div class="row"><div class="card-body col-6">';
+        foreach ($left_answers as $answer){
+            echo $answer."<br>";
+        }
+        echo '</div>';
 
-                    // Prava cast
-                    echo '<div class="card-body col-6">';
-                    foreach ($left_answers as $answer){
-                        echo '<select class="output" id="'.$question_id.'">';
-                        foreach ($right_answers as $option) {
-                            echo '
-                            <option class="output" id="' . $option["answer_key"] . '">' . $option["answer"] . '</option>
-                            ';
-                        }
-                        echo '</select><br>';
+        // Prava cast
+        echo '<div class="card-body col-6">';
+        foreach ($left_answers as $answer){
+            echo '<select class="output" name="'.$question["id"].'_'.$answer.'">';
+            foreach ($right_answers as $option) {
+                echo '
+                        <option class="output" value="'.$option.'">' . $option . '</option>
+                        ';
+            }
+            echo '</select><br>';
 
-                    }
-                    echo '</div>';
+        }
+        echo '</div></div>';
 
-                    echo'
+        echo'
+            <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -106,19 +89,21 @@ class GenerateQuestion
         $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span><br>
-                    <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
-                    <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
-                    <output id="range-num">1</output>      
+                    <div class="card-header">
+                        <span>'.$question.'</span>
+                        <input value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <input type="range" min="1" max="100" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
+                        <output id="range-num">1</output>      
+                    </div>
+                    <div class="card-body">
+                        <canvas id="'.$question_id.'-draw"></canvas>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
+                    </div>
+                    <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
+                    <input type="hidden" value="1" name="'.$question_id.'_hidden">
                 </div>
-                <div class="card-body">
-                    <canvas id="'.$question_id.'"></canvas>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
-                </div>
-            </div>
         ';
         //treba includnut v teste
         //<script src="../../js/api/studentAnswer.js"></script>
@@ -130,12 +115,16 @@ class GenerateQuestion
         $question = $result[0]['question'];
         echo'
             <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>
-                <div class="card-body">
-                    <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
-                </div>
+                    <div class="card-header">
+                        <span><?php echo $question ?></span>
+                    </div>
+                    <div class="card-body">
+                        <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" id='.$question_id.' name="'.$question_id.'">
+                        <input type="hidden" value="1" name="'.$question_id.'_hidden">
+                    </div>
             </div>
         ';
         //treba includnut v teste

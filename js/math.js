@@ -8,6 +8,7 @@ document.querySelectorAll("math-field").forEach(item => {
     mathfields.push(item.id);
 });
 
+//ukladanie vzorcov
 mathfields.forEach(item => {
     document.getElementById(item).addEventListener('input', (e) => {
         let id = item.split('-')[1];
@@ -16,16 +17,6 @@ mathfields.forEach(item => {
     })
 });
 
-
-
-/*//uloženie vzorca
-const saveMath = () => {
-    document.getElementById('save').addEventListener('click', (e) => {
-                save = escapeHtml(document.getElementById('mf').value);
-                console.log(save);
-                insertMathAnswer(save);              
-            });
-}*/
 
 //načítanie vzorca
 const loadMath = () => {
