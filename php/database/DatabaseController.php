@@ -140,6 +140,17 @@ class DatabaseController
         $stmt->execute();
     }
 
+    public function updateStudentTestEndTime($student_id, $test_key, $end_time)
+    {
+        $completed = true;
+        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time, completed=:completed WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":completed", $completed);
+        $stmt->bindParam(":end_time", $end_time);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+    }
+
     public function updateStudentAnswerPoints($id, $points)
     {
         $stmt = $this->conn->prepare("UPDATE student_answers SET points=:points WHERE id LIKE :id");
@@ -147,16 +158,6 @@ class DatabaseController
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
-
-    public function updateStudentTestEndTime($student_id, $test_key, $end_time)
-    {
-        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
-        $stmt->bindParam(":end_time", $end_time);
-        $stmt->bindParam(":student_id", $student_id);
-        $stmt->bindParam(":test_key", $test_key);
-        $stmt->execute();
-    }
-
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
