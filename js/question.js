@@ -19,7 +19,7 @@ const createQuestion = (type, number) => {
     <div class="card" id="Question${number}">
         <div class="card-header">
             <span>${typeArr[type]}</span>
-            <span class="btn btn-danger" onclick="removeElementById('Question${number}')">&times;</span>
+            <span class="btn btn-danger" onclick="removeElementById('Question${number}')"><i class="bi bi-x-lg"></i></span>
         </div>
         <div class="card-body">
             <div>
@@ -96,7 +96,7 @@ const addSelectToChooseQuestion = (bodyId, number) => {
                 <input class="form-control" type="text" id="selectQ${number}A${selectIndex}" name="selectQ${number}A${selectIndex}" data-parent="Q${number}" data-correct="false" required>
             </div>
             <div class="col-md-1">
-                <span onclick="removeElementById('selectQ${number}-${selectIndex}')" class="btn btn-danger">&times;</span>
+                <span onclick="removeElementById('selectQ${number}-${selectIndex}')" class="btn btn-danger"><i class="bi bi-x-lg"></i></span>
             </div>
         </div>
     `;
@@ -114,7 +114,7 @@ const createChooseQuestionBody = (number) => {
                 <input class="form-control" type="text" id="selectQ${number}A${selectIndex}" name="selectQ${number}A${selectIndex}" data-parent="Q${number}" data-correct="false" required>
             </div>
             <div class="col-md-1">
-                <span onclick="removeElementById('selectQ${number}-${selectIndex}')" class="btn btn-danger">&times;</span>
+                <span onclick="removeElementById('selectQ${number}-${selectIndex}')" class="btn btn-danger"><i class="bi bi-x-lg"></i></span>
             </div>
         </div>
     </div>
@@ -138,7 +138,7 @@ const addPairToConnectQuestion = (id, number) => {
             <input class="form-control" type="text" id="CA${number}-${pairIndex}" name="CA${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}">
         </div>
         <div class="col-md-1">
-            <span onclick="removeElementById('pairQ${number}-${pairIndex}')" class="btn btn-danger">&times;</span>
+            <span onclick="removeElementById('pairQ${number}-${pairIndex}')" class="btn btn-danger"><i class="bi bi-x-lg"></i></span>
         </div>
     </div>
     `;
@@ -158,7 +158,7 @@ const createConnectQuestionBody = (number) => {
                 <input class="form-control" type="text" id="CA${number}-${pairIndex}" name="CA${number}-${pairIndex}" data-parent="Q${number}" data-pair="${pairIndex}" >
             </div>
             <div class="col-md-1">
-                <span onclick="removeElementById('pairQ${number}-${pairIndex}')" class="btn btn-danger">&times;</span>
+                <span onclick="removeElementById('pairQ${number}-${pairIndex}')" class="btn btn-danger"><i class="bi bi-x-lg"></i></span>
             </div>
         </div>
 

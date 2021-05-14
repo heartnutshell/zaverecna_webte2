@@ -17,7 +17,7 @@ class Partial
         <link href='../css/bootstrap.min.css' rel='stylesheet'>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'>
         <!-- CSS -->
-        <link href='../css/teacher.css' rel='stylesheet'>
+        <link href='../css/style.css' rel='stylesheet'>
         <!-- JS -->
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8' crossorigin='anonymous'></script>
         <script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'></script>
@@ -30,7 +30,6 @@ class Partial
             <ul>
                 <li><a href='teacher.php'>Home</a></li>
                 <li><a href='createTest.php'>Vytvoriť test</a></li>
-                <li><a href='student.php'>Student</a></li>
                 <li><a href='logout.php'>Logout</a></li>
             </ul>
         </nav>

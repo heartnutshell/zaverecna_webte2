@@ -12,6 +12,7 @@
 }
 .card {
     width: 532px;
+    margin: 20px 0px;
 }
 /*MATH*/
 math-field {
@@ -68,4 +69,14 @@ body {
     width: 532px;
     margin: 0 auto;
     padding: 20px 0px;
+}
+.btn{
+    margin-top: 0px;
+}
+/*TEACHER*/
+.test.active {
+    background-color: rgb(44, 199, 78);
+}
+.test.not-active {
+    background-color: rgb(153, 31, 31);
 }

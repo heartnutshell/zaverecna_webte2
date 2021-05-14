@@ -9,45 +9,10 @@ $partial = new Partial();
 $partial->authenticate();
 
 $db = new DatabaseController();
-
+$partial->createHeader('Učitel | Vytváranie testu');
 ?>
 
-<!DOCTYPE html>
-<html lang='en'>
-
-<head>
-    <meta charset='UTF-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <!-- Bootstrap -->
-    <link href='../css/bootstrap.min.css' rel='stylesheet'>
-    <!-- CSS -->
-    <link href='../css/teacher.css' rel='stylesheet'>
-    <link href='../css/style.css' rel='stylesheet'>
-    <!-- JS -->
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js'
-        integrity='sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8' crossorigin='anonymous'>
-    </script>
-    <script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'></script>
-    <!-- Mathlive.js -->
-    <script src="https://unpkg.com/mathlive/dist/mathlive.js"></script>
-    <script src="../lib/fabric.min.js"></script>
-    <script src="../lib/jscolor.min.js"></script>
-
-    <title>Teacher | Vytvoriť test</title>
-</head>
-
-<body>
-    <nav>
-        <ul>
-            <li><a href='teacher.php'>Home</a></li>
-            <li><a href='createTest.php'>Vytvoriť test</a></li>
-            <li><a href='student.php'>Student</a></li>
-            <li><a href='logout.php'>Logout</a></li>
-        </ul>
-    </nav>
-
-    <main class="container">
+    <main class="container page-content">
         <h1>Test</h1>
 
         <div id="createQuestionbuttons">
@@ -62,7 +27,7 @@ $db = new DatabaseController();
                 výrazu</p>
         </div>
 
-        <form id="create-test" class="row g-3" onsubmit="submitHandle(event)">
+        <form id="create-test" class="row g-3 test-form" onsubmit="submitHandle(event)">
 
             <div class="col-md-4">
                 <label for="test_key" class="form-label">Kód testu</label>
@@ -87,7 +52,7 @@ $db = new DatabaseController();
 
             </div>
 
-            <button>Vytvoriť</button>
+            <button class="btn btn-lg btn-primary">Vytvoriť</button>
 
         </form>
 
@@ -267,6 +232,8 @@ $db = new DatabaseController();
 
     })
     </script>
+
+    <?php include '../footer.php';?>
 
 </body>
 

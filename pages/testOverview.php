@@ -38,7 +38,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
 ?>
 
-<main class="container">
+<main class="container page-content">
 
     <section>
         <h4>Info</h4>
@@ -117,6 +117,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
     </section>
 
 </main>
+<?php include '../footer.php';?>
 
 <script src="../js/api/teacher.js"></script>
 <script>
@@ -134,3 +135,6 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 //     }, 3000);
 // })
 </script>
+</body>
+
+</html>

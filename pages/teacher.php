@@ -24,7 +24,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
 ?>
 
-<main>
+<main class="container page-content">
     <h1>Teacher home</h1>
 
     <section>
@@ -83,3 +83,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
 
 </main>
+<?php include '../footer.php';?>
+</body>
+
+</html>
