@@ -72,6 +72,7 @@ foreach ($ids as $question_id){
 
             foreach (array_keys($current_answers) as $array_key){
                 $post_key = $question_id."_".$array_key;
+                $post_key = str_replace(" ", "_", $post_key);
                 if ($current_answers[$array_key] == $_POST[$post_key]){
                     // pripocitanie bodov
                     $total_points += $points_for_one;
