@@ -43,7 +43,7 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
             </div>
         </nav>
     
-    <div class="container">
+    <div class="container page-content">
 
     <?php
         echo "<form method='post' action='evaluate.php' class='center'>";

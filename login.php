@@ -80,8 +80,8 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             </div>
         </nav>
 
-        <div class="container">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row center">                 
+        <div class="container page-content">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row other-center">                 
                 <div class="form-group col">
                     <label for='email'>E-mail</label>                       
                     <input

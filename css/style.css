@@ -27,17 +27,24 @@ footer {
     padding: 10px;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    min-height: 5vh;
     text-align: center;
     color: white;
 }
 header {
     text-align: center;
+    min-height: 5vh;
 }
 .center {
     position: flex;
     align-items: center;
     justify-content: center;
+}
+.other-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .intro {
     font-size:x-large;
@@ -51,4 +58,8 @@ body {
     color: white;
     font-size: xx-large;
     font-weight: bold;
+}
+.page-content{
+    position: relative;
+    min-height: 87.8vh;
 }

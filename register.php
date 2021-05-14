@@ -67,10 +67,10 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container page-content">
             <form
                 action="<?php echo $_SERVER['PHP_SELF'] ?>"
-                class="needs-validation center"
+                class="needs-validation other-center"
                 method="post"
                 enctype="multipart/form-data"
                 novalidate

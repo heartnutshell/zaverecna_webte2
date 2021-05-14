@@ -32,8 +32,8 @@
             </div>
         </nav>
 
-        <div class="container">
-            <div class="center">
+        <div class="container page-content">
+            <div class="other-center">
                 <span class="intro">Som</span>
                 <a type="button" class="btn btn-primary btn-lg" href="student.php">študent</a>
                 <span class="intro">/</span>

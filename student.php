@@ -76,9 +76,9 @@ $db = new DatabaseController;
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container page-content">
 
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row center">  
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row other-center">  
                 <div class="form-group col">
                     <label for='id'>ID</label>            
                     <input
