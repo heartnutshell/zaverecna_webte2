@@ -207,7 +207,7 @@ class DatabaseController
 
     public function insertStudentTest($student_id, $test_key, $start_time)
     {
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO completed_tests (student_id, test_key, start_time) VALUES (:student_id, :test_key, :start_time)");
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (student_id, test_key, start_time) VALUES (:student_id, :test_key, :start_time)");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":start_time", $start_time);
