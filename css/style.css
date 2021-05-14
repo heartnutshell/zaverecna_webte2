@@ -1,7 +1,7 @@
 /*DRAW*/
 .form-range
 {
-    width: 200px !important;
+    width: 180px !important;
 }
 .card-body {
     background-color: whitesmoke;
@@ -23,7 +23,7 @@ math-field {
 }
 /*MAIN*/
 footer {
-    position: absolute !important;
+    position: relative !important;
     padding: 10px;
     bottom: 0;
     width: 100%;
@@ -35,10 +35,9 @@ header {
     text-align: center;
 }
 .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: flex;
+    align-items: center;
+    justify-content: center;
 }
 .intro {
     font-size:x-large;

@@ -85,12 +85,9 @@ class GenerateQuestion
     }
 
     public function generateDraw($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
         echo '
             <div class="card mb-3">
                     <div class="card-header">
-                        <span>'.$question.'</span>
                         <input value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
                         <input type="range" min="1" max="100" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                         <output id="range-num">1</output>      
@@ -112,13 +109,8 @@ class GenerateQuestion
     }
 
     public function generateEquation($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
         echo'
             <div class="card mb-3">
-                    <div class="card-header">
-                        <span><?php echo $question ?></span>
-                    </div>
                     <div class="card-body">
                         <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>

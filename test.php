@@ -42,6 +42,8 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
 
             </div>
         </nav>
+    
+    <div class="container">
 
     <?php
         echo "<form method='post' action='evaluate.php' class='center'>";
@@ -87,6 +89,8 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     echo "<input type='submit' class='btn btn-primary' value='Odoslať'>";
     echo "</form>";
     ?>
+
+    </div>
 
     <?php include 'footer.php';?>
 
