@@ -8,22 +8,27 @@ $db = new DatabaseController;
         try {
                    
             $id = $_POST['id'];
-
-            $result = $db->getStudentByID($id);
-
-            if ($result == NULL){
-                echo 'pridanie noveho studenta';
-                //treba pridat studenta
-                $name = $_POST['name'];
-                $surname = $_POST['surname'];
-                $db->insertStudent($id, $name, $surname);
-                //mozeme spustit test
+            $test = $db->getTestByKey($_POST['test_key']);
+            if($test == NULL || $test[0]['active'] == 0){
+                $message = "Zlý kód testu alebo zadaný test je neaktívny.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
             } else {
-                echo 'student uz je';
-                //student uz existuje netreba ho znovba pridat
-                //mozeme stupistit test
+                $result = $db->getStudentByID($id);
+
+                if ($result == NULL){
+                    //treba pridat studenta
+                    $name = $_POST['name'];
+                    $surname = $_POST['surname'];
+                    $db->insertStudent($id, $name, $surname);
+                    //mozeme spustit test
+                } else {
+                    //student uz existuje netreba ho znovba pridat
+                    //mozeme stupistit test
+                }
+                header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
             }
-        
+
+
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -82,6 +87,16 @@ $db = new DatabaseController;
                         id="surname"
                         name="surname"
                         required
+                    />
+                </div>
+                <div class="form-group col">
+                    <label for='test_key'>Kód testu</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="test_key"
+                            name="test_key"
+                            required
                     />
                 </div>
                 <div class="form-group col">
