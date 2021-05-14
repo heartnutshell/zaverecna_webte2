@@ -8,30 +8,25 @@ $databaseController = new DatabaseController();
 
 $post_keys = array_keys($_POST);
 
+$ids = explode(";", $_POST["ids"]);
 
-foreach ($post_keys as $key){
-    if ($key == "student_id" || $key == "test_key"){
-        continue;
-    }
+foreach ($ids as $question_id){
 
-    if (str_contains($key, "_hidden")){
-        $post_array = explode("_", $key, 2);
-    }else{
+    if ($question_id == "")
         continue;
-    }
 
     $total_points = 0;
     $student_answer = array();
-    $current_question = $databaseController->getQuestionById(intval($post_array[0]));
+    $current_question = $databaseController->getQuestionById($question_id);
 
     switch ($current_question[0]["type"]){
         case QuestionType::OPEN:
-            $student_answer["answer"] = $_POST[$key];
+            $student_answer["answer"] = $_POST[$question_id];
             $current_answers = $current_question[0]["correct_answer"];
             $decoded = json_decode($current_answers, true);
             if ($decoded != null){
                 foreach ($decoded as $answer){
-                    if ($_POST[$key] == $answer){
+                    if ($_POST[$question_id] == $answer){
                         $total_points = $current_question[0]["points"];
                         break;
                     }
@@ -39,15 +34,14 @@ foreach ($post_keys as $key){
             }
             break;
         case QuestionType::CHOOSE:
-            $current_answers = $current_question[0]["correct_answer"];
-            $decoded = json_decode($current_answers, true);
+            $current_answers = json_decode($current_question[0]["correct_answer"], true);
 
-            $points_for_one = $current_question[0]["points"]/sizeof(array_keys($decoded));
+            $points_for_one = $current_question[0]["points"]/sizeof(array_keys($current_answers));
 
-            foreach (array_keys($decoded) as $array_key){
-                $post_key = $current_question[0]["id"]."_".$array_key;
+            foreach (array_keys($current_answers) as $array_key){
+                $post_key = $question_id."_".$array_key;
                 if (isset($_POST[$post_key])){
-                    if ($decoded[$array_key]){
+                    if ($current_answers[$array_key]){
                         // pripocitanie bodov
                         $total_points += $points_for_one;
                     }else{
@@ -56,7 +50,7 @@ foreach ($post_keys as $key){
                     }
                     $student_answer[$array_key] = true;
                 }else{
-                    if (!$decoded[$array_key]){
+                    if (!$current_answers[$array_key]){
                         // pripocitanie bodov
                         $total_points += $points_for_one;
                     }else{
@@ -70,14 +64,13 @@ foreach ($post_keys as $key){
 
             break;
         case QuestionType::CONNECT:
-            $current_answers = $current_question[0]["correct_answer"];
-            $decoded = json_decode($current_answers, true);
+            $current_answers = json_decode($current_question[0]["correct_answer"], true);
 
-            $points_for_one = $current_question[0]["points"]/sizeof(array_keys($decoded));
+            $points_for_one = $current_question[0]["points"]/sizeof(array_keys($current_answers));
 
-            foreach (array_keys($decoded) as $array_key){
-                $post_key = $current_question[0]["id"]."_".$array_key;
-                if ($decoded[$array_key] == $_POST[$post_key]){
+            foreach (array_keys($current_answers) as $array_key){
+                $post_key = $question_id."_".$array_key;
+                if ($current_answers[$array_key] == $_POST[$post_key]){
                     // pripocitanie bodov
                     $total_points += $points_for_one;
                 }else{
@@ -90,7 +83,7 @@ foreach ($post_keys as $key){
             break;
         case QuestionType::MATH:
         case QuestionType::DRAW:
-            $student_answer["answer"] = $_POST[$current_question[0]["id"]];
+            $student_answer["answer"] = $_POST[$question_id];
             break;
         default:
             echo "wrong question type";

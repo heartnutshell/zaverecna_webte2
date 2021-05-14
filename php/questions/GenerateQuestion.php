@@ -24,7 +24,6 @@ class GenerateQuestion
         }
         echo '
                 </div>
-                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -35,7 +34,6 @@ class GenerateQuestion
                 <div class="card-body">
                     <textarea class="output" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
-                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
     }
 
@@ -79,7 +77,6 @@ class GenerateQuestion
         echo '</div></div>';
 
         echo'
-            <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
@@ -90,7 +87,6 @@ class GenerateQuestion
         echo '
             <div class="card mb-3">
                     <div class="card-header">
-                        <span>'.$question.'</span>
                         <input value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
                         <input type="range" min="1" max="100" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                         <output id="range-num">1</output>      
@@ -102,7 +98,6 @@ class GenerateQuestion
                         <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
                     </div>
                     <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
-                    <input type="hidden" value="1" name="'.$question_id.'_hidden">
                 </div>
         ';
         //treba includnut v teste
@@ -123,7 +118,6 @@ class GenerateQuestion
                     </div>
                     <div class="card-footer">
                         <input type="hidden" id='.$question_id.' name="'.$question_id.'">
-                        <input type="hidden" value="1" name="'.$question_id.'_hidden">
                     </div>
             </div>
         ';
