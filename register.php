@@ -104,7 +104,7 @@
                             </div>
                         </div>
 
-                        <label for="email">Email*</label>
+                        <label for="email">E-mail*</label>
                         <input
                             type="email"
                             class="form-control"
