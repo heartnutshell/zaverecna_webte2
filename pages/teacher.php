@@ -1,5 +1,7 @@
 <?php
 
+
+
 require_once __DIR__ . "/partials/Partial.php";
 require_once __DIR__ . "/../php/database/DatabaseController.php";
 require_once __DIR__ . "/../php/questions/CreateQuestion.php";

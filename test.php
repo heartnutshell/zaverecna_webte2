@@ -46,13 +46,14 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     <div class="container page-content">
 
     <?php
-        echo "<form method='post' action='evaluate.php' class='center'>";
+        echo "<form method='post' action='evaluate.php' class='center test-form'>";
         echo "<input type='hidden' name='test_key' value='{$_GET['test_key']}'>";
         echo "<input type='hidden' name='student_id' value='{$_GET['student_id']}'>";
     $ids = "";
-    foreach($questions as $question){
+    foreach($questions as $index => $question){
         $ids = $ids.$question['id'].";";
-        echo "{$question['question']}";
+        $i = $index+1;
+        echo "<h4>$i. {$question['question']}</h4>";
         switch ($question['type']) {
             case "open":
             {

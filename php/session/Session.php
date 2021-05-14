@@ -1,4 +1,4 @@
-<?
+<?php
 
 class Session
 {
@@ -8,3 +8,4 @@ class Session
         session_start();
     }
 }
+?>

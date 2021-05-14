@@ -1,4 +1,4 @@
-<?
+<?php
 
 require_once __DIR__ . "/../database/DatabaseController.php";
 
@@ -46,3 +46,4 @@ if ($_REQUEST["type"] == "tests") {
             break;
     }
 }
+?>

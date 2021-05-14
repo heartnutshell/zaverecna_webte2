@@ -30,13 +30,14 @@ footer {
     min-height: 5vh;
     text-align: center;
     color: white;
+    margin-top: 10px;
 }
 header {
     text-align: center;
     min-height: 5vh;
 }
 .center {
-    position: flex;
+    position: flex !important;
     align-items: center;
     justify-content: center;
 }
@@ -62,4 +63,9 @@ body {
 .page-content{
     position: relative;
     min-height: 87.8vh;
+}
+.test-form {
+    width: 532px;
+    margin: 0 auto;
+    padding: 20px 0px;
 }

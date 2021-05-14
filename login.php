@@ -27,7 +27,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
             if(password_verify($password, $result[0]['password'])){       
                 
-
                 $_SESSION["isLogged"] = true;
                 $_SESSION["teacher_id"] = $result[0]["id"];
                 $_SESSION["teacher_name"] = $result[0]["name"];

@@ -18,6 +18,7 @@
             if($result){
                 $message =  "Registrácia úspešná!";
                 echo "<script type='text/javascript'>alert('$message');</script>";
+                header("Location: login.php");
             } else {
                 $message =  "Registrácia neúspešná!";
                 echo "<script type='text/javascript'>alert('$message');</script>";
