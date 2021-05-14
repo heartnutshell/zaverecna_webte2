@@ -82,7 +82,8 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                     />
                 </div>
                 <div class="form-group col">
-                    <input class="btn btn-primary" type="submit" value="Prihlásiť sa">                        
+                    <input class="btn btn-primary" type="submit" value="Prihlásiť sa"><br>
+                    <span>Pre vytvorenie nového konta učitela kliknite </span><a href="register.php">tu</a><span>.</span>                     
                 </div>               
             </form>      
         </div>
