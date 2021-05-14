@@ -10,8 +10,6 @@ $post_keys = array_keys($_POST);
 
 $ids = explode(";", $_POST["ids"]);
 
-$_POST["27"] = str_replace("\"", "'", $_POST["27"]);
-
 foreach ($ids as $question_id){
 
     if ($question_id == "")
@@ -28,7 +26,7 @@ foreach ($ids as $question_id){
             $decoded = json_decode($current_answers, true);
             if ($decoded != null){
                 foreach ($decoded as $answer){
-                    if ($_POST[$question_id] == $answer){
+                    if (!strcasecmp($_POST[$question_id],$answer)){
                         $total_points = $current_question[0]["points"];
                         break;
                     }
@@ -86,10 +84,33 @@ foreach ($ids as $question_id){
             break;
         case QuestionType::MATH:
         case QuestionType::DRAW:
-            if (isset($_POST[$question_id."_upload"])){
-                $student_answer["answer"] = $_POST[$question_id."_upload"];
+            if ($_FILES[$question_id."_upload"]["size"] > 0){
+
+                $target_dir = "uploadedAnswers/";
+                $target_file = $target_dir . basename($_FILES[$question_id."_upload"]["name"]);
+                $uploadOk = 1;
+                $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        
+                if($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg") {
+                    $uploadOk = 0;
+                }
+        
+                if ($_FILES[$question_id."_upload"]["size"] > 2000000) {
+                    $uploadOk = 0;
+                }
+        
+                if ($uploadOk == 0) {
+                } else {
+                    // file name from studenID and questionID?
+                    if (move_uploaded_file($_FILES[$question_id."_upload"]["tmp_name"], $target_dir. $_POST["student_id"]."_".$question_id.".".$fileType)) {
+                    } else {
+                    }
+                }
+
+                $student_answer["answer"] = $_POST["student_id"]."_".$question_id.".".$fileType;
             }else{
-                $student_answer["answer"] = $_POST[$question_id];
+                $_POST[$question_id] = str_replace("\"", "'", $_POST[$question_id]);
+                $student_answer["answer"] = $_POST[$question_id];             
             }
             break;
         default:

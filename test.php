@@ -3,6 +3,8 @@ include_once "php/questions/GenerateQuestion.php";
 
 include_once "php/database/DatabaseController.php";
 
+
+
 $ctrl = new DatabaseController();
 $generator = new GenerateQuestion();
 
@@ -46,7 +48,7 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     <div class="container page-content">
 
     <?php
-        echo "<form method='post' action='evaluate.php' class='center test-form'>";
+        echo "<form method='post' action='evaluate.php' class='center test-form' enctype='multipart/form-data'>";
         echo "<input type='hidden' name='test_key' value='{$_GET['test_key']}'>";
         echo "<input type='hidden' name='student_id' value='{$_GET['student_id']}'>";
     $ids = "";
