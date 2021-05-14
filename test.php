@@ -10,9 +10,9 @@ if (isset($_GET['test_key'])) {
     $test_key = $_GET['test_key'];
 }
 
-$student = $ctrl->getStudentByID("2315");
-$test = $ctrl->getTestByKey("OS2021");
-$questions = $ctrl->getQuestionsByTestKey("OS2021");
+$student = $ctrl->getStudentByID($_GET['student_id']);
+$test = $ctrl->getTestByKey($_GET['test_key']);
+$questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
 
 ?>
 <html lang="sk">

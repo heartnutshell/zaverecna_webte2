@@ -7,20 +7,64 @@ const initCanvas = (id) => {
     })
 }
 
-const clearCanvas = () => {  
-    canvas.getObjects().forEach((o) => {
-        if(o != canvas.backgroundColor) {
-            canvas.remove(o);
+function changeColor(id){
+    let color = document.getElementById(id+'color');
+    canvases[id].freeDrawingBrush.color = color.value;
+}
+
+function changeSize(id){
+    let size = document.getElementById(id+'size');
+    canvases[id].freeDrawingBrush.width = parseInt(size.value, 10);
+}
+
+const clearCanvas = (id) => {  
+    canvases[id].getObjects().forEach((o) => {
+        if(o != canvases[id].backgroundColor) {
+            canvases[id].remove(o);
         }
     });
 }
 
-const saveDrawing = () => {
-    drawingSave = canvas.toSVG()
-    //need to save into DB
+const saveDrawing = (id) => {
+    drawingSave = canvases[id].toSVG()
+    console.log(drawingSave);
+    //insertDrawAnswer(drawingSave);
 }
 
-const loadDrawing = () => {
+var canvases = [];
+var can_ids = [];
+
+document.querySelectorAll("canvas").forEach(item => {
+    const canvas = initCanvas(item.id);
+    canvas.on('mouse:up', function(options) {
+        saveDrawing(item.id);
+      });
+    canvases[item.id] = canvas;
+    can_ids.push(item.id);
+});
+
+
+can_ids.forEach(item => {
+    const picker = document.getElementById(item+'color');
+    const slider = document.getElementById(item+'size');
+    const clear = document.getElementById(item+'clear');
+    picker.addEventListener("change", () => {
+        changeColor(item);
+    });
+    slider.addEventListener("change", () => {
+        changeSize(item);
+    });
+    clear.addEventListener("click", () => {
+        clearCanvas(item);
+    });
+   
+})
+
+console.log(canvases);
+
+
+
+const loadDrawing = () => { //len na testovanie
     clearCanvas();
     //need to get save from DB
     if(drawingSave) {
@@ -31,17 +75,5 @@ const loadDrawing = () => {
     }
 }
 
-const canvas = initCanvas('drawHere');
-const picker = document.getElementById('colorPicker');
-const slider = document.getElementById('sizeSlider');
 let drawingSave;
 
-//set brush color
-picker.onchange = function() {
-    canvas.freeDrawingBrush.color = this.value;
-}
-
-//set brush size
-slider.onchange = function() {
-    canvas.freeDrawingBrush.width = parseInt(this.value, 10);
-}
