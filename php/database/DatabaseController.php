@@ -237,6 +237,17 @@ class DatabaseController
         $stmt->execute();
     }
 
+    public function insertStudentAnswerWithPoints($student_id, $test_key, $question_id, $answer, $points)
+    {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, answer, points) VALUES (:student_id, :test_key, :question_id, :answer, :points)");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->bindParam(":answer", $answer);
+        $stmt->bindParam(":points", $points);
+        $stmt->execute();
+    }
+
 
     /**
      * @return PDO
