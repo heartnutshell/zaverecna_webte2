@@ -103,6 +103,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentAnswersByTestKey($test_key): array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getStudentAnswersByTestKeyAndStudentId($test_key, $student_id): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
