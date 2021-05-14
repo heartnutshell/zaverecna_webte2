@@ -48,16 +48,34 @@
 
     <body>
 
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <header>
+                    <span class="title">Registrácia</span>
+                </header>
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-secondary my-2 my-sm-0" href="login.php">Späť</a>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
         <div class="container">
             <form
                 action="<?php echo $_SERVER['PHP_SELF'] ?>"
-                class="needs-validation"
+                class="needs-validation center"
                 method="post"
                 enctype="multipart/form-data"
                 novalidate
             >
                 <fieldset>
-                    <legend>Registrácia pre učitela</legend>
                     <div class="form-group">
                         <div class="form-group form-row">
                             <div class="col">
@@ -125,6 +143,7 @@
             </form>
         </div>
 
+        <?php include 'footer.php';?>
         <script src="js/validateForm.js"></script>
 
     </body>

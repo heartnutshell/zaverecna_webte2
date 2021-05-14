@@ -21,9 +21,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             $password = $_POST['password'];
             if(password_verify($password, $result[0]['password'])){       
                 
-                session_start();
-                echo "prihlasený";
-                //pridať vytvorenie session -> interface pre učitela
+                $_SESSION["isLogged"] = true;
+                $_SESSION["teacher_id"] = $result[0]["id"];
+                $_SESSION["teacher_name"] = $result[0]["name"];
+                $_SESSION["teacher_surname"] = $result[0]["surname"];
+                header("Location: pages/teacher.php");
 
             } else{
                 if($user_found = 1){
@@ -46,7 +48,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrácia</title>
+        <title>Prihlásenie</title>
         <link rel="icon" type="image/png" href="img/favicon.png" />
         <!-- CSS --> 
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -59,9 +61,29 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     </head>
     <body>
 
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <header>
+                    <span class="title">Učitel</span>
+                </header>
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-secondary my-2 my-sm-0" href="index.php">Späť</a>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
         <div class="container">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row">                 
-                <div class="form-group col">                       
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row center">                 
+                <div class="form-group col">
+                    <label for='email'>E-mail</label>                       
                     <input
                         type="text"
                         class="form-control"
@@ -71,7 +93,8 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                         required
                     />
                 </div>
-                <div class="form-group col">            
+                <div class="form-group col">
+                    <label for='password'>Heslo</label>          
                     <input
                         type="password"
                         class="form-control"
@@ -81,12 +104,14 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                         required
                     />
                 </div>
-                <div class="form-group col">
+                <div class="form-group col"></br>
                     <input class="btn btn-primary" type="submit" value="Prihlásiť sa"><br>
                     <span>Pre vytvorenie nového konta učitela kliknite </span><a href="register.php">tu</a><span>.</span>                     
                 </div>               
             </form>      
         </div>
+
+        <?php include 'footer.php';?>
 
     </body>
 </html>

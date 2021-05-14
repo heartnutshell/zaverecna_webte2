@@ -100,6 +100,7 @@ class GenerateQuestion
                     </div>
                     <div class="card-footer">
                         <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-secondary">
                     </div>
                     <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
                     <input type="hidden" value="1" name="'.$question_id.'_hidden">
@@ -124,6 +125,7 @@ class GenerateQuestion
                     <div class="card-footer">
                         <input type="hidden" id='.$question_id.' name="'.$question_id.'">
                         <input type="hidden" value="1" name="'.$question_id.'_hidden">
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-secondary">
                     </div>
             </div>
         ';
