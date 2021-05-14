@@ -86,7 +86,11 @@ foreach ($ids as $question_id){
             break;
         case QuestionType::MATH:
         case QuestionType::DRAW:
-            $student_answer["answer"] = $_POST[$question_id];
+            if (isset($_POST[$question_id."_upload"])){
+                $student_answer["answer"] = $_POST[$question_id."_upload"];
+            }else{
+                $student_answer["answer"] = $_POST[$question_id];
+            }
             break;
         default:
             echo "wrong question type";
