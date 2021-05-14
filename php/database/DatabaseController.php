@@ -130,6 +130,17 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getCsv()
+    {
+        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'csv/vysledky.csv'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
+LINES TERMINATED BY '\n'
+FROM student_tests
+        JOIN student ON student_tests.student_id = student.id");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // UPDATE
     public function updateStudentTestPoints($test_key, $student_id, $points)
     {
