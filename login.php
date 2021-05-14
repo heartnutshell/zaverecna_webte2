@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . '/php/session/Session.php';
+
+$session = new Session();
+$session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
+
 require_once 'php/database/DatabaseController.php';
 
 $db = new DatabaseController;
