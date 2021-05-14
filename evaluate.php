@@ -10,6 +10,7 @@ $post_keys = array_keys($_POST);
 
 $ids = explode(";", $_POST["ids"]);
 
+$_POST["27"] = str_replace("\"", "'", $_POST["27"]);
 
 foreach ($ids as $question_id){
 
