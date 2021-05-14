@@ -105,7 +105,7 @@ class DatabaseController
 
     public function getStudentAnswersByTestKey($test_key): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE test_key LIKE :test_key");
+        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE test_key LIKE :test_key ORDER BY question_id");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
         return $stmt->fetchAll();
