@@ -10,6 +10,7 @@ $post_keys = array_keys($_POST);
 
 $ids = explode(";", $_POST["ids"]);
 
+
 foreach ($ids as $question_id){
 
     if ($question_id == "")
