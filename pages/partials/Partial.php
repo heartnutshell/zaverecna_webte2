@@ -39,6 +39,7 @@ class Partial
                         <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>                   
                     </ul>
                     <a class='nav-link logout' href='logout.php'>Odhlásiť</a>
+
                 </div>
                 
             </div>

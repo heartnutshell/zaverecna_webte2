@@ -107,6 +107,7 @@ const submitCreateTest = (formData) => {
         },
         success: (data) => {
             console.log(data);
+            window.location = "../pages/teacher.php";
         },
         error: (xhr, status, err) => {
             console.log(err);
@@ -136,6 +137,5 @@ const toggleTestStatus = (event, status, test_key) => {
             console.log(status);
             console.log(err);
         },
-        timeout: 3000,
     });
 };
