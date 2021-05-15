@@ -138,6 +138,17 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getCsv()
+    {
+        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/get/zaverecna_webte2/csv/vysledky.csv'
+                                        FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
+                                        LINES TERMINATED BY '\n'
+                                        FROM student_tests
+        JOIN student ON student_tests.student_id = student.id");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // UPDATE
     public function updateCompletedTestPoints($test_key, $student_id, $points)
     {
@@ -161,6 +172,15 @@ class DatabaseController
         $stmt = $this->conn->prepare("UPDATE test SET active=:active WHERE test_key LIKE :test_key");
         $stmt->bindParam(":active", $newStatus);
         $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+    }
+
+    public function updateStudentTest($test_key, $student_id, $end_time, $points) {
+        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time AND completed=1 AND points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt->bindParam(":end_time", $end_time);
+        $stmt->bindParam(":points", $points);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
         $stmt->execute();
     }
     
