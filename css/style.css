@@ -116,6 +116,10 @@ body {
 .logout :hover {
     color: red !important;
 }
+.doc {
+    font-size: 1.2rem;
+    color:cornflowerblue;
+}
 @media screen and (max-width: 768px){
     #time_left {
         position: fixed;
