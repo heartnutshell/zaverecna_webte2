@@ -110,7 +110,7 @@ if($start_time) {
     <script src="js/math.js"></script>
     <script src="js/resize.js"></script>
     <script src="js/countdown.js"></script>
-    <script src="js/api/pageVisibility"></script>
+    <script src="js/api/pageVisibility.js"></script>
 
     </body>
 

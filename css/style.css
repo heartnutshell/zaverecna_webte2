@@ -72,6 +72,12 @@ body {
     font-weight: bold;
     margin-right: 20px;
 }
+.title-black {
+    color: black;
+    font-size: x-large;
+    font-weight: bold;
+    margin-right: 10px;
+}
 .page-content{
     position: relative;
     min-height: 80vh;
@@ -151,4 +157,12 @@ body {
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
+}
+.ix {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.checkboi {
+    font-size: 2rem;
 }
