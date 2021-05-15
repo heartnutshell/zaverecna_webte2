@@ -8,6 +8,8 @@ $db = new DatabaseController;
         try {
                    
             $id = $_POST['id'];
+            $name = $_POST['name'];
+            $surname = $_POST['surname'];
             $test = $db->getTestByKey($_POST['test_key']);
             if($test == NULL || $test[0]['active'] == 0){
                 $message = "Zlý kód testu alebo zadaný test je neaktívny.";
@@ -17,15 +19,19 @@ $db = new DatabaseController;
 
                 if ($result == NULL){
                     //treba pridat studenta
-                    $name = $_POST['name'];
-                    $surname = $_POST['surname'];
                     $db->insertStudent($id, $name, $surname);
                     //mozeme spustit test
+                    header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
                 } else {
-                    //student uz existuje netreba ho znovba pridat
-                    //mozeme stupistit test
-                }
-                header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
+                    if($id == $result[0]['id'] && $name == $result[0]['name'] && $surname == $result[0]['surnname']){
+                        //student uz existuje netreba ho znovba pridat
+                        //mozeme stupistit test
+                        header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
+                    } else {
+                        $message = "Študent s daným id už existuje. A má iné meno.";
+                        echo "<script type='text/javascript'>alert('$message');</script>";        
+                    }
+                } 
             }
 
 
