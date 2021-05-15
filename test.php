@@ -100,6 +100,7 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     <script src="js/draw.js"></script>
     <script src="js/api/studentAnswer.js"></script>
     <script src="js/math.js"></script>
+    <script src="js/resize.js"></script>
 
     </body>
 

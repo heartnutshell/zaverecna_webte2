@@ -54,7 +54,6 @@ header {
     transform: translate(-50%, -50%);
 }
 .third-center {
-    max-width: 900px;
     margin: 0 auto;
     padding: 20px 0px;
 }
@@ -65,6 +64,7 @@ header {
 body {
     background-image: url("../img/18410.jpg");
     background-repeat: repeat;
+    font-size: 1.05rem;
 }
 .title {
     color: white;
@@ -98,9 +98,15 @@ body {
 .nav-item {
     margin: 0px 5px;
 }
-.btn-lg {
-    margin: 0px 50px;
+.nav-link {
+    font-size: 1.2rem;
 }
+.logout{
+    opacity: 1;
+    color: white;
+    text-transform: uppercase;
+}
+
 /*TEACHER*/
 .test.active {
     background-color: #28b62c;

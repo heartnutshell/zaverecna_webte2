@@ -34,11 +34,11 @@ class Partial
                 </button>
                 <div class='collapse navbar-collapse' id='navbarColor01'>
                     <ul class='navbar-nav me-auto'>
-                        <li class='nav-item'><a class='btn btn-outline-light' href='teacher.php'>Prehľad</a></li>
-                        <li class='nav-item'><a class='btn btn-outline-light' href='createTest.php'>Vytvoriť test</a></li>
+                        <li class='nav-item'><a class='nav-link' href='teacher.php'>Prehľad</a></li>
+                        <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>
                         
                     </ul>
-                    <a class='btn btn-secondary' href='logout.php'>Odhlásiť</a>
+                    <a class='nav-link logout' href='logout.php'>Odhlásiť</a>
                 </div>
                 
             </div>
