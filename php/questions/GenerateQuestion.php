@@ -14,13 +14,13 @@ class GenerateQuestion
 
     public function generateSelect($question) {
         echo '
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                 <div class="card-body">';
         $answers = $question["correct_answer"];
         $decoded = json_decode($answers, true);
         $keys = array_keys($decoded);
         foreach ($keys as $key){
-            echo '<input type="checkbox" class="output" name="'.$question["id"].'_'.$key.'">'.$key.'<br>';
+            echo '<input type="checkbox" class="output form-check-input" name="'.$question["id"].'_'.$key.'"> '.$key.'<br>';
         }
         echo '
                 </div>
@@ -31,9 +31,9 @@ class GenerateQuestion
 
     public function generateText($question) {
         echo '
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                 <div class="card-body">
-                    <textarea class="output" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
+                    <textarea class="output form-control" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
                 <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
@@ -41,7 +41,7 @@ class GenerateQuestion
 
     public function generateConnect($question) {
         echo '
-            <div class="card">';
+            <div class="card bg-secondary">';
         $answers = $question["correct_answer"];
         $decoded = json_decode($answers, true);
         $keys = array_keys($decoded);
@@ -58,25 +58,32 @@ class GenerateQuestion
         shuffle($right_answers);
 
         // Lava cast
-        echo '<div class="row"><div class="card-body col-6">';
+        echo '<div class="card-body">';
         foreach ($left_answers as $answer){
-            echo $answer."<br>";
-        }
-        echo '</div>';
-
-        // Prava cast
-        echo '<div class="card-body col-6">';
-        foreach ($left_answers as $answer){
-            echo '<select class="output" name="'.$question["id"].'_'.$answer.'">';
+            echo "<div class='row'><div class='col'>".$answer."</div>";
+            echo '<div class="col"><select class="output form-select" name="'.$question["id"].'_'.$answer.'">';
             foreach ($right_answers as $option) {
                 echo '
                         <option class="output" value="'.$option.'">' . $option . '</option>
                         ';
             }
-            echo '</select><br>';
-
+            echo '</select></div></div>';
         }
-        echo '</div></div>';
+        echo '</div>';
+
+        // Prava cast
+        //echo '<div class="card-body col-3">';
+        //foreach ($left_answers as $answer){
+            /*echo '<div class="row"><select class="output form-select" name="'.$question["id"].'_'.$answer.'">';
+            foreach ($right_answers as $option) {
+                echo '
+                        <option class="output" value="'.$option.'">' . $option . '</option>
+                        ';
+            }
+            echo '</select></div>';*/
+
+        //}
+        //echo '</div></div>';
 
         echo'
             <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
@@ -86,7 +93,7 @@ class GenerateQuestion
 
     public function generateDraw($question_id) {
         echo '
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                     <div class="card-header">
                         <input value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
                         <input type="range" min="1" max="100" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
@@ -110,7 +117,7 @@ class GenerateQuestion
 
     public function generateEquation($question_id) {
         echo'
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                     <div class="card-body">
                         <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
                     </div>

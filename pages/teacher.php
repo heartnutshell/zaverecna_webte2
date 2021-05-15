@@ -28,7 +28,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
     <section>
         <h4 class="part">Informácie o konte</h4>
-        <p><?= "ID : $teacher_id <br> Meno : $name <br>Priezvisko : $surname"; ?></p>
+        <p><?= "<b>ID:</b> $teacher_id <br> <b>Meno:</b> $name <br><b>Priezvisko:</b> $surname"; ?></p>
     </section>
 
     <section>
@@ -36,7 +36,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
         <?php if (count($tests) == 0) : ?>
 
-        <h6>Žiadne testy</h6>
+        <h6>Žiadne testy!</h6>
 
         <?php else : ?>
         <table class="table table-hover">

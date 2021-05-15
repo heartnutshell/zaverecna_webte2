@@ -14,15 +14,20 @@ $partial->createHeader('Učitel | Vytváranie testu');
 
     <main class="container page-content">
 
-        <div id="createQuestionbuttons">
+        <div class="alert alert-dismissible alert-primary">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Začnite zadaním kódu pre test!</strong>
+        </div>
+
+        <div id="createQuestionbuttons" class="third-center">
             <p id="createOpenQ" class="btn btn-primary btn-sm" data-type-question="open">Krátka odpoveď</p>
             <p id="createChooseQ" class="btn btn-primary btn-sm" data-type-question="choose">Výber správnej
                 odpovede</p>
             <p id="createConnectQ" class="btn btn-primary btn-sm" data-type-question="connect">Párovacia
                 otázka</p>
             <p id="createDrawQ" class="btn btn-primary btn-sm" data-type-question="draw">Kresliacia
-                otázky</p>
-            <p id="createMathQ" class="btn btn-primary btn-sm" data-type-question="math">Napísanie matematického
+                otázka</p>
+            <p id="createMathQ" class="btn btn-primary btn-sm" data-type-question="math">Písanie matematického
                 výrazu</p>
         </div>
 

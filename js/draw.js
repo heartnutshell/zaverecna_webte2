@@ -1,7 +1,7 @@
 const initCanvas = (id) => {
     return new fabric.Canvas(id, {
-        width: 500,
-        height: 500,
+        width: 400,
+        height: 400,
         backgroundColor: 'white',
         isDrawingMode: true,
     })
@@ -60,10 +60,6 @@ can_ids.forEach(item => {
     });
    
 })
-
-console.log(canvases);
-
-
 
 const loadDrawing = () => { //len na testovanie
     clearCanvas();

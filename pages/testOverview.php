@@ -44,27 +44,27 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
         <h4 class="part">Informácie o teste</h4>
         <table class="table">
             <tr>
-                <td>Kód testu : </td>
+                <th>Kód testu</th>
                 <td><?= $test[0]["test_key"]; ?></td>
             </tr>
             <tr>
-                <td>Časový limit : </td>
+                <th>Časový limit</th>
                 <td><?= $test[0]["time_limit"]; ?></td>
             </tr>
             <tr>
-                <td>Počet bodov : </td>
+                <th>Počet bodov</th>
                 <td><?= $test[0]["max_points"]; ?></td>
             </tr>
             <tr>
-                <td>Stav : </td>
+                <th>Stav</th>
                 <td><?= $test[0]["active"] ? "<span class='test active'>Zapnutý</span>" : "<span class='test not-active'>Vypnutý</span>"; ?>
                 </td>
             </tr>
             <tr>
-                <td>Zapnúť/vypnúť test : </td>
+                <th>Zapnúť/vypnúť test</th>
                 <td id="test_status"
                     onclick="toggleTestStatus(event, <?= $test[0]['active'] ?> , '<?= $_GET['test_key'] ?>' )">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-warning">
                         <?= $test[0]["active"] ? "Vypnúť" : "Zapnúť"; ?>
                     </button>
                 </td>
@@ -75,8 +75,8 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
     <section>
 
-        <h4>študenti</h4>
-        <table>
+        <h4 class="part">Študenti</h4>
+        <table class="table table-hover">
 
             <thead>
                 <tr>
@@ -96,8 +96,8 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
     <section id="notifications">
 
-        <h4>Upozornenia</h4>
-        <table>
+        <h4 class="part">Upozornenia</h4>
+        <table class="table table-hover">
 
             <thead>
                 <tr>
