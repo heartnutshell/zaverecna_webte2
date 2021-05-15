@@ -9,21 +9,19 @@ $db = new DatabaseController;
                    
             $id = $_POST['id'];
             $test = $db->getTestByKey($_POST['test_key']);
-            if($test == NULL){
-                $message = "Zlý kód testu. Test sa nenašiel.";
+            if($test == NULL || $test[0]['active'] == 0){
+                $message = "Zlý kód testu alebo zadaný test je neaktívny.";
                 echo "<script type='text/javascript'>alert('$message');</script>";
             } else {
                 $result = $db->getStudentByID($id);
 
                 if ($result == NULL){
-                    echo 'pridanie noveho studenta';
                     //treba pridat studenta
                     $name = $_POST['name'];
                     $surname = $_POST['surname'];
                     $db->insertStudent($id, $name, $surname);
                     //mozeme spustit test
                 } else {
-                    echo 'student uz je';
                     //student uz existuje netreba ho znovba pridat
                     //mozeme stupistit test
                 }
@@ -56,10 +54,31 @@ $db = new DatabaseController;
         <script src="lib/jscolor.min.js"></script>
     </head>
     <body>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <header>
+                    <span class="title">Študent</span>
+                </header>
+                <div class="container-fluid">
 
-        <div class="container">
 
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row">  
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-secondary my-2 my-sm-0" href="index.php">Späť</a>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container page-content">
+
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row other-center">  
                 <div class="form-group col">
                     <label for='id'>ID</label>            
                     <input
@@ -101,12 +120,14 @@ $db = new DatabaseController;
                             required
                     />
                 </div>
-                <div class="form-group col">
+                <div class="form-group col"><br>
                     <input class="btn btn-primary" type="submit" value="Spustiť test!">                        
                 </div>               
             </form>
 
         </div>
+
+        <?php include 'footer.php';?>
 
     </body>
 </html>

@@ -148,6 +148,14 @@ class DatabaseController
         $stmt->execute();
     }
     
+    public function updateTestActiveStatus($test_key, $newStatus)
+    {
+        $stmt = $this->conn->prepare("UPDATE test SET active=:active WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":active", $newStatus);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+    }
+    
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
@@ -226,6 +234,17 @@ class DatabaseController
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":visibility", $visibility);
         $stmt->bindParam(":timestamp", $time);
+        $stmt->execute();
+    }
+
+    public function insertStudentAnswerWithPoints($student_id, $test_key, $question_id, $answer, $points)
+    {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, answer, points) VALUES (:student_id, :test_key, :question_id, :answer, :points)");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->bindParam(":answer", $answer);
+        $stmt->bindParam(":points", $points);
         $stmt->execute();
     }
 

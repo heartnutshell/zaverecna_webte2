@@ -1,0 +1,120 @@
+/*DRAW*/
+.form-range
+{
+    width: 180px !important;
+}
+.card-body {
+    background-color: whitesmoke;
+}
+#range-num {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.card {
+    margin: 20px 0px;
+}
+/*MATH*/
+math-field {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+    border-radius: 5px;
+    background-color: #fff;
+}
+/*MAIN*/
+footer {
+    position: relative !important;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+    min-height: 5vh;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+header {
+    text-align: center;
+    min-height: 5vh;
+}
+.center-text {
+    text-align: center;
+}
+.text-bold {
+    font-weight: bold;
+}
+.center {
+    position: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.other-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.third-center {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+.intro {
+    font-size:x-large;
+    font-weight: bolder;
+}
+body {
+    background-image: url("../img/18410.jpg");
+    background-repeat: repeat;
+}
+.title {
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.page-content{
+    position: relative;
+    min-height: 87.8vh;
+}
+.test-form {
+    max-width: 85vh;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+.btn{
+    margin-top: 0px;
+}
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.part {
+    background-color: #158cba;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.nav-item {
+    margin: 0px 5px;
+}
+.btn-lg {
+    margin: 0px 50px;
+}
+/*TEACHER*/
+.test.active {
+    background-color: #28b62c;
+    color: white;
+    padding: 7.5px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.test.not-active {
+    background-color: #ff4136;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
