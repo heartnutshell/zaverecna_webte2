@@ -14,20 +14,20 @@ $partial->createHeader('Učitel | Vytváranie testu');
 
 <main class="container page-content">
 
-    <div class="alert alert-dismissible alert-primary">
+    <div class="alert alert-dismissible alert-warning">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>Začnite zadaním kódu pre test!</strong>
     </div>
 
     <div id="createQuestionbuttons" class="third-center">
-        <p id="createOpenQ" class="btn btn-primary btn-sm" data-type-question="open">Krátka odpoveď</p>
-        <p id="createChooseQ" class="btn btn-primary btn-sm" data-type-question="choose">Výber správnej
+        <p id="createOpenQ" class="btn btn-primary" data-type-question="open">Krátka odpoveď</p>
+        <p id="createChooseQ" class="btn btn-primary" data-type-question="choose">Výber správnej
             odpovede</p>
-        <p id="createConnectQ" class="btn btn-primary btn-sm" data-type-question="connect">Párovacia
+        <p id="createConnectQ" class="btn btn-primary" data-type-question="connect">Párovacia
             otázka</p>
-        <p id="createDrawQ" class="btn btn-primary btn-sm" data-type-question="draw">Kresliacia
+        <p id="createDrawQ" class="btn btn-primary" data-type-question="draw">Kresliacia
             otázka</p>
-        <p id="createMathQ" class="btn btn-primary btn-sm" data-type-question="math">Písanie matematického
+        <p id="createMathQ" class="btn btn-primary" data-type-question="math">Písanie matematického
             výrazu</p>
     </div>
 
@@ -36,7 +36,7 @@ $partial->createHeader('Učitel | Vytváranie testu');
         <div class="col-md-4">
             <label for="test_key" class="form-label">Kód testu</label>
             <input type="text" class="form-control" id="test_key" name="test_key" placeholde="Kód testu"
-                autocomplete="off" required>
+                autocomplete="off" minlength="3" required>
             <div class="valid-feedback">Kód testu je voľný</div>
             <div id="test_key--invalid" class="invalid-feedback"></div>
             <input type="hidden" id="test_key_hidden" name="test_key_hidden">

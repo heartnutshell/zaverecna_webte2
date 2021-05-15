@@ -21,7 +21,7 @@ const updateNotifications = (test_key) => {
                     <td>${log["id"]}</td>
                     <td>${log["name"]}</td>
                     <td>${log["surname"]}</td>
-                    <td>${log["visibility"]}</td>
+                    <td>Odišiel z okna</td>
                     <td>${log["timestamp"]}</td>
                 </tr>
                 `);
@@ -48,15 +48,29 @@ const updateStudentsData = (test_key) => {
         },
         dataType: "json",
         success: (data) => {
-            data.map((student) => {
-                $("#students--body").append(`
+            console.log(data);
+
+            const testStatus = data.test[0]["active"];
+
+            // Displaying students
+            data.students.map((student) => {
+                let row = `
                 <tr>
-                    <td>${student[0]}</td>
+                    <td>${student["id"]}</td>
                     <td>${student["name"]}</td>
                     <td>${student["surname"]}</td>
                     <td>${student["completed"]}</td>
-                </tr>
-                `);
+                `;
+
+                row += "<td>";
+                if (testStatus == 0) {
+                    row += `<a href="testEvaluate.php?student_id=${student["id"]}&test_key=${student["test_key"]}">Vyhodnotiť<a>`;
+                }
+                row += `
+                    </td>
+                </tr>`;
+
+                $("#students--body").append(row);
 
                 // Get the latest row id
                 last_student_id = parseInt(student[0]) > last_student_id ? parseInt(student[0]) : last_student_id;
@@ -107,7 +121,7 @@ const submitCreateTest = (formData) => {
         },
         success: (data) => {
             console.log(data);
-            // window.location = "../pages/teacher.php";
+            window.location = "../pages/teacher.php";
         },
         error: (xhr, status, err) => {
             console.log(err);
@@ -139,3 +153,5 @@ const toggleTestStatus = (event, status, test_key) => {
         },
     });
 };
+
+const manualEvaluateApi = () => {};

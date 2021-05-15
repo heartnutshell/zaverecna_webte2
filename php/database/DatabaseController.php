@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ ."/Database.php";
+require_once __DIR__ . "/Database.php";
 date_default_timezone_set("Europe/Bratislava");
 
 class DatabaseController
@@ -36,7 +36,7 @@ class DatabaseController
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
     public function getTestByKey($test_key): array
     {
         $stmt = $this->conn->prepare("SELECT * FROM test WHERE test_key LIKE :test_key");
@@ -44,7 +44,7 @@ class DatabaseController
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
     public function getTestKeys(): array
     {
         $stmt = $this->conn->prepare("SELECT test_key FROM test");
@@ -105,11 +105,11 @@ class DatabaseController
 
     public function getStudentAnswersByTestKeyAndStudentId($test_key, $student_id): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_answers WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt = $this->conn->prepare("SELECT *, student_answers.points as student_points, questions.points as max_points FROM student_answers, questions WHERE student_answers.question_id = questions.id AND student_id LIKE :student_id AND student_answers.test_key LIKE :test_key");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(2);
     }
 
     public function getStudentAnswersByTestKeyAndQuestionId($test_key, $question_id): array
@@ -126,6 +126,15 @@ class DatabaseController
         $stmt = $this->conn->prepare("SELECT * FROM student_visibilities AS st_v, student AS s WHERE st_v.student_id = s.id  AND st_v.test_key = :test_key AND st_v.id > :last_id ORDER BY st_v.id ASC");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":last_id", $last_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getStudentTestsTimestamp($test_key, $student_id)
+    {
+        $stmt = $this->conn->prepare("SELECT start_time FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -147,7 +156,7 @@ class DatabaseController
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
-    
+
     public function updateTestActiveStatus($test_key, $newStatus)
     {
         $stmt = $this->conn->prepare("UPDATE test SET active=:active WHERE test_key LIKE :test_key");
@@ -155,7 +164,7 @@ class DatabaseController
         $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
     }
-    
+
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
@@ -175,7 +184,7 @@ class DatabaseController
         $stmt->bindParam(":surname", $surname);
         $stmt->execute();
         $result = $this->getTeacherByEmail($email);
-        if ($result){
+        if ($result) {
             return TRUE;
         } else {
             return FALSE;
@@ -248,6 +257,15 @@ class DatabaseController
         $stmt->execute();
     }
 
+    public function insertStudentTestsTimestamp($test_key, $student_id, $start_time)
+    {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (test_key, student_id, start_time) VALUES (:test_key, :student_id, :start_time)");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":start_time", $start_time);
+        $stmt->execute();
+    }
+
 
     /**
      * @return PDO
@@ -257,5 +275,3 @@ class DatabaseController
         return $this->conn;
     }
 }
-
-?>

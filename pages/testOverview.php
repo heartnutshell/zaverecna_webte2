@@ -84,6 +84,9 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
                     <th>Meno</th>
                     <th>Priezvisko</th>
                     <th>Stav</th>
+                    <? if ($test[0]["active"] == 0) : ?>
+                    <th>Vyhodnotiť</th>
+                    <? endif; ?>
                 </tr>
             </thead>
 
@@ -117,23 +120,23 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
     </section>
 
 </main>
-<?php include '../footer.php';?>
+<?php include '../footer.php'; ?>
 
 <script src="../js/api/teacher.js"></script>
 <script>
-// $(document).ready(() => {
+$(document).ready(() => {
 
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const test_key = urlParams.get("test_key");
+    const urlParams = new URLSearchParams(window.location.search);
+    const test_key = urlParams.get("test_key");
 
-//     updateNotifications(test_key);
-//     updateStudentsData(test_key);
+    updateNotifications(test_key);
+    updateStudentsData(test_key);
 
-//     setInterval(() => {
-//         updateNotifications(test_key);
-//         updateStudentsData(test_key);
-//     }, 3000);
-// })
+    setInterval(() => {
+        updateNotifications(test_key);
+        updateStudentsData(test_key);
+    }, 3000);
+})
 </script>
 </body>
 

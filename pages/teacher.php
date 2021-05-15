@@ -1,7 +1,5 @@
 <?php
 
-
-
 require_once __DIR__ . "/partials/Partial.php";
 require_once __DIR__ . "/../php/database/DatabaseController.php";
 require_once __DIR__ . "/../php/questions/CreateQuestion.php";
@@ -68,7 +66,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
                     <td>
                         <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
-                            <i class="bi bi-nut"></i>
+                            <i class="fas fa-cog"></i>
                         </a>
                     </td>
                 </tr>
@@ -82,7 +80,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
 
 </main>
-<?php include '../footer.php';?>
+<?php include '../footer.php'; ?>
 </body>
 
 </html>

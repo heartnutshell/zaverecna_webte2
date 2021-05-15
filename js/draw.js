@@ -1,6 +1,8 @@
+let cards = document.querySelectorAll(".card-body");
+
 const initCanvas = (id) => {
     return new fabric.Canvas(id, {
-        width: 400,
+        width: cards[0].offsetWidth-30,
         height: 400,
         backgroundColor: 'white',
         isDrawingMode: true,
@@ -45,6 +47,7 @@ document.querySelectorAll("canvas").forEach(item => {
 });
 
 
+
 can_ids.forEach(item => {
     const picker = document.getElementById(item+'color');
     const slider = document.getElementById(item+'size');
@@ -73,3 +76,14 @@ const loadDrawing = () => { //len na testovanie
 }
 
 let drawingSave;
+
+window.addEventListener("resize", () => { 
+    console.log('not ass')
+    can_ids.forEach( (item) => {
+        console.log('ass');   
+        canvases[item].setWidth(cards[0].offsetWidth-30);
+             
+        canvases[item].requestRenderAll();
+        
+    })
+}, false);
