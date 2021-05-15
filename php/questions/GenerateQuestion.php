@@ -14,93 +14,91 @@ class GenerateQuestion
 
     public function generateSelect($question) {
         echo '
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                 <div class="card-body">';
-                    $answers = $question[0]["correct_answer"];
-                    $decoded = json_decode($answers, true);
-                    $keys = array_keys($decoded);
-                    foreach ($keys as $key){
-                        echo '<input type="checkbox" class="output" name="'.$question[0]["id"].'_'.$key.'">'.$key.'<br>';
-                    }
-                    echo '
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
+        foreach ($keys as $key){
+            echo '<div class="form-check pt-2"><input type="checkbox" class="output form-check-input" name="'.$question["id"].'_'.$key.'" id="'.$question["id"].'_'.$key.'">';
+            echo '<label class="form-check-label" for="'.$question["id"].'_'.$key.'">'.$key.'</label></div>';
+        }
+        echo '
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
 
     public function generateText($question) {
         echo '
-            <div class="card mb-3">
+            <div class="card bg-secondary">
                 <div class="card-body">
-                    <textarea class="output" name="'.$question[0]["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
+                    <textarea class="output form-control" name="'.$question["id"].'" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
                 </div>
+                <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>';
     }
 
     public function generateConnect($question) {
         echo '
-            <div class="card">';
-                $answers = $question[0]["correct_answer"];
-                $decoded = json_decode($answers, true);
-                $keys = array_keys($decoded);
+            <div class="card bg-secondary">';
+        $answers = $question["correct_answer"];
+        $decoded = json_decode($answers, true);
+        $keys = array_keys($decoded);
 
-                $left_answers = array();
-                $right_answers = array();
+        $left_answers = array();
+        $right_answers = array();
 
-                // rozdelenie na polia
-                foreach ($keys as $key){
-                    array_push($left_answers, $key);
-                    array_push($right_answers, $decoded[$key]);
-                }
+        // rozdelenie na polia
+        foreach ($keys as $key){
+            array_push($left_answers, $key);
+            array_push($right_answers, $decoded[$key]);
+        }
 
-                shuffle($right_answers);
+        shuffle($right_answers);
 
-                    // Lava cast
-                echo '<div class="row"><div class="card-body col-6">';
-                foreach ($left_answers as $answer){
-                    echo $answer."<br>";
-                }
-                echo '</div>';
-
-                // Prava cast
-                echo '<div class="card-body col-6">';
-                foreach ($left_answers as $answer){
-                    echo '<select class="output" name="'.$question[0]["id"].'_'.$answer.'">';
-                    foreach ($right_answers as $option) {
-                        echo '
+        // cela cast
+        echo '<div class="card-body">';
+        foreach ($left_answers as $answer){
+            echo "<div class='row p-1'><div class='col'>".$answer."</div>";
+            echo '<div class="col"><select class="output form-select" name="'.$question["id"].'_'.$answer.'">';
+            foreach ($right_answers as $option) {
+                echo '
                         <option class="output" value="'.$option.'">' . $option . '</option>
                         ';
-                    }
-                    echo '</select><br>';
+            }
+            echo '</select></div></div>';
+        }
+        echo '</div>';
 
-                }
-                echo '</div></div>';
 
-                echo'
+        echo'
+            <input type="hidden" value="1" name="'."{$question['id']}".'_hidden">
             </div>
         ';
     }
 
     public function generateDraw($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
         echo '
-            <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span><br>
-                    <input value="#000000" id="colorPicker" data-jscolor="{closeButton:true, closeText:"Close"}">
-                    <input type="range" min="1" max="100" value="1" step="1" id="sizeSlider" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
-                    <output id="range-num">1</output>      
+            <div class="card bg-secondary">
+                    <div class="card-header row">
+                        <input class="col" value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <div class="col">
+                            <input type="range" min="1" max="99" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
+                            <output id="range-num">1</output>    
+                        </div>
+                        <button type="button" class="btn btn-dark col" onclick="clearCanvas()" id="'.$question_id.'-drawclear">Clear</button>  
+                    </div>
+                    <div class="card-body">
+                        <canvas id="'.$question_id.'-draw"></canvas>
+                    </div>
+                    <div class="card-footer">
+                        <input type="file" name="'.$question_id.'_upload" id="'.$question_id.'_upload" class="form-control">
+                    </div>
+                    <input type="hidden" id="'.$question_id.'" value="" name="'.$question_id.'">
+                    <input type="hidden" value="1" name="'.$question_id.'_hidden">
                 </div>
-                <div class="card-body">
-                    <canvas id="'.$question_id.'"></canvas>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" onclick="clearCanvas()" id="clear">Clear</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="saveDrawing()" id="save">Save</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="loadDrawing()" id="save">Load last Save</button>
-                </div>
-            </div>
         ';
         //treba includnut v teste
         //<script src="../../js/api/studentAnswer.js"></script>
@@ -108,20 +106,16 @@ class GenerateQuestion
     }
 
     public function generateEquation($question_id) {
-        $result = $this->databaseController->getQuestionById($question_id);
-        $question = $result[0]['question'];
         echo'
-            <div class="card mb-3">
-                <div class="card-header">
-                    <span>'.$question.'</span>
-                </div>
-                <div class="card-body">
-                    <math-field class="mathfield" smartMode="true" virtual-keyboard-mode="manual" id="'.$question_id.'"></math-field>
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-outline-primary" id="save" onclick="saveMath()">Save</button>
-                    <button type="button" class="btn btn-outline-primary" id="load" onclick="loadMath()">Load</button>
-                </div>
+            <div class="card bg-secondary">
+                    <div class="card-body">
+                        <math-field id="mf-'.$question_id.'" class="mathfield" smartMode="true" virtual-keyboard-mode="manual"></math-field>
+                    </div>
+                    <div class="card-footer">
+                        <input type="hidden" id='.$question_id.' name="'.$question_id.'">
+                        <input type="hidden" value="1" name="'.$question_id.'_hidden">
+                        <input type="file" name="'.$question_id.'_upload" id="'.$question_id.'_upload" class="form-control">
+                    </div>
             </div>
         ';
         //treba includnut v teste

@@ -130,6 +130,33 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentTestsTimestamp($test_key, $student_id) {
+        $stmt = $this->conn->prepare("SELECT start_time FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getCsv()
+    {
+        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/get/zaverecna_webte2/csv/vysledky.csv'
+                                        FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
+                                        LINES TERMINATED BY '\n'
+                                        FROM student_tests
+        JOIN student ON student_tests.student_id = student.id");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getStudentTest($test_key, $student_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // UPDATE
     public function updateCompletedTestPoints($test_key, $student_id, $points)
     {
@@ -145,6 +172,23 @@ class DatabaseController
         $stmt = $this->conn->prepare("UPDATE student_answers SET is_correct=:is_correct WHERE id LIKE :id");
         $stmt->bindParam(":is_correct", $is_correct);
         $stmt->bindParam(":id", $id);
+        $stmt->execute();
+    }
+    
+    public function updateTestActiveStatus($test_key, $newStatus)
+    {
+        $stmt = $this->conn->prepare("UPDATE test SET active=:active WHERE test_key LIKE :test_key");
+        $stmt->bindParam(":active", $newStatus);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+    }
+
+    public function updateStudentTest($test_key, $student_id, $end_time, $points) {
+        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time, completed=1, points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt->bindParam(":end_time", $end_time);
+        $stmt->bindParam(":points", $points);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
         $stmt->execute();
     }
     
@@ -226,6 +270,25 @@ class DatabaseController
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":visibility", $visibility);
         $stmt->bindParam(":timestamp", $time);
+        $stmt->execute();
+    }
+
+    public function insertStudentAnswerWithPoints($student_id, $test_key, $question_id, $answer, $points)
+    {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_answers (student_id, test_key, question_id, answer, points) VALUES (:student_id, :test_key, :question_id, :answer, :points)");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->bindParam(":answer", $answer);
+        $stmt->bindParam(":points", $points);
+        $stmt->execute();
+    }
+
+    public function insertStudentTestsTimestamp($test_key, $student_id, $start_time) {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (test_key, student_id, start_time) VALUES (:test_key, :student_id, :start_time)");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":start_time", $start_time);
         $stmt->execute();
     }
 
