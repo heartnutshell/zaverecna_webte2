@@ -44,15 +44,15 @@ $ctrl = new DatabaseController();
                 if(isset($_GET['error'])) {
                     switch ($_GET['error']) {
                         case "testAlreadyCompleted":
-                        {
-                            echo "Test bol ukončený a nie je možné ho vyplniť znova!";
-                            break;
-                        }
+                            {
+                                echo "Test bol ukončený a nie je možné ho vyplniť znova!";
+                                break;
+                            }
                         case "wrong_name":
-                        {
-                            echo "Zadané meno sa nezhoduje s menom študenta v databáze!";
-                            break;
-                        }
+                            {
+                                echo "Zadané meno sa nezhoduje s menom študenta v databáze!";
+                                break;
+                            }
                         case "outOfTime":
                             {
                                 if (isset($_GET['student_id']) && isset($_GET['test_key'])) {

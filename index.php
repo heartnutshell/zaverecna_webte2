@@ -33,6 +33,17 @@
         </nav>
 
         <div class="container page-content">
+            <?php
+                if(isset($_GET['sent'])){
+                    if($_GET['sent'] == 1){
+                        echo'
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <span>Test bol úspečne odoslaný!</span>
+                        </div>';
+                    }
+                }
+            ?>
             <div class="other-center">
                     <a type="button" class="btn btn-primary btn-lg m-5" href="student.php">Vyplniť test</a>
                     <a type="button" class="btn btn-primary btn-lg m-5" href="login.php">Prihlásiť sa ako učitel</a>

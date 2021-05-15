@@ -128,4 +128,4 @@ foreach ($ids as $question_id){
 
 $databaseController->updateStudentTest($_POST["test_key"], $_POST["student_id"], $end_time, $total_points);
 
-header('Location: index.php');
+header('Location: index.php?sent=1');

@@ -4,40 +4,7 @@ require_once 'php/database/DatabaseController.php';
 
 $db = new DatabaseController;
 
-    if(isset($_POST['id'])){
-        try {
-                   
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $surname = $_POST['surname'];
-            $test = $db->getTestByKey($_POST['test_key']);
-            if($test == NULL || $test[0]['active'] == 0){
-                $message = "Zlý kód testu alebo zadaný test je neaktívny.";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            } else {
-                $result = $db->getStudentByID($id);
 
-                if ($result == NULL){
-                    //treba pridat studenta
-                    $db->insertStudent($id, $name, $surname);
-                    //mozeme spustit test
-
-                } else {
-                    if($result[0]["name"] != $_POST["name"] || $result[0]["surname"] != $_POST["surname"]){
-                        header("Location: oops.php?error=wrong_name");
-                        exit();
-                    }
-                    //student uz existuje netreba ho znovba pridat
-                    //mozeme stupistit test
-                }
-                header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
-            }
-
-
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
 
 ?>
 
@@ -83,6 +50,51 @@ $db = new DatabaseController;
         </nav>
 
         <div class="container page-content">
+
+            <?php
+            
+            if(isset($_POST['id'])){
+                try {
+                           
+                    $id = $_POST['id'];
+                    $name = $_POST['name'];
+                    $surname = $_POST['surname'];
+                    $test = $db->getTestByKey($_POST['test_key']);
+                    if($test == NULL || $test[0]['active'] == 0){
+                        echo '
+                        <div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <span>Zadaný test neexistuje alebo nie je aktívny.</span>
+                        </div>';
+                    } else {
+                        $result = $db->getStudentByID($id);
+        
+                        if ($result == NULL){
+                            //treba pridat studenta
+                            $db->insertStudent($id, $name, $surname);
+                            //mozeme spustit test
+                            header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
+                        } else {
+                            if($result[0]["name"] != $_POST["name"] || $result[0]["surname"] != $_POST["surname"]){
+                                echo '
+                                <div class="alert alert-dismissible alert-danger">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <span>Zadané meno sa nezhoduje s menom študenta v databáze!</span>
+                                </div>';
+                            } else {
+                                header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
+                            }
+                        }
+                        
+                    }
+        
+        
+                } catch(PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
+            
+            ?>
 
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row other-center">  
                 <div class="form-group col">
