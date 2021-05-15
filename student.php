@@ -21,17 +21,16 @@ $db = new DatabaseController;
                     //treba pridat studenta
                     $db->insertStudent($id, $name, $surname);
                     //mozeme spustit test
-                    header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
+
                 } else {
-                    if($id == $result[0]['id'] && $name == $result[0]['name'] && $surname == $result[0]['surnname']){
-                        //student uz existuje netreba ho znovba pridat
-                        //mozeme stupistit test
-                        header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
-                    } else {
-                        $message = "Študent s daným id už existuje pod iným menom.";
-                        echo "<script type='text/javascript'>alert('$message');</script>";        
+                    if($result[0]["name"] != $_POST["name"] || $result[0]["surname"] != $_POST["surname"]){
+                        header("Location: oops.php?error=wrong_name");
+                        exit();
                     }
-                } 
+                    //student uz existuje netreba ho znovba pridat
+                    //mozeme stupistit test
+                }
+                header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
             }
 
 
@@ -70,13 +69,13 @@ $db = new DatabaseController;
                 <div class="container-fluid">
 
 
-                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <div class="navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="title" href="index.php"><i class="bi bi-house-fill"></i></a>
+                        <a class="title" href="index.php"><i class="bi bi-arrow-left-square-fill"></i></a>
                     </form>
                     </div>
                 </div>

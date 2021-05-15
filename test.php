@@ -18,9 +18,17 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
 
 $start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
 if($start_time) {
+    $current = $ctrl->getStudentTest($_GET['test_key'], $_GET['student_id']);
+    if ($current[0]['completed']) {
+        header("Location: oops.php?error=testAlreadyCompleted");
+        exit();
+    }
+    if(strtotime($start_time[0][0])+intval($time_limit) < time()){
+       header("Location: oops.php?error=outOfTime&test_key={$_GET['test_key']}&student_id={$_GET['student_id']}");
+       exit();
+    }
 } else {
     $ctrl->insertStudentTestsTimestamp($_GET['test_key'], $_GET['student_id'], date('Y-m-d H:i:s'));
-    $start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
 }
 
 ?>

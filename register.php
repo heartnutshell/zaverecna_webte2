@@ -56,7 +56,7 @@
                     <span class="title">Registrácia</span>
                 </header>
                 <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <div class="navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                         </li>

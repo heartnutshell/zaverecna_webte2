@@ -76,13 +76,13 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     <span class="title">Učitel</span>
                 </header>
                 <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarColor01">
+                    <div class="navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="title" href="index.php"><i class="bi bi-house-fill"></i></a>
+                        <a class="title" href="index.php"><i class="bi bi-arrow-left-square-fill"></i></a>
                     </form>
                     </div>
                 </div>

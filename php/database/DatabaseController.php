@@ -149,6 +149,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentTest($test_key, $student_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // UPDATE
     public function updateCompletedTestPoints($test_key, $student_id, $points)
     {
@@ -176,7 +184,7 @@ class DatabaseController
     }
 
     public function updateStudentTest($test_key, $student_id, $end_time, $points) {
-        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time AND completed=1 AND points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time, completed=1, points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
         $stmt->bindParam(":end_time", $end_time);
         $stmt->bindParam(":points", $points);
         $stmt->bindParam(":test_key", $test_key);
