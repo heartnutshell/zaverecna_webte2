@@ -27,7 +27,8 @@ const clearCanvas = (id) => {
 
 const saveDrawing = (id) => {
     drawingSave = canvases[id].toSVG()
-    console.log(drawingSave);
+    const hidden = document.getElementById(id.split("-")[0]);
+    hidden.value = drawingSave;
     //insertDrawAnswer(drawingSave);
 }
 
