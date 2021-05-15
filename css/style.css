@@ -106,11 +106,15 @@ body {
 }
 .nav-link {
     font-size: 1.2rem;
+    color: white;
 }
 .logout{
     opacity: 1;
     color: white;
     text-transform: uppercase;
+}
+.logout :hover {
+    color: red !important;
 }
 @media screen and (max-width: 768px){
     #time_left {

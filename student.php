@@ -46,7 +46,8 @@ $db = new DatabaseController;
         <link rel="icon" type="image/png" href="img/favicon.png" />
         <!-- CSS --> 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">    
+        <link href="css/style.css" rel="stylesheet">
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'>
         <!-- JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -69,7 +70,7 @@ $db = new DatabaseController;
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="btn btn-secondary my-2 my-sm-0" href="index.php">Späť</a>
+                        <a class="title" href="index.php"><i class="bi bi-house-fill"></i></a>
                     </form>
                     </div>
                 </div>

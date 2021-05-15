@@ -61,7 +61,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
                 </td>
             </tr>
             <tr>
-                <th>Zapnúť/vypnúť test</th>
+                <th>Zapnúť/vypnúť test:</th>
                 <td id="test_status"
                     onclick="toggleTestStatus(event, <?= $test[0]['active'] ?> , '<?= $_GET['test_key'] ?>' )">
                     <button class="btn btn-warning">
@@ -121,19 +121,19 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
 <script src="../js/api/teacher.js"></script>
 <script>
-// $(document).ready(() => {
+$(document).ready(() => {
 
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const test_key = urlParams.get("test_key");
+    const urlParams = new URLSearchParams(window.location.search);
+    const test_key = urlParams.get("test_key");
 
-//     updateNotifications(test_key);
-//     updateStudentsData(test_key);
+    updateNotifications(test_key);
+    updateStudentsData(test_key);
 
-//     setInterval(() => {
-//         updateNotifications(test_key);
-//         updateStudentsData(test_key);
-//     }, 3000);
-// })
+    setInterval(() => {
+        updateNotifications(test_key);
+        updateStudentsData(test_key);
+    }, 3000);
+})
 </script>
 </body>
 
