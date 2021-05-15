@@ -36,8 +36,7 @@ class Partial
                 <div class='collapse navbar-collapse' id='navbarColor01'>
                     <ul class='navbar-nav me-auto'>
                         <li class='nav-item'><a class='nav-link' href='teacher.php'>Prehľad</a></li>
-                        <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>
-                        
+                        <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>                   
                     </ul>
                     <a class='nav-link logout' href='logout.php'>Odhlásiť</a>
                 </div>
