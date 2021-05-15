@@ -21,6 +21,7 @@ $partial->createHeader('Učitel | Vytváranie testu');
 
     <div id="createQuestionbuttons" class="third-center">
         <h3 class="typ_otazky">Vyberte otázku, ktorú chcete pridať:</h3>
+
         <p id="createOpenQ" class="btn btn-primary" data-type-question="open">Krátka odpoveď</p>
         <p id="createChooseQ" class="btn btn-primary" data-type-question="choose">Výber správnej
             odpovede</p>

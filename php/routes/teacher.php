@@ -31,7 +31,10 @@ if ($_REQUEST["type"] == "teacher-test") {
             echo json_encode($db->getStudentsVisibility($_POST["test_key"], $_POST["last_id"]));
             break;
         case "get-students":
-            echo json_encode($db->getStudentsByTestKey($_POST["test_key"], $_POST["last_id"]));
+            $students = $db->getStudentsByTestKey($_POST["test_key"], $_POST["last_id"]);
+            $test = $db->getTestByKey($_POST["test_key"]);
+            $result = ["students" => $students, "test" => $test];
+            echo json_encode($result);
             break;
         default:
             break;
@@ -57,4 +60,3 @@ if ($_REQUEST["type"] == "tests") {
             break;
     }
 }
-?>

@@ -1,7 +1,5 @@
 <?php
 
-
-
 require_once __DIR__ . "/partials/Partial.php";
 require_once __DIR__ . "/../php/database/DatabaseController.php";
 require_once __DIR__ . "/../php/questions/CreateQuestion.php";
@@ -82,7 +80,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
 
 </main>
-<?php include '../footer.php';?>
+<?php include '../footer.php'; ?>
 </body>
 
 </html>

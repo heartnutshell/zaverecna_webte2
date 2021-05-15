@@ -84,6 +84,9 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
                     <th>Meno</th>
                     <th>Priezvisko</th>
                     <th>Stav</th>
+                    <? if ($test[0]["active"] == 0) : ?>
+                    <th>Vyhodnotiť</th>
+                    <? endif; ?>
                 </tr>
             </thead>
 
@@ -117,7 +120,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
     </section>
 
 </main>
-<?php include '../footer.php';?>
+<?php include '../footer.php'; ?>
 
 <script src="../js/api/teacher.js"></script>
 <script>
