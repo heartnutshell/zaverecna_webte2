@@ -1,8 +1,8 @@
 <?php
+date_default_timezone_set("Europe/Bratislava");
+
 include_once "php/questions/GenerateQuestion.php";
-
 include_once "php/database/DatabaseController.php";
-
 
 
 $ctrl = new DatabaseController();
@@ -15,6 +15,13 @@ if (isset($_GET['test_key'])) {
 $student = $ctrl->getStudentByID($_GET['student_id']);
 $test = $ctrl->getTestByKey($_GET['test_key']);
 $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
+
+$start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
+if($start_time) {
+} else {
+    $ctrl->insertStudentTestsTimestamp($_GET['test_key'], $_GET['student_id'], date('Y-m-d H:i:s'));
+    $start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
+}
 
 ?>
 <html lang="sk">
@@ -48,9 +55,10 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     <div class="container page-content">
 
     <?php
+        echo "<p id='time_left'></p>";
         echo "<form method='post' action='evaluate.php' class='test-form' enctype='multipart/form-data'>";
-        echo "<input type='hidden' name='test_key' value='{$_GET['test_key']}'>";
-        echo "<input type='hidden' name='student_id' value='{$_GET['student_id']}'>";
+        echo "<input type='hidden' id='test_key' name='test_key' value='{$_GET['test_key']}'>";
+        echo "<input type='hidden' id='student_id' name='student_id' value='{$_GET['student_id']}'>";
     $ids = "";
     foreach($questions as $index => $question){
         $ids = $ids.$question['id'].";";
@@ -89,7 +97,7 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
         }
     }
     echo "<input type='hidden' value={$ids} name='ids'>";
-    echo "<input type='submit' class='btn btn-primary' value='Odoslať'>";
+    echo "<input type='submit' id='submit_test' class='btn btn-primary' value='Odoslať'>";
     echo "</form>";
     ?>
 
@@ -101,6 +109,7 @@ $questions = $ctrl->getQuestionsByTestKey($_GET['test_key']);
     <script src="js/api/studentAnswer.js"></script>
     <script src="js/math.js"></script>
     <script src="js/resize.js"></script>
+    <script src="js/countdown.js"></script>
 
     </body>
 

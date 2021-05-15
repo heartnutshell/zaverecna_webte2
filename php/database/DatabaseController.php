@@ -130,6 +130,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
+    public function getStudentTestsTimestamp($test_key, $student_id) {
+        $stmt = $this->conn->prepare("SELECT start_time FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     // UPDATE
     public function updateCompletedTestPoints($test_key, $student_id, $points)
     {
@@ -245,6 +253,14 @@ class DatabaseController
         $stmt->bindParam(":question_id", $question_id);
         $stmt->bindParam(":answer", $answer);
         $stmt->bindParam(":points", $points);
+        $stmt->execute();
+    }
+
+    public function insertStudentTestsTimestamp($test_key, $student_id, $start_time) {
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO student_tests (test_key, student_id, start_time) VALUES (:test_key, :student_id, :start_time)");
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":start_time", $start_time);
         $stmt->execute();
     }
 

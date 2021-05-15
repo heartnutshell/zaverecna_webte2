@@ -13,4 +13,7 @@ source.addEventListener('evt', function(e) {
     let seconds = ((e.data - (hours * 3600))) - (minutes*60)
     time_left.innerHTML = hours.toString().padStart(2, "0")+":"+minutes.toString().padStart(2, "0")+
         ":"+seconds.toString().padStart(2, "0")
+    if (e.data <= 300) {
+        time_left.style.backgroundColor = '#ff4136';
+    }
 }, false)

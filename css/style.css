@@ -1,3 +1,4 @@
+*{box-sizing: border-box;}
 /*DRAW*/
 .form-range
 {
@@ -22,19 +23,18 @@ math-field {
     background-color: #fff;
 }
 /*MAIN*/
+nav {
+    text-align: center;
+    height: 10vh;
+}
 footer {
     position: relative !important;
     padding: 10px;
     bottom: 0;
     width: 100%;
-    min-height: 5vh;
+    height: 10vh;
     text-align: center;
     color: white;
-    margin-top: 10px;
-}
-header {
-    text-align: center;
-    min-height: 5vh;
 }
 .center-text {
     text-align: center;
@@ -43,7 +43,7 @@ header {
     font-weight: bold;
 }
 .center {
-    position: flex !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }
@@ -74,7 +74,7 @@ body {
 }
 .page-content{
     position: relative;
-    min-height: 87.8vh;
+    min-height: 80vh;
 }
 .test-form {
     max-width: 85vh;
@@ -106,7 +106,35 @@ body {
     color: white;
     text-transform: uppercase;
 }
-
+@media screen and (max-width: 768px){
+    #time_left {
+        position: fixed;
+        top: 1%;
+        right: 1%;
+        z-index: 100;
+        background-color: #555;
+        color: white;
+        padding: 7.5px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }   
+}
+@media screen and (min-width: 769px){
+    #time_left {
+        position: fixed;
+        top: 1%;
+        right: 1%;
+        z-index: 100;
+        background-color: #555;
+        color: white;
+        padding: 7.5px;
+        border-radius: 5px;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+}
 /*TEACHER*/
 .test.active {
     background-color: #28b62c;

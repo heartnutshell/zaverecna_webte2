@@ -68,7 +68,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
                     <td>
                         <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
-                            <i class="bi bi-nut"></i>
+                            <i class="fas fa-cog"></i>
                         </a>
                     </td>
                 </tr>
