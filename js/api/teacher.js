@@ -129,6 +129,7 @@ const toggleTestStatus = (event, status, test_key) => {
         },
         success: (data) => {
             event.target.removeAttribute("disabled");
+            location.reload();
         },
         error: (xhr, status, err) => {
             console.log(xhr);

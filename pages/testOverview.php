@@ -41,7 +41,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 <main class="container page-content">
 
     <section>
-        <h4>Info</h4>
+        <h4 class="part">Informácie o teste</h4>
         <table class="table">
             <tr>
                 <td>Kód testu : </td>

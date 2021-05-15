@@ -13,17 +13,16 @@ $partial->createHeader('Učitel | Vytváranie testu');
 ?>
 
     <main class="container page-content">
-        <h1>Test</h1>
 
         <div id="createQuestionbuttons">
-            <p id="createOpenQ" class="btn btn-outline-primary" data-type-question="open">Krátka odpoveď</p>
-            <p id="createChooseQ" class="btn btn-outline-primary" data-type-question="choose">Výber správnej
+            <p id="createOpenQ" class="btn btn-primary btn-sm" data-type-question="open">Krátka odpoveď</p>
+            <p id="createChooseQ" class="btn btn-primary btn-sm" data-type-question="choose">Výber správnej
                 odpovede</p>
-            <p id="createConnectQ" class="btn btn-outline-primary" data-type-question="connect">Párovacia
+            <p id="createConnectQ" class="btn btn-primary btn-sm" data-type-question="connect">Párovacia
                 otázka</p>
-            <p id="createDrawQ" class="btn btn-outline-primary" data-type-question="draw">Kresliacia
+            <p id="createDrawQ" class="btn btn-primary btn-sm" data-type-question="draw">Kresliacia
                 otázky</p>
-            <p id="createMathQ" class="btn btn-outline-primary" data-type-question="math">Napísanie matematického
+            <p id="createMathQ" class="btn btn-primary btn-sm" data-type-question="math">Napísanie matematického
                 výrazu</p>
         </div>
 

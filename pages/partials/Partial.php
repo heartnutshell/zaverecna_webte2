@@ -27,18 +27,21 @@ class Partial
 
     <body>
         <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-            <div class='container-fluid'>
-                <span class='title'>Teacher interface</span>
+            <div class='container'>
+                <span class='title'>Učitel</span>
                 <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
                     <span class='navbar-toggler-icon'></span>
                 </button>
                 <div class='collapse navbar-collapse' id='navbarColor01'>
                     <ul class='navbar-nav me-auto'>
-                        <li class='nav-item'><a class='nav-link' href='teacher.php'>Home</a></li>
-                        <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>
-                        <li class='nav-item'><a class='nav-link' href='logout.php'>Logout</a></li>
+                        <li class='nav-item'><a class='btn btn-outline-light' href='teacher.php'>Prehľad</a></li>
+                        <li class='nav-item'>     </li>
+                        <li class='nav-item'><a class='btn btn-outline-light' href='createTest.php'>Vytvoriť test</a></li>
+                        
                     </ul>
+                    <a class='btn btn-secondary' href='logout.php'>Odhlásiť</a>
                 </div>
+                
             </div>
         </nav>
 

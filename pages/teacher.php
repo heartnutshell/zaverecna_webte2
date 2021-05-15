@@ -25,29 +25,28 @@ $tests = $db->getAllTeacherTests($teacher_id);
 ?>
 
 <main class="container page-content">
-    <h1>Teacher home</h1>
 
     <section>
-        <h4>Info</h4>
+        <h4 class="part">Informácie o konte</h4>
         <p><?= "ID : $teacher_id <br> Meno : $name <br>Priezvisko : $surname"; ?></p>
     </section>
 
     <section>
-        <h4>Moje testy</h4>
+        <h4 class="part">Moje testy</h4>
 
         <?php if (count($tests) == 0) : ?>
 
         <h6>Žiadne testy</h6>
 
         <?php else : ?>
-        <table>
+        <table class="table table-hover">
 
             <thead>
                 <tr>
-                    <th>Kód testu</th>
-                    <th>Časový limit</th>
-                    <th>Max bodov</th>
-                    <th>Status</th>
+                    <th scope="col">Kód testu</th>
+                    <th scope="col">Časový limit</th>
+                    <th scope="col">Max bodov</th>
+                    <th scope="col">Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -69,7 +68,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
                     <td>
                         <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
-                            <i class="bi bi-three-dots"></i>
+                            <i class="bi bi-nut"></i>
                         </a>
                     </td>
                 </tr>

@@ -37,6 +37,9 @@ header {
     text-align: center;
     min-height: 5vh;
 }
+.center-text {
+    text-align: center;
+}
 .center {
     position: flex !important;
     align-items: center;
@@ -60,6 +63,7 @@ body {
     color: white;
     font-size: xx-large;
     font-weight: bold;
+    margin-right: 20px;
 }
 .page-content{
     position: relative;
@@ -73,10 +77,31 @@ body {
 .btn{
     margin-top: 0px;
 }
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.part {
+    background-color: #158cba;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-transform: uppercase;
+}
 /*TEACHER*/
 .test.active {
-    background-color: rgb(44, 199, 78);
+    background-color: #28b62c;
+    color: white;
+    padding: 7.5px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
 }
 .test.not-active {
-    background-color: rgb(153, 31, 31);
+    background-color: #ff4136;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
 }
