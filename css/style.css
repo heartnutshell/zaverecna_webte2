@@ -1,7 +1,19 @@
-*{box-sizing: border-box;}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+* {
+    box-sizing: border-box;
+}
 /*DRAW*/
-.form-range
-{
+.form-range {
     width: 180px !important;
 }
 .card-body {
@@ -58,7 +70,7 @@ footer {
     padding: 20px 0px;
 }
 .intro {
-    font-size:x-large;
+    font-size: x-large;
     font-weight: bolder;
 }
 body {
@@ -78,7 +90,8 @@ body {
     font-weight: bold;
     margin-right: 10px;
 }
-.page-content{
+
+.page-content {
     position: relative;
     min-height: 80vh;
 }
@@ -87,7 +100,7 @@ body {
     margin: 0 auto;
     padding: 20px 0px;
 }
-.btn{
+.btn {
     margin-top: 0px;
 }
 .container {
@@ -108,7 +121,8 @@ body {
     font-size: 1.2rem;
     color: white;
 }
-.logout{
+
+.logout {
     opacity: 1;
     color: white;
     text-transform: uppercase;
@@ -118,9 +132,9 @@ body {
 }
 .doc {
     font-size: 1.2rem;
-    color:cornflowerblue;
+    color: cornflowerblue;
 }
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     #time_left {
         position: fixed;
         top: 1%;
@@ -132,9 +146,10 @@ body {
         border-radius: 5px;
         font-weight: bold;
         text-align: center;
-    }   
+
+    }
 }
-@media screen and (min-width: 769px){
+@media screen and (min-width: 769px) {
     #time_left {
         position: fixed;
         top: 1%;
