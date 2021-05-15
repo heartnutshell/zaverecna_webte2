@@ -69,14 +69,12 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    /*
-    public function getAllCompletedTests(): array
+    public function getAllStudentTests(): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM completed_tests");
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests");
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    */
 
     public function getStudentTestsByTestKey($test_key): array
     {
@@ -177,6 +175,17 @@ FROM student_tests
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
+
+    public function updateStudentTest($test_key, $student_id, $end_time, $points) {
+        $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time AND completed=1 AND points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
+        $stmt->bindParam(":end_time", $end_time);
+        $stmt->bindParam(":points", $points);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->execute();
+    }
+
+
     // INSERT
     public function insertStudent($id, $name, $surname)
     {

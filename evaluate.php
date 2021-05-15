@@ -3,21 +3,21 @@
 require_once __DIR__ . "/php/database/DatabaseController.php";
 require_once __DIR__ . "/php/questions/QuestionType.php";
 
+date_default_timezone_set("Europe/Bratislava");
+$end_time = time();
+
 $databaseController = new DatabaseController();
 
-
 $post_keys = array_keys($_POST);
-
 $ids = explode(";", $_POST["ids"]);
-
-$_POST["27"] = str_replace("\"", "'", $_POST["27"]);
+$total_points = 0;
 
 foreach ($ids as $question_id){
 
     if ($question_id == "")
         continue;
 
-    $total_points = 0;
+    $question_points = 0;
     $student_answer = array();
     $current_question = $databaseController->getQuestionById($question_id);
 
@@ -28,8 +28,8 @@ foreach ($ids as $question_id){
             $decoded = json_decode($current_answers, true);
             if ($decoded != null){
                 foreach ($decoded as $answer){
-                    if ($_POST[$question_id] == $answer){
-                        $total_points = $current_question[0]["points"];
+                    if (!strcasecmp($_POST[$question_id],$answer)){
+                        $question_points = $current_question[0]["points"];
                         break;
                     }
                 }
@@ -45,7 +45,7 @@ foreach ($ids as $question_id){
                 if (isset($_POST[$post_key])){
                     if ($current_answers[$array_key]){
                         // pripocitanie bodov
-                        $total_points += $points_for_one;
+                        $question_points += $points_for_one;
                     }else{
                         // odpocitanie bodov
                         // $total_points -= $points_for_one;
@@ -54,7 +54,7 @@ foreach ($ids as $question_id){
                 }else{
                     if (!$current_answers[$array_key]){
                         // pripocitanie bodov
-                        $total_points += $points_for_one;
+                        $question_points += $points_for_one;
                     }else{
                         // odpocitanie bodov
                         // $total_points -= $points_for_one;
@@ -75,7 +75,7 @@ foreach ($ids as $question_id){
                 $post_key = str_replace(" ", "_", $post_key);
                 if ($current_answers[$array_key] == $_POST[$post_key]){
                     // pripocitanie bodov
-                    $total_points += $points_for_one;
+                    $question_points += $points_for_one;
                 }else{
                     // odpocitanie bodov
                     // $total_points -= $points_for_one;
@@ -86,9 +86,32 @@ foreach ($ids as $question_id){
             break;
         case QuestionType::MATH:
         case QuestionType::DRAW:
-            if (isset($_POST[$question_id."_upload"])){
-                $student_answer["answer"] = $_POST[$question_id."_upload"];
+            if ($_FILES[$question_id."_upload"]["size"] > 0){
+
+                $target_dir = "uploadedAnswers/";
+                $target_file = $target_dir . basename($_FILES[$question_id."_upload"]["name"]);
+                $uploadOk = 1;
+                $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                if($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg") {
+                    $uploadOk = 0;
+                }
+
+                if ($_FILES[$question_id."_upload"]["size"] > 2000000) {
+                    $uploadOk = 0;
+                }
+
+                if ($uploadOk == 0) {
+                } else {
+                    // file name from studenID and questionID?
+                    if (move_uploaded_file($_FILES[$question_id."_upload"]["tmp_name"], $target_dir. $_POST["student_id"]."_".$question_id.".".$fileType)) {
+                    } else {
+                    }
+                }
+
+                $student_answer["answer"] = $_POST["student_id"]."_".$question_id.".".$fileType;
             }else{
+                $_POST[$question_id] = str_replace("\"", "'", $_POST[$question_id]);
                 $student_answer["answer"] = $_POST[$question_id];
             }
             break;
@@ -96,7 +119,11 @@ foreach ($ids as $question_id){
             echo "wrong question type";
     }
 
+    $total_points += $question_points;
+
     if (isset($student_answer)){
-        $databaseController->insertStudentAnswerWithPoints($_POST["student_id"], $_POST["test_key"], $current_question[0]["id"], json_encode($student_answer), $total_points);
+        $databaseController->insertStudentAnswerWithPoints($_POST["student_id"], $_POST["test_key"], $current_question[0]["id"], json_encode($student_answer), $question_points);
     }
 }
+
+$databaseController->updateStudentTest($_POST["test_key"], $_POST["student_id"], $end_time, $total_points);
