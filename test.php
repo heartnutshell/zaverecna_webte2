@@ -30,8 +30,10 @@ if($start_time) {
     }
 } else {
     $ctrl->insertStudentTestsTimestamp($_GET['test_key'], $_GET['student_id'], date('Y-m-d H:i:s'));
+}
 
 ?>
+<!DOCTYPE html>
 <html lang="sk">
 
 <head>
@@ -66,53 +68,53 @@ if($start_time) {
     <div class="container page-content">
 
 
-    <?php
-        echo "<p id='time_left'></p>";
-        echo "<form method='post' action='evaluate.php' class='test-form' enctype='multipart/form-data'>";
-        echo "<input type='hidden' id='test_key' name='test_key' value='{$_GET['test_key']}'>";
-        echo "<input type='hidden' id='student_id' name='student_id' value='{$_GET['student_id']}'>";
+        <?php
+            echo "<p id='time_left'></p>";
+            echo "<form method='post' action='evaluate.php' class='test-form' enctype='multipart/form-data'>";
+            echo "<input type='hidden' id='test_key' name='test_key' value='{$_GET['test_key']}'>";
+            echo "<input type='hidden' id='student_id' name='student_id' value='{$_GET['student_id']}'>";
 
-    $ids = "";
-    foreach($questions as $index => $question){
-        $ids = $ids.$question['id'].";";
-        $i = $index+1;
-        echo "<h4>$i. {$question['question']}</h4>";
-        switch ($question['type']) {
-            case "open":
-            {
-                $generator->generateText($question);
-                break;
-            }
-            case "choose":
-            {
-                $generator->generateSelect($question);
-                break;
-            }
-            case "connect":
-            {
-                $generator->generateConnect($question);
-                break;
-            }
-            case "draw":
-            {
-                $generator->generateDraw($question['id']);
-                break;
-            }
-            case "math":
-            {
-                $generator->generateEquation($question['id']);
-                break;
-            }
-            default:
-            {
-                break;
+        $ids = "";
+        foreach($questions as $index => $question){
+            $ids = $ids.$question['id'].";";
+            $i = $index+1;
+            echo "<h4>$i. {$question['question']}</h4>";
+            switch ($question['type']) {
+                case "open":
+                {
+                    $generator->generateText($question);
+                    break;
+                }
+                case "choose":
+                {
+                    $generator->generateSelect($question);
+                    break;
+                }
+                case "connect":
+                {
+                    $generator->generateConnect($question);
+                    break;
+                }
+                case "draw":
+                {
+                    $generator->generateDraw($question['id']);
+                    break;
+                }
+                case "math":
+                {
+                    $generator->generateEquation($question['id']);
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
             }
         }
-    }
-    echo "<input type='hidden' value={$ids} name='ids'>";
-    echo "<input type='submit' id='submit_test' class='btn btn-primary' value='Odoslať'>";
-    echo "</form>";
-    ?>
+        echo "<input type='hidden' value={$ids} name='ids'>";
+        echo "<input type='submit' id='submit_test' class='btn btn-primary' value='Odoslať'>";
+        echo "</form>";
+        ?>
 
     </div>
 
@@ -126,5 +128,4 @@ if($start_time) {
     <script src="js/api/pageVisibility.js"></script>
 
 </body>
-
 </html>
