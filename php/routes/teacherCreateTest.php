@@ -1,4 +1,4 @@
-<?
+<?php
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: https://wt100.fei.stuba.sk/zygarde/pages/teacher.php");
 }
