@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Europe/Bratislava");
 include_once "php/questions/GenerateQuestion.php";
 
 include_once "php/database/DatabaseController.php";
@@ -6,12 +7,31 @@ include_once "php/database/DatabaseController.php";
 $ctrl = new DatabaseController();
 $generator = new GenerateQuestion();
 
-if (isset($_GET['test_key'])) {
-    $test_key = $_GET['test_key'];
-}
+$student = $ctrl->getStudentByID($_GET['student_id']);
+$test = $ctrl->getTestByKey($_GET['test_key']);
 
-$student = $ctrl->getStudentByID("2315");
-$test = $ctrl->getTestByKey("OS2021");
+$time_limit = $test[0]['time_limit'];
+$finish_time = "";
+
+var_dump(intval($time_limit));
+
+$start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
+if($start_time) {
+   var_dump(strtotime($start_time[0][0]));
+   $finish_time = strtotime($start_time[0][0]) + intval($time_limit)*60;
+} else {
+    $ctrl->insertStudentTestsTimestamp($_GET['test_key'], $_GET['student_id'], date('Y-m-d H:i:s'));
+    $start_time = $ctrl->getStudentTestsTimestamp($_GET['test_key'], $_GET['student_id']);
+    $finish_time = strtotime($start_time[0][0]) + intval($time_limit)*60;
+}
+var_dump($finish_time);
+
+$time_left = date("H:i:s",$finish_time - strtotime($start_time[0][0]) - 3600);
+
+
+
+$currentTime = date('Y-m-d H:i:s');
+
 $questions = $ctrl->getQuestionsByTestKey("OS2021");
 
 ?>
@@ -34,10 +54,13 @@ $questions = $ctrl->getQuestionsByTestKey("OS2021");
     </head>
     <body>
     <?php
-        echo "<form method='post'>";
-        echo "<input type='hidden' name='test_key' value='{$_GET['test_key']}'>";
-        echo "<input type='hidden' name='student_id' value='{$_GET['student_id']}'>";
+        echo "<p id='time_left'></p>";
+        echo "<form method='post' action='evaluate.php'>";
+        echo "<input type='hidden' id='test_key' name='test_key' value='{$_GET['test_key']}'>";
+        echo "<input type='hidden' id='student_id' name='student_id' value='{$_GET['student_id']}'>";
+    $ids = "";
     foreach($questions as $question){
+        $ids = $ids.$question['id'].";";
         echo "{$question['question']}";
         switch ($question['type']) {
             case "open":
@@ -71,12 +94,13 @@ $questions = $ctrl->getQuestionsByTestKey("OS2021");
             }
         }
     }
-    echo "<input type='submit' class='btn btn-primary' value='Odoslať'>";
+    echo "<input type='hidden' value={$ids} name='ids'>";
+    echo "<input type='submit' id='submit_test' class='btn btn-primary' value='Odoslať'>";
     echo "</form>";
     ?>
     <script src="js/draw.js"></script>
     <script src="js/api/studentAnswer.js"></script>
     <script src="js/math.js"></script>
-
+    <script src="js/countdown.js"></script>
     </body>
 </html>
