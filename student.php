@@ -28,7 +28,7 @@ $db = new DatabaseController;
                         //mozeme stupistit test
                         header("Location: test.php?test_key={$_POST['test_key']}&student_id={$_POST['id']}");
                     } else {
-                        $message = "Študent s daným id už existuje. A má iné meno.";
+                        $message = "Študent s daným id už existuje pod iným menom.";
                         echo "<script type='text/javascript'>alert('$message');</script>";        
                     }
                 } 
