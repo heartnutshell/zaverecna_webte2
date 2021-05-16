@@ -58,7 +58,7 @@ class Partial
         require_once __DIR__ . "/../../php/session/Session.php";
 
         $session = new Session();
-        $session->sessionStart(0, "/", "wt86.fei.stuba.sk", true, true);
+        $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
         if (!isset($_SESSION["isLogged"])) {
             header("Location: ../login.php");
         }

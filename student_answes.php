@@ -1,4 +1,16 @@
 <?php
+
+require_once __DIR__ . "/../../php/session/Session.php";
+
+        $session = new Session();
+        $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
+        if (!isset($_SESSION["isLogged"])) {
+            header("Location: index.php");
+        }
+        if ($_SESSION["isLogged"] != true) {
+            header("Location: index.php");
+        }
+        
 include_once "php/database/DatabaseController.php";
 include_once "php/questions/QuestionType.php";
 
@@ -13,7 +25,7 @@ $test_key = $_GET["test_key"];
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>PDF</title>
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <!-- CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
