@@ -32,24 +32,6 @@ class Partial
         <title>$title</title>
         </head>
 
-        <body>
-            <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-                <div class='container'>
-                    <span class='title'>Učitel</span>
-                    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01'
-                        aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
-                        <span class='navbar-toggler-icon'></span>
-                    </button>
-                    <div class='collapse navbar-collapse' id='navbarColor01'>
-                        <ul class='navbar-nav me-auto'>
-                            <li class='nav-item'><a class='nav-link' href='teacher.php'>Prehľad</a></li>
-                            <li class='nav-item'><a class='nav-link' href='createTest.php'>Vytvoriť test</a></li>
-                        </ul>
-                        <a class='nav-link logout' href='logout.php'>Odhlásiť</a>
-
-                    </div>
-
-
     <body>
         <nav class='navbar navbar-dark navbar-expand-lg bg-primary'>
             <div class='container'>
@@ -76,7 +58,7 @@ class Partial
         require_once __DIR__ . "/../../php/session/Session.php";
 
         $session = new Session();
-        $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
+        $session->sessionStart(0, "/", "wt86.fei.stuba.sk", true, true);
         if (!isset($_SESSION["isLogged"])) {
             header("Location: ../login.php");
         }

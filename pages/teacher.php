@@ -37,6 +37,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
         <h6>Žiadne testy!</h6>
 
         <?php else : ?>
+        <div class="table-responsive">
         <table class="table table-hover">
 
             <thead>
@@ -74,6 +75,7 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
             </tbody>
         </table>
+        </div>
 
         <?php endif; ?>
     </section>

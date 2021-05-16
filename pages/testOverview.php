@@ -42,6 +42,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
 
     <section>
         <h4 class="part">Informácie o teste</h4>
+        <div class="table-responsive">
         <table class="table">
             <tr>
                 <th>Kód testu</th>
@@ -71,11 +72,13 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
             </tr>
 
         </table>
+        </div>
     </section>
 
     <section>
 
         <h4 class="part">Študenti</h4>
+        <div class="table-responsive">
         <table class="table table-hover">
 
             <thead>
@@ -94,12 +97,14 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
             </tbody>
 
         </table>
+        </div>
 
     </section>
 
     <section id="notifications">
 
         <h4 class="part">Upozornenia</h4>
+        <div class="table-responsive">
         <table class="table table-hover">
 
             <thead>
@@ -116,6 +121,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
             </tbody>
 
         </table>
+        </div>
 
     </section>
 

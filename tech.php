@@ -51,6 +51,7 @@
             <p>tu ide vela textu</p>
             <h3 class="part">Rozdelenie úloh</h3>
             <div>
+            <div class="table-responsive">
                 <table class="table table-hover text-center">
                     <thead>
                         <tr>
@@ -201,6 +202,7 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
 
