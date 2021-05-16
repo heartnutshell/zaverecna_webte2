@@ -1,0 +1,188 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+* {
+    box-sizing: border-box;
+}
+/*DRAW*/
+.form-range {
+    width: 180px !important;
+}
+.card-body {
+    background-color: whitesmoke;
+}
+#range-num {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.card {
+    margin: 20px 0px;
+}
+/*MATH*/
+math-field {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+    border-radius: 5px;
+    background-color: #fff;
+}
+/*MAIN*/
+nav {
+    text-align: center;
+    min-height: 10vh;
+}
+footer {
+    position: relative !important;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+    min-height: 10vh;
+    text-align: center;
+    color: white;
+}
+.center-text {
+    text-align: center;
+}
+.text-bold {
+    font-weight: bold;
+}
+.center {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.other-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.third-center {
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+.intro {
+    font-size: x-large;
+    font-weight: bolder;
+}
+body {
+    background-image: url("../img/18410.jpg");
+    background-repeat: repeat;
+    font-size: 1.05rem;
+}
+.title {
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.title-black {
+    color: black;
+    font-size: x-large;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.page-content {
+    position: relative;
+    min-height: 80vh;
+}
+.test-form {
+    max-width: 85vh;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+.btn {
+    margin-top: 0px;
+}
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.part {
+    background-color: #158cba;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.nav-item {
+    margin: 0px 5px;
+}
+.nav-link {
+    font-size: 1.2rem;
+    color: white;
+}
+.logout {
+    opacity: 1;
+    color: white;
+    text-transform: uppercase;
+}
+.logout :hover {
+    color: red !important;
+}
+.doc {
+    font-size: 1.2rem;
+    color: cornflowerblue;
+}
+@media screen and (max-width: 768px) {
+    #time_left {
+        position: fixed;
+        top: 1%;
+        right: 1%;
+        z-index: 100;
+        background-color: #555;
+        color: white;
+        padding: 7.5px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+@media screen and (min-width: 769px) {
+    #time_left {
+        position: fixed;
+        top: 1%;
+        right: 1%;
+        z-index: 100;
+        background-color: #555;
+        color: white;
+        padding: 7.5px;
+        border-radius: 5px;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+/*TEACHER*/
+.test.active {
+    background-color: #28b62c;
+    color: white;
+    padding: 7.5px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.test.not-active {
+    background-color: #ff4136;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.ix {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.checkboi {
+    font-size: 2rem;
+}
