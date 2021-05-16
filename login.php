@@ -51,30 +51,33 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 <html lang="sk">
 
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Prihlásenie</title>
-        <link rel="icon" type="image/png" href="img/favicon.png" />
-        <!-- CSS --> 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'>    
-        <!-- JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="lib/fabric.min.js"></script>
-        <script src="lib/jscolor.min.js"></script>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prihlásenie</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'>
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="lib/fabric.min.js"></script>
+    <script src="lib/jscolor.min.js"></script>
+</head>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <header>
-                    <span class="title">Učitel</span>
-                </header>
-                <div class="container-fluid">
-                    <div class="navbar-collapse" id="navbarColor01">
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <header>
+                <span class="title">Učiteľ</span>
+            </header>
+            <div class="container-fluid">
+                <div class="navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                         </li>
@@ -87,7 +90,20 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         </div>
     </nav>
 
+            
+
     <div class="container page-content">
+        <?php
+            if(isset($_GET['success'])){
+                if($_GET['success'] == 1){
+                    echo'
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <span>Registrácia úspešná!</span>
+                    </div>';
+                }
+            }
+        ?>
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-row other-center">
             <div class="form-group col">
                 <label for='email'>E-mail</label>
@@ -100,7 +116,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             </div>
             <div class="form-group col"></br>
                 <input class="btn btn-primary" type="submit" value="Prihlásiť sa"><br>
-                <span>Pre vytvorenie nového konta učitela kliknite </span><a href="register.php">tu</a><span>.</span>
+                <span>Pre vytvorenie nového konta učiteľa kliknite </span><a href="register.php">tu</a><span>.</span>
             </div>
         </form>
     </div>

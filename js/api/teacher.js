@@ -43,36 +43,32 @@ const updateStudentsData = (test_key) => {
         data: {
             type: "teacher-test",
             action: "get-students",
-            last_id: last_student_id,
             test_key,
         },
         dataType: "json",
         success: (data) => {
+            console.log(data);
             const testStatus = data.test[0]["active"];
-
+            const needManualEvaluation = data.test[0]["manual_evaluation"];
+            let output = "";
             // Displaying students
             data.students.map((student) => {
-                let row = `
+                output += `
                 <tr>
                     <td>${student["id"]}</td>
                     <td>${student["name"]}</td>
                     <td>${student["surname"]}</td>
                     <td>${student["completed"]}</td>
                 `;
-
-                row += "<td>";
+                output += "<td>";
                 if (testStatus == 0) {
-                    row += `<a href="testEvaluate.php?student_id=${student["id"]}&test_key=${student["test_key"]}">Vyhodnotiť<a>`;
+                    output += `<a href="testEvaluate.php?student_id=${student["id"]}&test_key=${student["test_key"]}">Vyhodnotiť<a>`;
                 }
-                row += `
-                    </td>
-                </tr>`;
+                output += "</td>";
 
-                $("#students--body").append(row);
-
-                // Get the latest row id
-                last_student_id = parseInt(student[0]) > last_student_id ? parseInt(student[0]) : last_student_id;
+                output += `</tr>`;
             });
+            $("#students--body").html(output);
         },
         error: (xhr, status, err) => {
             console.log(xhr);
@@ -111,6 +107,8 @@ const getTestKeys = (e) => {
 };
 
 const submitCreateTest = (formData) => {
+    console.log("Submit Test API");
+    console.log(formData);
     $.ajax({
         url: teacherApiUrl + "teacherCreateTest.php",
         method: "POST",
@@ -119,6 +117,7 @@ const submitCreateTest = (formData) => {
         },
         success: (data) => {
             console.log(data);
+            // TODO UNcomment
             window.location = "../pages/teacher.php";
         },
         error: (xhr, status, err) => {

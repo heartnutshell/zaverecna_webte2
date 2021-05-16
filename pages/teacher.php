@@ -38,43 +38,42 @@ $tests = $db->getAllTeacherTests($teacher_id);
 
         <?php else : ?>
         <div class="table-responsive">
-        <table class="table table-hover">
+            <table class="table table-hover">
 
-            <thead>
-                <tr>
-                    <th scope="col">Kód testu</th>
-                    <th scope="col">Časový limit</th>
-                    <th scope="col">Max bodov</th>
-                    <th scope="col">Status</th>
-                    <th></th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th scope="col">Kód testu</th>
+                        <th scope="col">Časový limit</th>
+                        <th scope="col">Max bodov</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="center-text">Detail testu</th>
+                    </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-                <?php foreach ($tests as $key => $test) : ?>
-                <tr>
+                    <?php foreach ($tests as $key => $test) : ?>
+                    <tr>
 
-                    <td><?= $test["test_key"]; ?></td>
-                    <td><?= $test["time_limit"]; ?></td>
-                    <td><?= $test["max_points"]; ?></td>
+                        <td><?= $test["test_key"]; ?></td>
+                        <td><?= $test["time_limit"]; ?></td>
+                        <td><?= $test["max_points"]; ?></td>
 
-                    <?php if ($test["active"]) : ?>
-                    <td class="test active"><?= $test["active"] ?> </td>
-                    <?php else : ?>
-                    <td class="test not-active"><?= $test["active"] ?></td>
-                    <?php endif; ?>
+                        <?php if ($test["active"]) : ?>
+                        <td class="test active"><?= $test["active"] ?> </td>
+                        <?php else : ?>
+                        <td class="test not-active"><?= $test["active"] ?></td>
+                        <?php endif; ?>
+                        <td class="center-text">
+                            <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
+                                <i class="fas fa-cog yep-cog"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
 
-                    <td>
-                        <a href="testOverview.php?test_key=<?= $test["test_key"] ?>">
-                            <i class="fas fa-cog"></i>
-                        </a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
 
         <?php endif; ?>

@@ -9,7 +9,7 @@ $partial = new Partial();
 $partial->authenticate();
 
 $db = new DatabaseController();
-$partial->createHeader('Učitel | Vytváranie testu');
+$partial->createHeader('Učiteľ | Vytváranie testu');
 ?>
 
 <main class="container page-content">

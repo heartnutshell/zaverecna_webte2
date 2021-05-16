@@ -1,10 +1,10 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: https://wt100.fei.stuba.sk/zygarde/pages/teacher.php");
+    header("Location: https://wt100.fei.stuba.sk/zaver/pages/teacher.php");
 }
 
 if (!isset($_POST["formData"])) {
-    header("Location: https://wt100.fei.stuba.sk/zygarde/pages/teacher.php");
+    header("Location: https://wt100.fei.stuba.sk/zaver/pages/teacher.php");
 }
 
 require_once __DIR__ . "/../../pages/partials/Partial.php";
@@ -18,6 +18,8 @@ $partial->authenticate();
 
 // Get Teacher ID from SESSION
 $teacher_id = $_SESSION["teacher_id"];
+echo "POST";
+print_r($_POST);
 $test_key = $_POST["formData"][1]["value"];
 $time_limit = $_POST["formData"][2]["value"];
 $max_points = $_POST["formData"][3]["value"];
@@ -25,10 +27,22 @@ $max_points = $_POST["formData"][3]["value"];
 // Create Services
 $db = new DatabaseController();
 
-// Create Test record in DB
-$db->insertTest($test_key, $teacher_id, $time_limit, 1, $max_points);
-
 $formData = $_POST["formData"];
+
+// 0 - dont have Math or Draw Question
+$manualEvaluation = 0;
+
+foreach ($formData as $data) {
+
+    if (isset($data["type"])) {
+        if ($data["type"] == "draw" || $data["type"] == "math") {
+            $manualEvaluation = 1;
+        }
+    }
+}
+
+// Create Test record in DB
+$db->insertTest($test_key, $teacher_id, $time_limit, 1, $max_points, $manualEvaluation);
 
 // Init Creating Questions
 $questionService = new CreateQuestion($test_key);

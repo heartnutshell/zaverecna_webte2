@@ -16,12 +16,18 @@ if (!isset($_GET["test_key"]) || !isset($_GET["student_id"])) {
 $db = new DatabaseController();
 
 $studentAnswers = $db->getStudentAnswersByTestKeyAndStudentId($_GET["test_key"], $_GET["student_id"]);
+$student = $db->getStudentByID($_GET["student_id"]);
 
 $partial->createHeader("Učiteľ | Vyhodnocovanie testu");
 
 ?>
 <main class="container page-content">
-    <button class="btn btn-primary" onclick="window.history.go(-1);">Späť</button>
+    <button class="btn btn-primary mb-2" onclick="window.history.go(-1);">späť</i></button>
+
+    <h2 class="mb-3">
+        Meno študenta:
+        <?php echo "<span class='text-primary'>{$student[0]['name']} {$student[0]['surname']}</span>";  ?>
+    </h2>
 
     <form id="manual-evaluate" onsubmit="manualEvaluate(event)">
 
@@ -71,6 +77,8 @@ const manualEvaluate = (event) => {
 
     const test_key = urlParams.get('test_key');
     const student_id = urlParams.get('student_id');
+
+    console.log(formData);
 
     manualEvaluateApi(formData, test_key, student_id);
 }

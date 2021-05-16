@@ -46,7 +46,7 @@
             ?>
             <div class="other-center">
                     <a type="button" class="btn btn-primary btn-lg m-5" href="student.php">Vyplniť test</a>
-                    <a type="button" class="btn btn-primary btn-lg m-5" href="login.php">Prihlásiť sa ako učitel</a>
+                    <a type="button" class="btn btn-primary btn-lg m-5" href="login.php">Prihlásiť sa ako učiteľ</a>
             </div>
         </div>
 

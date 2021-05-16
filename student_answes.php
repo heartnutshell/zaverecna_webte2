@@ -44,7 +44,8 @@ $test_key = $_GET["test_key"];
 <body>
 
     <div class="container m-2">
-        <button class="btn btn-success" onclick="exportToPdf()">Uložiť</button>
+        <button class="btn btn-primary m-1" onclick="window.history.go(-1);">Späť</button>
+        <button class="btn btn-success m-1" onclick="exportToPdf()">Uložiť</button>
     </div>
 
     <div id="export">

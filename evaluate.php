@@ -38,30 +38,34 @@ foreach ($ids as $question_id){
         case QuestionType::CHOOSE:
             $current_answers = json_decode($current_question[0]["correct_answer"], true);
 
-            $points_for_one = $current_question[0]["points"]/sizeof(array_keys($current_answers));
+            $true = 0;
+
+            foreach($current_answers as $answer){
+                if ($answer == 'true'){
+                    $true++;
+                }
+            }
+
+            $points_for_one = $current_question[0]["points"]/$true;
 
             foreach (array_keys($current_answers) as $array_key){
                 $post_key = $question_id."_".$array_key;
                 if (isset($_POST[$post_key])){
-                    if ($current_answers[$array_key]){
+                    if ($current_answers[$array_key] == 'true'){
                         // pripocitanie bodov
                         $question_points += $points_for_one;
                     }else{
                         // odpocitanie bodov
-                        // $total_points -= $points_for_one;
+                        $question_points -= $points_for_one;
                     }
                     $student_answer[$array_key] = true;
-                }else{
-                    if (!$current_answers[$array_key]){
-                        // pripocitanie bodov
-                        $question_points += $points_for_one;
-                    }else{
-                        // odpocitanie bodov
-                        // $total_points -= $points_for_one;
-                    }
+                }else{                    
                     $student_answer[$array_key] = false;
                 }
 
+            }
+            if ($question_points < 0) {
+                $question_points = 0;
             }
 
             break;

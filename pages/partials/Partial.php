@@ -35,7 +35,7 @@ class Partial
     <body>
         <nav class='navbar navbar-dark navbar-expand-lg bg-primary'>
             <div class='container'>
-                <span class='title'>Učitel</span>
+                <span class='title'>Učiteľ</span>
                 <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
                     <span class='navbar-toggler-icon'></span>
                 </button>

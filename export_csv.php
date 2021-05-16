@@ -51,7 +51,9 @@ fwrite($myfile, $csv);
 </head>
 
 <body>
-<?php echo '<div class="containter m-2"><a class="btn btn-success" href="csv/vysledky'.$test_key.'.csv" download>Uložiť</a></div>';
+<?php echo '<div class="containter m-2">
+<button class="btn btn-primary m-1" onclick="window.history.go(-1);">Späť</button>
+<a class="btn btn-success m-1" href="csv/vysledky'.$test_key.'.csv" download>Uložiť</a></div>';
 echo nl2br($csv);
 ?>
 </body>

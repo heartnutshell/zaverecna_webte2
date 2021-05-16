@@ -11,8 +11,8 @@ function openEvaluation($answer)
             <p>$answerJson->answer</p>
         </div>
         <div class='card-footer'>
-            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5'>
-            {$answer["student_points"]}/{$answer["max_points"]}
+            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5' required value='{$answer["student_points"]}'>
+            /{$answer["max_points"]}
         </div>
     </div>
 
@@ -79,7 +79,7 @@ function connectEvaluation($answer)
 function drawEvaluation($answer)
 {
 
-    if (is_file('../uploaded_answers/' . json_decode($answer["answer"])->answer)) {
+    if (is_file('../uploadedAnswers/' . json_decode($answer["answer"])->answer)) {
         $studentAnswer = "<img src='../uploadedAnswers/" . json_decode($answer["answer"])->answer . "'>";
     } else {
         $studentAnswer = json_decode($answer["answer"])->answer;
@@ -91,8 +91,8 @@ function drawEvaluation($answer)
             $studentAnswer
         </div>
         <div class='card-footer'>
-            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5'>
-            {$answer["student_points"]}/{$answer["max_points"]}
+            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5' required value='{$answer["student_points"]}'>
+            /{$answer["max_points"]}
         </div>
     </div>";
 }
@@ -100,20 +100,21 @@ function drawEvaluation($answer)
 function mathEvaluation($answer)
 {
 
-    if (is_file('../uploaded_answers/' . json_decode($answer["answer"])->answer)) {
+    if (is_file('../uploadedAnswers/' . json_decode($answer["answer"])->answer)) {
         $studentAnswer = "<img src='../uploadedAnswers/" . json_decode($answer["answer"])->answer . "'>";
     } else {
         $studentAnswer = json_decode($answer["answer"])->answer;
+        $studentAnswer = "$$$studentAnswer$$";
     }
 
     echo "
     <div class='card bg-secondary'>
         <div class='card-body'>
-            $$$studentAnswer$$
+            $studentAnswer
         </div>
         <div class='card-footer'>
-            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5'>
-            {$answer["student_points"]}/{$answer["max_points"]}
+            <input type='number' name='{$answer["question_id"]}' min='0' max='{$answer["max_points"]}' step='0.5' required value='{$answer["student_points"]}'>
+            /{$answer["max_points"]}
         </div>
     </div>";
 }

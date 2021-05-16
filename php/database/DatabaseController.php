@@ -94,11 +94,10 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    public function getStudentsByTestKey($test_key, $last_id): array
+    public function getStudentsByTestKey($test_key): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student_tests, student WHERE test_key LIKE :test_key AND student.id = student_tests.student_id AND student_tests.id > :last_id");
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests, student WHERE test_key LIKE :test_key AND student.id = student_tests.student_id");
         $stmt->bindParam(":test_key", $test_key);
-        $stmt->bindParam(":last_id", $last_id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -131,7 +130,8 @@ class DatabaseController
     }
 
 
-    public function getStudentTestsTimestamp($test_key, $student_id) {
+    public function getStudentTestsTimestamp($test_key, $student_id)
+    {
         $stmt = $this->conn->prepare("SELECT start_time FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -141,7 +141,7 @@ class DatabaseController
 
     public function getCsv($test_key)
     {
-        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/git/zaverecna_webte2/csv/vysledky.csv'
+        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt100.fei.stuba.sk/zaver/csv/vysledky.csv'
                                         FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
                                         LINES TERMINATED BY '\n'
                                         FROM student_tests
@@ -151,7 +151,8 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    public function getStudentTest($test_key, $student_id) {
+    public function getStudentTest($test_key, $student_id)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id AND test_key LIKE :test_key");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->bindParam(":test_key", $test_key);
@@ -187,7 +188,8 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function updateStudentTest($test_key, $student_id, $end_time, $points) {
+    public function updateStudentTest($test_key, $student_id, $end_time, $points)
+    {
         $stmt = $this->conn->prepare("UPDATE student_tests SET end_time=:end_time, completed=1, points=:points WHERE test_key LIKE :test_key AND student_id LIKE :student_id");
         $stmt->bindParam(":end_time", $end_time);
         $stmt->bindParam(":points", $points);
@@ -195,7 +197,7 @@ class DatabaseController
         $stmt->bindParam(":student_id", $student_id);
         $stmt->execute();
     }
-    
+
     // INSERT
     public function insertStudent($id, $name, $surname)
     {
@@ -222,14 +224,15 @@ class DatabaseController
         }
     }
 
-    public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points)
+    public function insertTest($test_key, $teacher_id, $time_limit, $active, $max_points, $manualEvaluation)
     {
-        $stmt = $this->conn->prepare("INSERT IGNORE INTO test (test_key, teacher_id, time_limit, active, max_points) VALUES (:test_key, :teacher_id, :time_limit, :active, :max_points)");
+        $stmt = $this->conn->prepare("INSERT IGNORE INTO test (test_key, teacher_id, time_limit, active, max_points, manual_evaluation) VALUES (:test_key, :teacher_id, :time_limit, :active, :max_points, :manualEvaluation)");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->bindParam(":teacher_id", $teacher_id);
         $stmt->bindParam(":time_limit", $time_limit);
         $stmt->bindParam(":active", $active);
         $stmt->bindParam(":max_points", $max_points);
+        $stmt->bindParam(":manualEvaluation", $manualEvaluation);
         $stmt->execute();
     }
 

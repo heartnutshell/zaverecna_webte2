@@ -71,7 +71,7 @@ const createOpenQuestionBody = (number) => {
     return `
     <div>
         <label for="OpenA${number}">Odpoveď</label>
-        <input class="form-control m-1" type="text" id="OpenA${number}" name="OpenA${number}" data-parent="Q${number}" required>
+        <input class="form-control m-1" type="text" id="OpenA${number}" name="OpenA${number}" data-parent="Q${number}" >
     </div>
     `;
 };

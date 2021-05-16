@@ -183,7 +183,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row">Info o zbiehaní testov pre učitela</th>
+                            <th scope="row">Info o zbiehaní testov pre učiteľa</th>
                             <td><i class="bi bi-check-lg"></i></td>
                             <td></td>
                             <td></td>
@@ -207,12 +207,12 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row">Docker balíček</th>
-                            <td></td>
-                            <td><i class="bi bi-check-lg"></i></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th scope="row">Docker balíček(pokúsili sme sa)</th>
+                            <td>¯\_(ツ)_/¯</td>
+                            <td>¯\_(ツ)_/¯</td>
+                            <td>¯\_(ツ)_/¯</td>
+                            <td>¯\_(ツ)_/¯</td>
+                            <td>¯\_(ツ)_/¯</td>
                         </tr>
                         <tr>
                             <th scope="row">Design</th>

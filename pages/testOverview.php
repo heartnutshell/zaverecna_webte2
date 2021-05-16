@@ -18,7 +18,6 @@ $db = new DatabaseController();
 // Get Test by GET[test_key]
 $test = $db->getTestByKey($_GET["test_key"]);
 
-
 // Invalid key -> No Test Found -> 404
 if (count($test) == 0) {
     header("Location: 404.php");
@@ -31,7 +30,7 @@ if ($_SESSION["teacher_id"] != $test[0]["teacher_id"]) {
 }
 
 // Get Students
-$students = $db->getStudentsByTestKey($_GET["test_key"], 0);
+$students = $db->getStudentsByTestKey($_GET["test_key"]);
 
 // Creating Header
 $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
@@ -43,42 +42,48 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
     <section>
         <h4 class="part">Informácie o teste</h4>
         <div class="table-responsive">
-        <table class="table">
-            <tr>
-                <th>Kód testu</th>
-                <td><?= $test[0]["test_key"]; ?></td>
-            </tr>
-            <tr>
-                <th>Časový limit</th>
-                <td><?= $test[0]["time_limit"]; ?></td>
-            </tr>
-            <tr>
-                <th>Počet bodov</th>
-                <td><?= $test[0]["max_points"]; ?></td>
-            </tr>
-            <tr>
-                <th>Stav</th>
-                <td><?= $test[0]["active"] ? "<span class='test active'>Zapnutý</span>" : "<span class='test not-active'>Vypnutý</span>"; ?>
-                </td>
-            </tr>
-            <tr>
-                <th>Zapnúť/vypnúť test:</th>
-                <td id="test_status"
-                    onclick="toggleTestStatus(event, <?= $test[0]['active'] ?> , '<?= $_GET['test_key'] ?>' )">
-                    <button class="btn btn-warning">
-                        <?= $test[0]["active"] ? "Vypnúť" : "Zapnúť"; ?>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <th>Export:</th>
-                <td>
-                    <a class="btn btn-primary" href="../student_answes.php?test_key=<?php echo $_GET['test_key'];?>">PDF</a>
-                    <a class="btn btn-primary" href="../export_csv.php?test_key=<?php echo $_GET['test_key'];?>">CSV</a>
-                </td>
-            </tr>
+            <table class="table">
+                <tr>
+                    <th>Kód testu</th>
+                    <td><?= $test[0]["test_key"]; ?></td>
+                </tr>
+                <tr>
+                    <th>Časový limit</th>
+                    <td><?= $test[0]["time_limit"]; ?></td>
+                </tr>
+                <tr>
+                    <th>Počet bodov</th>
+                    <td><?= $test[0]["max_points"]; ?></td>
+                </tr>
+                <tr>
+                    <th>Stav</th>
+                    <td><?= $test[0]["active"] ? "<span class='test active'>Zapnutý</span>" : "<span class='test not-active'>Vypnutý</span>"; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Zapnúť/vypnúť test:</th>
+                    <td id="test_status"
+                        onclick="toggleTestStatus(event, <?= $test[0]['active'] ?> , '<?= $_GET['test_key'] ?>' )">
+                        <button class="btn btn-warning">
+                            <?= $test[0]["active"] ? "Vypnúť" : "Zapnúť"; ?>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Export:</th>
+                    <td>
+                        <a class="btn btn-primary"
+                            href="../student_answes.php?test_key=<?php echo $_GET['test_key']; ?>">PDF</a>
+                        <a class="btn btn-primary"
+                            href="../export_csv.php?test_key=<?php echo $_GET['test_key']; ?>">CSV</a>
+                    </td>
+                </tr>
 
             </table>
+            <div class="alert alert-dismissible alert-info">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <span>Pre vyhodnotenie testov musí byť test vypnutý!</span>
+            </div>
         </div>
     </section>
 
@@ -97,6 +102,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
                         <? if ($test[0]["active"] == 0) : ?>
                         <th>Vyhodnotiť</th>
                         <? endif; ?>
+
                     </tr>
                 </thead>
 

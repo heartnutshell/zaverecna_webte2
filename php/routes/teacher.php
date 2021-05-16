@@ -31,7 +31,7 @@ if ($_REQUEST["type"] == "teacher-test") {
             echo json_encode($db->getStudentsVisibility($_POST["test_key"], $_POST["last_id"]));
             break;
         case "get-students":
-            $students = $db->getStudentsByTestKey($_POST["test_key"], $_POST["last_id"]);
+            $students = $db->getStudentsByTestKey($_POST["test_key"]);
             $test = $db->getTestByKey($_POST["test_key"]);
             $result = ["students" => $students, "test" => $test];
             echo json_encode($result);
@@ -58,11 +58,14 @@ if ($_REQUEST["type"] == "tests") {
             break;
         case "manual-evaluate":
             ["test_key" => $test_key, "student_id" => $student_id, "data" => $data] = $_POST;
-
-            foreach($data as $questionData) {
+            $total_points = 0;
+            foreach ($data as $questionData) {
                 $db->updateStudentAnswer($student_id, $test_key, $questionData["name"], $questionData["value"]);
+                $total_points += $questionData["value"];
             }
-
+            $current_test = $db->getStudentTest($test_key, $student_id);
+            $end_time = $current_test[0]['end_time'];
+            $db-> updateStudentTest($test_key, $student_id, $end_time, $total_points);
             break;
         default:
             break;
