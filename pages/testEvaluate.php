@@ -85,7 +85,6 @@ $(document).ready(() => {
 
 <?php include '../footer.php'; ?>
 
-<script src="../js/api/studentAnswer.js"></script>
 <script src="../js/draw.js"></script>
 <script src="../js/math.js"></script>
 

@@ -80,7 +80,7 @@ function drawEvaluation($answer)
 {
 
     if (is_file('../uploaded_answers/' . json_decode($answer["answer"])->answer)) {
-        $studentAnswer = "<img src='../uploaded_answers/" . json_decode($answer["answer"])->answer . "'>";
+        $studentAnswer = "<img src='../uploadedAnswers/" . json_decode($answer["answer"])->answer . "'>";
     } else {
         $studentAnswer = json_decode($answer["answer"])->answer;
     }
@@ -101,7 +101,7 @@ function mathEvaluation($answer)
 {
 
     if (is_file('../uploaded_answers/' . json_decode($answer["answer"])->answer)) {
-        $studentAnswer = "<img src='../uploaded_answers/" . json_decode($answer["answer"])->answer . "'>";
+        $studentAnswer = "<img src='../uploadedAnswers/" . json_decode($answer["answer"])->answer . "'>";
     } else {
         $studentAnswer = json_decode($answer["answer"])->answer;
     }

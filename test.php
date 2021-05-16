@@ -121,7 +121,6 @@ if($start_time) {
     <?php include 'footer.php'; ?>
 
     <script src="js/draw.js"></script>
-    <script src="js/api/studentAnswer.js"></script>
     <script src="js/math.js"></script>
     <script src="js/resize.js"></script>
     <script src="js/countdown.js"></script>

@@ -7,7 +7,7 @@ $databaseController = new DatabaseController();
 $test_key = $_GET["test_key"];
 
 ?>
-
+<!DOCTYPE html>
 <html lang="sk">
 
 <head>
@@ -41,13 +41,13 @@ $test_key = $_GET["test_key"];
                 echo "<div><u>" . $student[0]["id"] . " " . $student[0]["name"] . " " . $student[0]["surname"] . "</u><br>";
                 if ($question["type"] == QuestionType::MATH) {
                     if (is_file('uploaded_answers/' . json_decode($student_answer["answer"])->answer)) {
-                        $answer = "<img src='uploaded_answers/" . json_decode($student_answer["answer"])->answer . "'>";
+                        $answer = "<img src='uploadedAnswers/" . json_decode($student_answer["answer"])->answer . "'>";
                     } else {
                         $answer = "$$" . json_decode($student_answer["answer"])->answer . "$$";
                     }
                 } else if ($question["type"] == QuestionType::DRAW) {
                     if (is_file('uploaded_answers/' . json_decode($student_answer["answer"])->answer)) {
-                        $answer = "<img src='uploaded_answers/" . json_decode($student_answer["answer"])->answer . "'>";
+                        $answer = "<img src='uploadedAnswers/" . json_decode($student_answer["answer"])->answer . "'>";
                     } else {
                         $answer = json_decode($student_answer["answer"])->answer;
                     }
