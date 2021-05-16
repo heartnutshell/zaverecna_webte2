@@ -50,7 +50,8 @@ const submitHandle = (event) => {
     const form = $("#create-test");
     const inputs = document.querySelector("#create-test").elements;
     let data = form.serializeArray();
-    console.log(data);
+    let a = data;
+    console.log(a);
     if (inputs.max_points.value == "" || inputs.max_points.value == 0) {
         alert("Test je prázdny!");
         return;
@@ -92,8 +93,8 @@ const submitHandle = (event) => {
         }
     }
     // Clear data from Empty Slots
-    data = data.flat();
-    console.log(data);
+    newdata = data.flat();
+    console.log(newdata);
     submitCreateTest(data);
 };
 

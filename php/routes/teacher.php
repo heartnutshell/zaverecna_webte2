@@ -56,6 +56,14 @@ if ($_REQUEST["type"] == "tests") {
             echo $status;
             $db->updateTestActiveStatus($test_key, $status);
             break;
+        case "manual-evaluate":
+            ["test_key" => $test_key, "student_id" => $student_id, "data" => $data] = $_POST;
+
+            foreach($data as $questionData) {
+                $db->updateStudentAnswer($student_id, $test_key, $questionData["name"], $questionData["value"]);
+            }
+
+            break;
         default:
             break;
     }
