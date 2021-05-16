@@ -48,8 +48,6 @@ const updateStudentsData = (test_key) => {
         },
         dataType: "json",
         success: (data) => {
-            console.log(data);
-
             const testStatus = data.test[0]["active"];
 
             // Displaying students
@@ -154,4 +152,19 @@ const toggleTestStatus = (event, status, test_key) => {
     });
 };
 
-const manualEvaluateApi = () => {};
+const manualEvaluateApi = (formData, test_key, student_id) => {
+    $.ajax({
+        url: teacherApiUrl + "teacher.php",
+        method: "POST",
+        data: {
+            type: "tests",
+            action: "manual-evaluate",
+            test_key,
+            student_id,
+            data: formData,
+        },
+        success: (data) => {
+            location.reload();
+        },
+    });
+};

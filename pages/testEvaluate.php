@@ -19,16 +19,11 @@ $studentAnswers = $db->getStudentAnswersByTestKeyAndStudentId($_GET["test_key"],
 
 $partial->createHeader("Učiteľ | Vyhodnocovanie testu");
 
-if (isset($_POST["evaluate-test"])) {
-    echo "<pre>";
-    print_r($_POST);
-}
-
 ?>
 <main class="container page-content">
-    <button class="btn btn-primary" onclick="window.history.go(-1);">Spať</button>
+    <button class="btn btn-primary" onclick="window.history.go(-1);">Späť</button>
 
-    <form onsubmit="manualEvaluate()">
+    <form id="manual-evaluate" onsubmit="manualEvaluate(event)">
 
         <?php
         $index = 1;
@@ -59,13 +54,27 @@ if (isset($_POST["evaluate-test"])) {
 
         ?>
 
-        <button class="btn btn-success" name="evaluate-test">Uložiť</button>
+        <button class="btn btn-success">Uložiť</button>
 
     </form>
 
 </main>
 
+<script src="../js/api/teacher.js"></script>
 <script>
+const manualEvaluate = (event) => {
+    event.preventDefault();
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const formData = $("#manual-evaluate").serializeArray();
+
+    const test_key = urlParams.get('test_key');
+    const student_id = urlParams.get('student_id');
+
+    manualEvaluateApi(formData, test_key, student_id);
+}
+
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [
@@ -74,13 +83,6 @@ MathJax.Hub.Config({
         ]
     }
 });
-
-
-$(document).ready(() => {
-    const manualEvaluate = () => {
-
-    }
-})
 </script>
 
 <?php include '../footer.php'; ?>

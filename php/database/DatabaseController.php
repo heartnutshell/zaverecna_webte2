@@ -169,11 +169,13 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function updateStudentAnswerToCorrect($id, $is_correct)
+    public function updateStudentAnswer($student_id, $test_key, $question_id, $points)
     {
-        $stmt = $this->conn->prepare("UPDATE student_answers SET is_correct=:is_correct WHERE id LIKE :id");
-        $stmt->bindParam(":is_correct", $is_correct);
-        $stmt->bindParam(":id", $id);
+        $stmt = $this->conn->prepare("UPDATE student_answers SET points=:points WHERE test_key LIKE :test_key AND question_id = :question_id AND student_id LIKE :student_id");
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":test_key", $test_key);
+        $stmt->bindParam(":question_id", $question_id);
+        $stmt->bindParam(":points", $points);
         $stmt->execute();
     }
 

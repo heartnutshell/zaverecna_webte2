@@ -163,6 +163,6 @@ const createConnectQuestionBody = (number) => {
         </div>
 
     </div>
-    <span class="btn btn-success d-flex justify-content-center" onclick="addPairToConnectQuestion('connectQ${number}', '', '${number}')"><i class="bi bi-plus-lg"></i></span>
+    <span class="btn btn-success d-flex justify-content-center" onclick="addPairToConnectQuestion('connectQ${number}', '${number}')"><i class="bi bi-plus-lg"></i></span>
     `;
 };
