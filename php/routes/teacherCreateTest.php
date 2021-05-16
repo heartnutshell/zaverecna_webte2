@@ -18,9 +18,9 @@ $partial->authenticate();
 
 // Get Teacher ID from SESSION
 $teacher_id = $_SESSION["teacher_id"];
-$test_key = $_POST["formData"][0]["value"];
-$time_limit = $_POST["formData"][1]["value"];
-$max_points = $_POST["formData"][2]["value"];
+$test_key = $_POST["formData"][1]["value"];
+$time_limit = $_POST["formData"][2]["value"];
+$max_points = $_POST["formData"][3]["value"];
 
 // Create Services
 $db = new DatabaseController();
