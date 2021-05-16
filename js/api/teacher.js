@@ -121,7 +121,7 @@ const submitCreateTest = (formData) => {
         },
         success: (data) => {
             console.log(data);
-            window.location = "../pages/teacher.php";
+            //window.location = "../pages/teacher.php";
         },
         error: (xhr, status, err) => {
             console.log(err);

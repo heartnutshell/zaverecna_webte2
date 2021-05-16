@@ -30,6 +30,11 @@ $test_key = $_GET["test_key"];
 </head>
 
 <body>
+
+    <div class="container m-2">
+        <button class="btn btn-success" onclick="exportToPdf()">Uložiť</button>
+    </div>
+
     <div id="export">
         <?php
         foreach ($databaseController->getQuestionsByTestKey($test_key) as $question) {
@@ -40,13 +45,13 @@ $test_key = $_GET["test_key"];
                 $student = $databaseController->getStudentByID($student_answer["student_id"]);
                 echo "<div><u>" . $student[0]["id"] . " " . $student[0]["name"] . " " . $student[0]["surname"] . "</u><br>";
                 if ($question["type"] == QuestionType::MATH) {
-                    if (is_file('uploaded_answers/' . json_decode($student_answer["answer"])->answer)) {
+                    if (is_file('uploadedAnswers/' . json_decode($student_answer["answer"])->answer)) {
                         $answer = "<img src='uploadedAnswers/" . json_decode($student_answer["answer"])->answer . "'>";
                     } else {
                         $answer = "$$" . json_decode($student_answer["answer"])->answer . "$$";
                     }
                 } else if ($question["type"] == QuestionType::DRAW) {
-                    if (is_file('uploaded_answers/' . json_decode($student_answer["answer"])->answer)) {
+                    if (is_file('uploadedAnswers/' . json_decode($student_answer["answer"])->answer)) {
                         $answer = "<img src='uploadedAnswers/" . json_decode($student_answer["answer"])->answer . "'>";
                     } else {
                         $answer = json_decode($student_answer["answer"])->answer;
@@ -76,8 +81,6 @@ $test_key = $_GET["test_key"];
         }
         ?>
     </div>
-
-    <button onclick="exportToPdf()">To Pdf</button>
 
     <script src="js/exportToPdf.js"></script>
 

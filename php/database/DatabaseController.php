@@ -139,13 +139,14 @@ class DatabaseController
         return $stmt->fetchAll();
     }
 
-    public function getCsv()
+    public function getCsv($test_key)
     {
         $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/get/zaverecna_webte2/csv/vysledky.csv'
                                         FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
                                         LINES TERMINATED BY '\n'
                                         FROM student_tests
-        JOIN student ON student_tests.student_id = student.id");
+        JOIN student ON student_tests.student_id = student.id WHERE test_key = :test_key");
+        $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
         return $stmt->fetchAll();
     }
