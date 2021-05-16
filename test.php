@@ -96,7 +96,7 @@ if($start_time) {
                     break;
                 }
                 case "draw":
-                {
+                {                    
                     $generator->generateDraw($question['id']);
                     break;
                 }

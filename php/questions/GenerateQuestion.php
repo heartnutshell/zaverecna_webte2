@@ -83,7 +83,7 @@ class GenerateQuestion
         echo '
             <div class="card bg-secondary">
                     <div class="card-header row">
-                        <input class="col" value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true, closeText:"Close"}">
+                        <input class="col" value="#000000" id="'.$question_id.'-drawcolor" data-jscolor="{closeButton:true}">
                         <div class="col">
                             <input type="range" min="1" max="99" value="1" step="1" id="'.$question_id.'-drawsize" class="form-range slider-width100" oninput="this.nextElementSibling.value = this.value">
                             <output id="range-num">1</output>    
