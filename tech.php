@@ -47,9 +47,55 @@
         <div class="container page-content">
 
             <h3 class="part">Technická dokumentácia</h3>
-            <h4>Nejaký nadpis</h4>
-            <p>tu ide vela textu</p>
-            <h3 class="part">Rozdelenie úloh</h3>
+            <h5>Použité JavaScript knižnice:</h5>
+            <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>fabric.js</th>
+                    <td>v4.4.0</td>
+                    <td>Kreslenie na canvas s ukladaním obrázkov vo forme SVG</td>
+                </tr>
+                <tr>
+                    <th>html2pdf.js</th>
+                    <td>v0.9.3</td>
+                    <td>Export výsledkov do PDF</td>
+                </tr>
+                <tr>
+                    <th>jQuery.js</th>
+                    <td>v3.6.0</td>
+                    <td>Data handling (Ajax)</td>
+                </tr>
+                <tr>
+                    <th>jscolor.js</th>
+                    <td>v2.4.5</td>
+                    <td>Výber farieb pri kreslení</td>
+                </tr>
+                <tr>
+                    <th>mathlive.js</th>
+                    <td>v0.65.0</td>
+                    <td>Vkladanie formátovaných vzorcov pri odpovedi na matematické otázky</td>
+                </tr>
+                <tr>
+                    <th>mathjax.js</th>
+                    <td>v3.0</td>
+                    <td>Zobrazovanie matematických vzorcov</td>
+                </tr>
+
+            </table>
+            </div>
+
+            <h5>CSS Štýly:</h5>
+            <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Bootstrap</th>
+                    <td>v5.0.0</td>
+                    <td>Téma Lumen (https://bootswatch.com/lumen/)</td>
+                </tr>
+            </table>
+            </div>
+
+        <h3 class="part">Rozdelenie úloh</h3>
             <div>
             <div class="table-responsive">
                 <table class="table table-hover text-center">

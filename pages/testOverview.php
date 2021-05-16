@@ -74,10 +74,7 @@ $partial->createHeader("Učiteľ | Test: {$_GET["test_key"]}");
                 <th>Export:</th>
                 <td>
                     <a class="btn btn-primary" href="../student_answes.php?test_key=<?php echo $_GET['test_key'];?>">PDF</a>
-                    <?php 
-                        $db->getCsv($_GET['test_key']);
-                    ?>
-                    <a class="btn btn-primary" href="csv/vysledky.csv">CSV</a>
+                    <a class="btn btn-primary" href="../export_csv.php?test_key=<?php echo $_GET['test_key'];?>">CSV</a>
                 </td>
             </tr>
 

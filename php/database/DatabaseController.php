@@ -78,17 +78,17 @@ class DatabaseController
     }
     */
 
-    public function getCompletedTestsByTestKey($test_key): array
+    public function getStudentTestsByTestKey($test_key): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE test_key LIKE :test_key");
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE test_key LIKE :test_key");
         $stmt->bindParam(":test_key", $test_key);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getCompletedTestsByStudentId($student_id): array
+    public function getStudentTestsByStudentId($student_id): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM completed_tests WHERE student_id LIKE :student_id");
+        $stmt = $this->conn->prepare("SELECT * FROM student_tests WHERE student_id LIKE :student_id");
         $stmt->bindParam(":student_id", $student_id);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -141,7 +141,7 @@ class DatabaseController
 
     public function getCsv($test_key)
     {
-        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/get/zaverecna_webte2/csv/vysledky.csv'
+        $stmt = $this->conn->prepare("SELECT student_id, name, surname, points INTO OUTFILE 'www.wt86.fei.stuba.sk/git/zaverecna_webte2/csv/vysledky.csv'
                                         FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
                                         LINES TERMINATED BY '\n'
                                         FROM student_tests
