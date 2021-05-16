@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../../php/session/Session.php";
+require_once "php/session/Session.php";
 
         $session = new Session();
         $session->sessionStart(0, "/", "wt100.fei.stuba.sk", true, true);
@@ -10,7 +10,7 @@ require_once __DIR__ . "/../../php/session/Session.php";
         if ($_SESSION["isLogged"] != true) {
             header("Location: index.php");
         }
-        
+
 include_once "php/database/DatabaseController.php";
 include_once "php/questions/QuestionType.php";
 
